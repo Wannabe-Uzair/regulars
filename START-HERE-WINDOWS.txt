@@ -42,9 +42,10 @@ File Explorer, right-click an empty space, and choose Open in Terminal.
      fine). Open Terminal from the Start menu and run these two commands:
 
      git clone https://github.com/Wannabe-Uzair/regulars C:\Regulars
-     curl.exe -L -o C:\Regulars\regulars-image-amd64.tar.gz https://github.com/Wannabe-Uzair/regulars/releases/latest/download/regulars-image-amd64.tar.gz
+     curl.exe -fL --retry 5 -H "Accept: application/octet-stream" -o C:\Regulars\regulars-image-amd64.tar.gz https://api.github.com/repos/Wannabe-Uzair/regulars/releases/assets/726606858
 
-     The second one downloads the ready-made build (98 MB) into the folder.
+     The second one downloads the ready-made build (98 MB) into the folder. If it
+     fails, take regulars-image-amd64.tar.gz from regulars-for-windows.zip instead.
 4. Start the app:
 
      powershell -ExecutionPolicy Bypass -File .\stall-windows.ps1

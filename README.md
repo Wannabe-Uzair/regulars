@@ -16,8 +16,11 @@ offline.
 
    ```powershell
    git clone https://github.com/Wannabe-Uzair/regulars C:\Regulars
-   curl.exe -L -o C:\Regulars\regulars-image-amd64.tar.gz https://github.com/Wannabe-Uzair/regulars/releases/latest/download/regulars-image-amd64.tar.gz
+   curl.exe -fL --retry 5 -H "Accept: application/octet-stream" -o C:\Regulars\regulars-image-amd64.tar.gz https://api.github.com/repos/Wannabe-Uzair/regulars/releases/assets/726606858
    ```
+
+   If the second command fails, download `regulars-image-amd64.tar.gz` from the
+   [Releases page](https://github.com/Wannabe-Uzair/regulars/releases) in Chrome and move it into `C:\Regulars`.
 
 3. Turn animations on: Settings, Accessibility, Visual effects, **Animation effects**. When it is off, Chrome tells the
    app to stand still and none of its animations play.
