@@ -1,0 +1,886 @@
+{
+ "voice": "am_michael",
+ "model": "Kokoro v1.0 (kokoro-onnx 0.6.1)",
+ "sample_rate": 48000,
+ "air_s": 0.2,
+ "word_timing": "word starts from Kokoro's phoneme durations (the model's own duration output)",
+ "lines": [
+  {
+   "file": "/private/tmp/claude-501/-Users-uzairspc-Regulars/76094edf-7763-4727-ab26-8c81e4426640/scratchpad/reel/sound/01-question.wav",
+   "beat": "question",
+   "beat_start": 0,
+   "beat_end": 3,
+   "file_start": 0,
+   "file_duration": 3.0,
+   "speech_offset": 0.2,
+   "speech_start_at": 0.2,
+   "speech_duration": 2.14,
+   "speech_end_at": 2.34,
+   "fits": true,
+   "moved": false,
+   "spare_s": 0.46,
+   "speed": 1.0,
+   "sentence_pause": 0.25,
+   "clause_pause": 0.1,
+   "text_spoken": "Where did January's new members go?",
+   "caption": "Where did January's new members go?",
+   "lufs": -16.1,
+   "true_peak_dbtp": -2.0,
+   "words": [
+    {
+     "word": "Where",
+     "t": 0.045,
+     "at": 0.245
+    },
+    {
+     "word": "did",
+     "t": 0.245,
+     "at": 0.445
+    },
+    {
+     "word": "January's",
+     "t": 0.42,
+     "at": 0.62,
+     "stress": true
+    },
+    {
+     "word": "new",
+     "t": 1.195,
+     "at": 1.395
+    },
+    {
+     "word": "members",
+     "t": 1.395,
+     "at": 1.595
+    },
+    {
+     "word": "go?",
+     "t": 1.845,
+     "at": 2.045
+    }
+   ],
+   "spoken_words": [
+    {
+     "word": "Where",
+     "t": 0.045,
+     "at": 0.245
+    },
+    {
+     "word": "did",
+     "t": 0.245,
+     "at": 0.445
+    },
+    {
+     "word": "January's",
+     "t": 0.42,
+     "at": 0.62
+    },
+    {
+     "word": "new",
+     "t": 1.195,
+     "at": 1.395
+    },
+    {
+     "word": "members",
+     "t": 1.395,
+     "at": 1.595
+    },
+    {
+     "word": "go?",
+     "t": 1.845,
+     "at": 2.045
+    }
+   ]
+  },
+  {
+   "file": "/private/tmp/claude-501/-Users-uzairspc-Regulars/76094edf-7763-4727-ab26-8c81e4426640/scratchpad/reel/sound/02-six-in-ten.wav",
+   "beat": "six-in-ten",
+   "beat_start": 3,
+   "beat_end": 7,
+   "file_start": 3,
+   "file_duration": 4.0,
+   "speech_offset": 0.2,
+   "speech_start_at": 3.2,
+   "speech_duration": 2.09,
+   "speech_end_at": 5.29,
+   "fits": true,
+   "moved": false,
+   "spare_s": 1.51,
+   "speed": 1.0,
+   "sentence_pause": 0.25,
+   "clause_pause": 0.1,
+   "text_spoken": "Six in ten are gone by month three.",
+   "caption": "6 in 10 new members are gone by month three.",
+   "lufs": -16.1,
+   "true_peak_dbtp": -2.0,
+   "words": [
+    {
+     "word": "6",
+     "t": 0.095,
+     "at": 3.295
+    },
+    {
+     "word": "in",
+     "t": 0.395,
+     "at": 3.595
+    },
+    {
+     "word": "10",
+     "t": 0.57,
+     "at": 3.77
+    },
+    {
+     "word": "new",
+     "t": 0.616,
+     "at": 3.816,
+     "unspoken": true
+    },
+    {
+     "word": "members",
+     "t": 0.692,
+     "at": 3.892,
+     "unspoken": true
+    },
+    {
+     "word": "are",
+     "t": 0.845,
+     "at": 4.045
+    },
+    {
+     "word": "gone",
+     "t": 1.02,
+     "at": 4.22
+    },
+    {
+     "word": "by",
+     "t": 1.345,
+     "at": 4.545
+    },
+    {
+     "word": "month",
+     "t": 1.545,
+     "at": 4.745
+    },
+    {
+     "word": "three.",
+     "t": 1.82,
+     "at": 5.02
+    }
+   ],
+   "spoken_words": [
+    {
+     "word": "Six",
+     "t": 0.095,
+     "at": 3.295
+    },
+    {
+     "word": "in",
+     "t": 0.395,
+     "at": 3.595
+    },
+    {
+     "word": "ten",
+     "t": 0.57,
+     "at": 3.77
+    },
+    {
+     "word": "are",
+     "t": 0.845,
+     "at": 4.045
+    },
+    {
+     "word": "gone",
+     "t": 1.02,
+     "at": 4.22
+    },
+    {
+     "word": "by",
+     "t": 1.345,
+     "at": 4.545
+    },
+    {
+     "word": "month",
+     "t": 1.545,
+     "at": 4.745
+    },
+    {
+     "word": "three.",
+     "t": 1.82,
+     "at": 5.02
+    }
+   ]
+  },
+  {
+   "file": "/private/tmp/claude-501/-Users-uzairspc-Regulars/76094edf-7763-4727-ab26-8c81e4426640/scratchpad/reel/sound/03-the-line.wav",
+   "beat": "the-line",
+   "beat_start": 7,
+   "beat_end": 12,
+   "file_start": 5.3,
+   "file_duration": 7.01,
+   "speech_offset": 0.2,
+   "speech_start_at": 5.5,
+   "speech_duration": 6.61,
+   "speech_end_at": 12.11,
+   "fits": true,
+   "moved": true,
+   "spare_s": 0.19,
+   "speed": 1.15,
+   "sentence_pause": 0.25,
+   "clause_pause": 0.1,
+   "text_spoken": "The ones who stay come three times a week. Seventy-eight percent of them renewed. Under once a week, fifty-nine percent.",
+   "caption": "The ones who stay come three times a week. 78% of them renewed. Under once a week, 59%.",
+   "lufs": -16.2,
+   "true_peak_dbtp": -2.0,
+   "words": [
+    {
+     "word": "The",
+     "t": 0.026,
+     "at": 5.526
+    },
+    {
+     "word": "ones",
+     "t": 0.126,
+     "at": 5.626
+    },
+    {
+     "word": "who",
+     "t": 0.351,
+     "at": 5.851
+    },
+    {
+     "word": "stay",
+     "t": 0.501,
+     "at": 6.001
+    },
+    {
+     "word": "come",
+     "t": 0.826,
+     "at": 6.326
+    },
+    {
+     "word": "three",
+     "t": 1.076,
+     "at": 6.576
+    },
+    {
+     "word": "times",
+     "t": 1.351,
+     "at": 6.851
+    },
+    {
+     "word": "a",
+     "t": 1.701,
+     "at": 7.201
+    },
+    {
+     "word": "week.",
+     "t": 1.826,
+     "at": 7.326
+    },
+    {
+     "word": "78%",
+     "t": 2.526,
+     "at": 8.026
+    },
+    {
+     "word": "of",
+     "t": 3.576,
+     "at": 9.076
+    },
+    {
+     "word": "them",
+     "t": 3.676,
+     "at": 9.176
+    },
+    {
+     "word": "renewed.",
+     "t": 3.876,
+     "at": 9.376
+    },
+    {
+     "word": "Under",
+     "t": 4.751,
+     "at": 10.251
+    },
+    {
+     "word": "once",
+     "t": 4.976,
+     "at": 10.476
+    },
+    {
+     "word": "a",
+     "t": 5.201,
+     "at": 10.701
+    },
+    {
+     "word": "week,",
+     "t": 5.326,
+     "at": 10.826
+    },
+    {
+     "word": "59%.",
+     "t": 5.696,
+     "at": 11.196
+    }
+   ],
+   "spoken_words": [
+    {
+     "word": "The",
+     "t": 0.026,
+     "at": 5.526
+    },
+    {
+     "word": "ones",
+     "t": 0.126,
+     "at": 5.626
+    },
+    {
+     "word": "who",
+     "t": 0.351,
+     "at": 5.851
+    },
+    {
+     "word": "stay",
+     "t": 0.501,
+     "at": 6.001
+    },
+    {
+     "word": "come",
+     "t": 0.826,
+     "at": 6.326
+    },
+    {
+     "word": "three",
+     "t": 1.076,
+     "at": 6.576
+    },
+    {
+     "word": "times",
+     "t": 1.351,
+     "at": 6.851
+    },
+    {
+     "word": "a",
+     "t": 1.701,
+     "at": 7.201
+    },
+    {
+     "word": "week.",
+     "t": 1.826,
+     "at": 7.326
+    },
+    {
+     "word": "Seventy-eight",
+     "t": 2.526,
+     "at": 8.026
+    },
+    {
+     "word": "percent",
+     "t": 3.226,
+     "at": 8.726
+    },
+    {
+     "word": "of",
+     "t": 3.576,
+     "at": 9.076
+    },
+    {
+     "word": "them",
+     "t": 3.676,
+     "at": 9.176
+    },
+    {
+     "word": "renewed.",
+     "t": 3.876,
+     "at": 9.376
+    },
+    {
+     "word": "Under",
+     "t": 4.751,
+     "at": 10.251
+    },
+    {
+     "word": "once",
+     "t": 4.976,
+     "at": 10.476
+    },
+    {
+     "word": "a",
+     "t": 5.201,
+     "at": 10.701
+    },
+    {
+     "word": "week,",
+     "t": 5.326,
+     "at": 10.826
+    },
+    {
+     "word": "fifty-nine",
+     "t": 5.696,
+     "at": 11.196
+    },
+    {
+     "word": "percent.",
+     "t": 6.271,
+     "at": 11.771
+    }
+   ]
+  },
+  {
+   "file": "/private/tmp/claude-501/-Users-uzairspc-Regulars/76094edf-7763-4727-ab26-8c81e4426640/scratchpad/reel/sound/04-the-mark.wav",
+   "beat": "the-mark",
+   "beat_start": 12,
+   "beat_end": 14,
+   "file_start": 12,
+   "file_duration": 2.0,
+   "speech_offset": 0.45,
+   "speech_start_at": 12.45,
+   "speech_duration": 1.06,
+   "speech_end_at": 13.51,
+   "fits": true,
+   "moved": true,
+   "spare_s": 0.29,
+   "speed": 1.0,
+   "sentence_pause": 0.25,
+   "clause_pause": 0.1,
+   "text_spoken": "Meet Regulars.",
+   "caption": "Meet Regulars.",
+   "lufs": -16.1,
+   "true_peak_dbtp": -2.0,
+   "words": [
+    {
+     "word": "Meet",
+     "t": 0.095,
+     "at": 12.545
+    },
+    {
+     "word": "Regulars.",
+     "t": 0.42,
+     "at": 12.87
+    }
+   ],
+   "spoken_words": [
+    {
+     "word": "Meet",
+     "t": 0.095,
+     "at": 12.545
+    },
+    {
+     "word": "Regulars.",
+     "t": 0.42,
+     "at": 12.87
+    }
+   ]
+  },
+  {
+   "file": "/private/tmp/claude-501/-Users-uzairspc-Regulars/76094edf-7763-4727-ab26-8c81e4426640/scratchpad/reel/sound/05-check-in.wav",
+   "beat": "check-in",
+   "beat_start": 14,
+   "beat_end": 17,
+   "file_start": 14,
+   "file_duration": 3.0,
+   "speech_offset": 0.2,
+   "speech_start_at": 14.2,
+   "speech_duration": 1.28,
+   "speech_end_at": 15.48,
+   "fits": true,
+   "moved": false,
+   "spare_s": 1.32,
+   "speed": 1.0,
+   "sentence_pause": 0.25,
+   "clause_pause": 0.1,
+   "text_spoken": "Every check-in counts.",
+   "caption": "Every check-in counts.",
+   "lufs": -16.2,
+   "true_peak_dbtp": -2.0,
+   "words": [
+    {
+     "word": "Every",
+     "t": 0.054,
+     "at": 14.254
+    },
+    {
+     "word": "check-in",
+     "t": 0.379,
+     "at": 14.579
+    },
+    {
+     "word": "counts.",
+     "t": 0.804,
+     "at": 15.004
+    }
+   ],
+   "spoken_words": [
+    {
+     "word": "Every",
+     "t": 0.054,
+     "at": 14.254
+    },
+    {
+     "word": "check-in",
+     "t": 0.379,
+     "at": 14.579
+    },
+    {
+     "word": "counts.",
+     "t": 0.804,
+     "at": 15.004
+    }
+   ]
+  },
+  {
+   "file": "/private/tmp/claude-501/-Users-uzairspc-Regulars/76094edf-7763-4727-ab26-8c81e4426640/scratchpad/reel/sound/06-slipping.wav",
+   "beat": "slipping",
+   "beat_start": 17,
+   "beat_end": 20,
+   "file_start": 17,
+   "file_duration": 3.0,
+   "speech_offset": 0.2,
+   "speech_start_at": 17.2,
+   "speech_duration": 2.11,
+   "speech_end_at": 19.31,
+   "fits": true,
+   "moved": false,
+   "spare_s": 0.49,
+   "speed": 1.0,
+   "sentence_pause": 0.25,
+   "clause_pause": 0.1,
+   "text_spoken": "See who's slipping, before they're gone.",
+   "caption": "See who's slipping, before they're gone.",
+   "lufs": -16.2,
+   "true_peak_dbtp": -2.0,
+   "words": [
+    {
+     "word": "See",
+     "t": 0.096,
+     "at": 17.296
+    },
+    {
+     "word": "who's",
+     "t": 0.296,
+     "at": 17.496
+    },
+    {
+     "word": "slipping,",
+     "t": 0.521,
+     "at": 17.721
+    },
+    {
+     "word": "before",
+     "t": 1.201,
+     "at": 18.401
+    },
+    {
+     "word": "they're",
+     "t": 1.476,
+     "at": 18.676
+    },
+    {
+     "word": "gone.",
+     "t": 1.726,
+     "at": 18.926
+    }
+   ],
+   "spoken_words": [
+    {
+     "word": "See",
+     "t": 0.096,
+     "at": 17.296
+    },
+    {
+     "word": "who's",
+     "t": 0.296,
+     "at": 17.496
+    },
+    {
+     "word": "slipping,",
+     "t": 0.521,
+     "at": 17.721
+    },
+    {
+     "word": "before",
+     "t": 1.201,
+     "at": 18.401
+    },
+    {
+     "word": "they're",
+     "t": 1.476,
+     "at": 18.676
+    },
+    {
+     "word": "gone.",
+     "t": 1.726,
+     "at": 18.926
+    }
+   ]
+  },
+  {
+   "file": "/private/tmp/claude-501/-Users-uzairspc-Regulars/76094edf-7763-4727-ab26-8c81e4426640/scratchpad/reel/sound/07-nudge.wav",
+   "beat": "nudge",
+   "beat_start": 20,
+   "beat_end": 23,
+   "file_start": 20,
+   "file_duration": 3.0,
+   "speech_offset": 0.2,
+   "speech_start_at": 20.2,
+   "speech_duration": 2.57,
+   "speech_end_at": 22.77,
+   "fits": true,
+   "moved": false,
+   "spare_s": 0.03,
+   "speed": 1.15,
+   "sentence_pause": 0.25,
+   "clause_pause": 0.1,
+   "text_spoken": "One tap, and his coach's text is on its way.",
+   "caption": "One tap, and his coach's text is on its way.",
+   "lufs": -16.2,
+   "true_peak_dbtp": -2.0,
+   "words": [
+    {
+     "word": "One",
+     "t": 0.059,
+     "at": 20.259
+    },
+    {
+     "word": "tap,",
+     "t": 0.334,
+     "at": 20.534
+    },
+    {
+     "word": "and",
+     "t": 0.799,
+     "at": 20.999
+    },
+    {
+     "word": "his",
+     "t": 0.899,
+     "at": 21.099
+    },
+    {
+     "word": "coach's",
+     "t": 1.074,
+     "at": 21.274
+    },
+    {
+     "word": "text",
+     "t": 1.524,
+     "at": 21.724
+    },
+    {
+     "word": "is",
+     "t": 1.874,
+     "at": 22.074
+    },
+    {
+     "word": "on",
+     "t": 1.999,
+     "at": 22.199
+    },
+    {
+     "word": "its",
+     "t": 2.124,
+     "at": 22.324
+    },
+    {
+     "word": "way.",
+     "t": 2.324,
+     "at": 22.524
+    }
+   ],
+   "spoken_words": [
+    {
+     "word": "One",
+     "t": 0.059,
+     "at": 20.259
+    },
+    {
+     "word": "tap,",
+     "t": 0.334,
+     "at": 20.534
+    },
+    {
+     "word": "and",
+     "t": 0.799,
+     "at": 20.999
+    },
+    {
+     "word": "his",
+     "t": 0.899,
+     "at": 21.099
+    },
+    {
+     "word": "coach's",
+     "t": 1.074,
+     "at": 21.274
+    },
+    {
+     "word": "text",
+     "t": 1.524,
+     "at": 21.724
+    },
+    {
+     "word": "is",
+     "t": 1.874,
+     "at": 22.074
+    },
+    {
+     "word": "on",
+     "t": 1.999,
+     "at": 22.199
+    },
+    {
+     "word": "its",
+     "t": 2.124,
+     "at": 22.324
+    },
+    {
+     "word": "way.",
+     "t": 2.324,
+     "at": 22.524
+    }
+   ]
+  },
+  {
+   "file": "/private/tmp/claude-501/-Users-uzairspc-Regulars/76094edf-7763-4727-ab26-8c81e4426640/scratchpad/reel/sound/08-back.wav",
+   "beat": "back",
+   "beat_start": 23,
+   "beat_end": 26,
+   "file_start": 23,
+   "file_duration": 3.0,
+   "speech_offset": 0.2,
+   "speech_start_at": 23.2,
+   "speech_duration": 1.04,
+   "speech_end_at": 24.24,
+   "fits": true,
+   "moved": false,
+   "spare_s": 1.56,
+   "speed": 1.0,
+   "sentence_pause": 0.25,
+   "clause_pause": 0.1,
+   "text_spoken": "And Sam's back.",
+   "caption": "And Sam's back.",
+   "lufs": -16.0,
+   "true_peak_dbtp": -2.0,
+   "words": [
+    {
+     "word": "And",
+     "t": 0.063,
+     "at": 23.263
+    },
+    {
+     "word": "Sam's",
+     "t": 0.238,
+     "at": 23.438
+    },
+    {
+     "word": "back.",
+     "t": 0.663,
+     "at": 23.863
+    }
+   ],
+   "spoken_words": [
+    {
+     "word": "And",
+     "t": 0.063,
+     "at": 23.263
+    },
+    {
+     "word": "Sam's",
+     "t": 0.238,
+     "at": 23.438
+    },
+    {
+     "word": "back.",
+     "t": 0.663,
+     "at": 23.863
+    }
+   ]
+  },
+  {
+   "file": "/private/tmp/claude-501/-Users-uzairspc-Regulars/76094edf-7763-4727-ab26-8c81e4426640/scratchpad/reel/sound/09-end-card.wav",
+   "beat": "end-card",
+   "beat_start": 26,
+   "beat_end": 30,
+   "file_start": 26,
+   "file_duration": 4.0,
+   "speech_offset": 0.2,
+   "speech_start_at": 26.2,
+   "speech_duration": 2.74,
+   "speech_end_at": 28.94,
+   "fits": true,
+   "moved": false,
+   "spare_s": 0.86,
+   "speed": 1.0,
+   "sentence_pause": 0.25,
+   "clause_pause": 0.1,
+   "text_spoken": "Regulars. Turn new members into regulars.",
+   "caption": "Regulars. Turn new members into regulars.",
+   "lufs": -16.1,
+   "true_peak_dbtp": -2.0,
+   "words": [
+    {
+     "word": "Regulars.",
+     "t": 0.074,
+     "at": 26.274
+    },
+    {
+     "word": "Turn",
+     "t": 0.999,
+     "at": 27.199
+    },
+    {
+     "word": "new",
+     "t": 1.299,
+     "at": 27.499
+    },
+    {
+     "word": "members",
+     "t": 1.474,
+     "at": 27.674
+    },
+    {
+     "word": "into",
+     "t": 1.874,
+     "at": 28.074
+    },
+    {
+     "word": "regulars.",
+     "t": 2.124,
+     "at": 28.324
+    }
+   ],
+   "spoken_words": [
+    {
+     "word": "Regulars.",
+     "t": 0.074,
+     "at": 26.274
+    },
+    {
+     "word": "Turn",
+     "t": 0.999,
+     "at": 27.199
+    },
+    {
+     "word": "new",
+     "t": 1.299,
+     "at": 27.499
+    },
+    {
+     "word": "members",
+     "t": 1.474,
+     "at": 27.674
+    },
+    {
+     "word": "into",
+     "t": 1.874,
+     "at": 28.074
+    },
+    {
+     "word": "regulars.",
+     "t": 2.124,
+     "at": 28.324
+    }
+   ]
+  }
+ ]
+}

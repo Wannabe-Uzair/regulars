@@ -1,0 +1,33 @@
+.kpi {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+  color: var(--color-text);
+}
+
+.label {
+  color: var(--color-text-soft);
+  font-size: var(--label-size);
+  font-weight: var(--label-weight);
+  letter-spacing: var(--label-tracking);
+  text-transform: var(--label-transform);
+  line-height: var(--leading-heading);
+}
+
+/* In a tile taller than the Kpi (a row whose neighbour's label wraps), the figure keeps to the foot, level with it. */
+.value {
+  margin-block-start: auto;
+  font-size: var(--text-32);
+  font-weight: var(--weight-heading);
+  line-height: var(--leading-display);
+}
+
+.hint {
+  color: var(--color-text-soft);
+  font-size: var(--text-13);
+  line-height: var(--leading-body);
+}
+
+.attention .value {
+  color: var(--color-attention-text);
+}

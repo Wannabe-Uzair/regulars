@@ -1,0 +1,6 @@
+/* Try the Demo with its own failure line under it, both centred on the button's axis. */
+.try {
+  display: grid;
+  justify-items: center;
+  gap: var(--space-2);
+}

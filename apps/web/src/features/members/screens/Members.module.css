@@ -1,0 +1,33 @@
+/* As in the shell: the column may be narrower than the table, which then scrolls inside its own frame. */
+.page {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: var(--space-6);
+  max-inline-size: 72rem;
+}
+
+.count {
+  margin: 0;
+  color: var(--color-text-soft);
+  font-size: var(--text-14);
+}
+
+.error {
+  display: grid;
+  gap: var(--space-4);
+  justify-items: start;
+}
+
+.error p {
+  margin: 0;
+  color: var(--color-danger);
+}
+
+/* The three views stay one segmented control on a phone: at the phone's 17 px body, "First 90 Days | Everyone |
+   Archived" doesn't fit 390 px and its last segment wrapped onto a second row. Segment labels take the footnote size
+   there, as a phone's segmented control does. */
+@media (width < 48rem) {
+  .views {
+    font-size: var(--text-14);
+  }
+}

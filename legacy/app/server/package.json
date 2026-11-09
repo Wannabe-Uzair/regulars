@@ -1,0 +1,21 @@
+{
+  "name": "tenure-server",
+  "private": true,
+  "type": "module",
+  "description": "Tenure API: Hono on Node, SQLite via node:sqlite.",
+  "engines": {
+    "node": ">=24"
+  },
+  "scripts": {
+    "dev": "node --watch index.mjs",
+    "start": "node index.mjs",
+    "stall": "node index.mjs --stall",
+    "seed": "node seed.mjs",
+    "test": "node --test \"test/*.test.mjs\" \"import/test/*.test.mjs\" \"seed/test/*.test.mjs\" \"reports/test/*.test.mjs\""
+  },
+  "dependencies": {
+    "@hono/node-server": "^2.1.6",
+    "hono": "^4.13.16",
+    "qrcode": "^1.5.4"
+  }
+}

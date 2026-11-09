@@ -1,0 +1,138 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Regulars standee, 2 x 5 ft</title>
+<link rel="stylesheet" href="../brand/regulars/tokens.css">
+<style>
+  /* Regulars standee: 24 x 60 in roll-up banner, laid out at real size.
+     Safe area 1.5 in at the sides, 2 in at the top. The low zone (the bottom 9 in, 51-60 in, in or near the stand's base)
+     holds only the price and the team's names, and nothing comes within 3 in of the bottom (57-60 in).
+     Nothing smaller than 48 pt. Read from 3 m: capitals at least 25 mm tall in the headline, 10 mm in everything else.
+     Open with ?guides=1 to see the safe area, the top third and the low zone. */
+  @page { size: 24in 60in; margin: 0; }
+  html, body { margin: 0; width: 24in; height: 60in; overflow: hidden; background: var(--card); }
+  body { position: relative; }
+  .at { position: absolute; left: 1.5in; width: 21in; }
+
+  .lockup { font-size: 160pt; }
+  .descriptor { font-size: 60pt; line-height: 1.2; font-weight: 600; color: var(--text-soft); }
+  .headline { font-weight: 700; line-height: 1.02; letter-spacing: -0.03em; white-space: nowrap; }
+  .problem { font-size: 110pt; line-height: 1.08; font-weight: 700; letter-spacing: -0.022em; }
+  .source { font-size: 50pt; line-height: 1.25; color: var(--text-soft); text-wrap: pretty; }
+
+  /* the board picture at standee size: 52 pt labels, tighter rows than print at hand size */
+  .shot { font-size: 52pt; }
+  .shot .rg-screen { padding: 0.45in; border-radius: 0.6in; }
+  .shot .rg-top { margin-bottom: 0.3in; }
+  .shot .rg-card { border-radius: 0.42in; padding: 0 0.42in; }
+  .shot .rg-row { padding: 0.42em 0 0.48em; }
+  .shot .rg-row + .rg-row::before { border-top-width: 2pt; }
+  .shot .rg-l1 { margin-bottom: 0.32em; }
+  .shot .rg-nudge { padding: 0.2em 0.9em 0.24em; }
+  .shot .rg-ruler { padding-top: 0.6em; height: 1.3em; margin-bottom: 0; }
+  .shot .rg-ruler span { top: 0.6em; }
+  .shot .rg-legend { margin-top: 0.5in; gap: 0.3in 0.7in; }
+  .shot .sample-tag { border-width: 3pt; }
+
+  /* the three words spread across the 21 in measure: "Track" starts at the board's left edge, "Nudge" ends at its right */
+  .steps { display: flex; justify-content: space-between; font-size: 140pt; line-height: 1; font-weight: 700; letter-spacing: -0.02em; }
+
+  .price { font-size: 96pt; line-height: 1.1; font-weight: 700; letter-spacing: -0.02em; text-wrap: balance; }
+  .not-yet { font-size: 64pt; line-height: 1.2; font-weight: 600; color: var(--text-soft); }
+  .names { font-size: 54pt; line-height: 1.2; font-weight: 600; color: var(--text-soft); white-space: nowrap; }
+
+  /* guides (?guides=1): working view only, never printed */
+  .guide { position: absolute; pointer-events: none; display: none; }
+  .guides .guide { display: block; }
+  .g-safe { left: 1.5in; top: 2in; width: 21in; height: 49in; outline: 4pt dashed #00B4FF; }
+  .g-third { left: 0; top: 20in; width: 24in; border-top: 4pt dashed #00B4FF; }
+  .g-low { left: 0; top: 51in; width: 24in; height: 9in; background: rgba(255, 0, 200, 0.14); border-top: 4pt solid #FF00C8; }
+  .g-nogo { left: 0; top: 57in; width: 24in; height: 3in; background: rgba(255, 0, 200, 0.22); border-top: 4pt dashed #FF00C8; }
+</style>
+<script>window.READY = false</script>
+</head>
+<body>
+
+<!-- the name -->
+<div class="at" id="top" style="top:2.6in">
+  <div class="lockup" id="lockup"></div>
+  <div class="descriptor" style="margin-top:0.35in">Member retention for independent gyms</div>
+</div>
+
+<!-- the headline: the tagline -->
+<div class="at headline" id="headline">Turn new<br>members into<br>regulars.</div>
+
+<!-- the problem, with its source -->
+<div class="at" id="problem">
+  <div class="problem">6 in 10 new members quit within three months.</div>
+  <div class="source" style="margin-top:0.35in">At one gym in Rio de Janeiro. Sperandei, Vieira and Reis, Journal of Science and Medicine in Sport, 2016.</div>
+</div>
+
+<!-- the board picture -->
+<div class="at shot" id="board"></div>
+
+<!-- track, flag, nudge -->
+<div class="at steps" id="steps"><div>Track</div><div>Flag</div><div>Nudge</div></div>
+
+<!-- low zone: the price and the team -->
+<div class="at" id="price">
+  <div class="price">The plan we’d test: a free 90-day pilot, then $99&nbsp;a&nbsp;month per&nbsp;gym.</div>
+  <div class="not-yet" style="margin-top:0.25in">Not on sale yet.</div>
+</div>
+<div class="at names" id="names">Uzair Imran · Moiz Hamid · Zain ul Abideen · Ali Hassan</div>
+
+<div class="guide g-safe"></div><div class="guide g-third"></div><div class="guide g-low"></div><div class="guide g-nogo"></div>
+
+<script src="../brand/regulars/regulars.js"></script>
+<script>
+(async function () {
+  const R = REGULARS, $ = (id) => document.getElementById(id), IN = 96
+  if (/[?&]guides=1\b/.test(location.search)) document.body.classList.add('guides')
+
+  $('lockup').innerHTML = R.lockup()
+  $('board').innerHTML = R.board({ mark: '64pt' })
+  await document.fonts.ready
+
+  // the headline fills the 21 in live width: size its widest line to fit
+  const hl = $('headline')
+  hl.style.fontSize = '100pt'
+  const probe = document.createElement('span')
+  probe.className = 'headline'
+  probe.style.cssText = 'position:absolute;visibility:hidden;font-size:100pt'
+  document.body.appendChild(probe)
+  const widest = Math.max(...hl.innerHTML.split('<br>').map((t) => { probe.innerHTML = t; return probe.getBoundingClientRect().width }))
+  probe.remove()
+  hl.style.fontSize = Math.min(232, Math.floor((100 * 21 * IN) / widest)) + 'pt'
+
+  // stack the blocks from the name down, then pin the low zone from the bottom
+  const box = (el) => el.getBoundingClientRect()
+  const below = (id, prev, gap) => { $(id).style.top = box($(prev)).bottom / IN + gap + 'in' }
+  below('headline', 'top', 1.3)
+  below('problem', 'headline', 1.35)
+  below('board', 'problem', 0.75)
+  below('steps', 'board', 0.95)
+  $('names').style.top = 56.9 - box($('names')).height / IN + 'in'
+  $('price').style.top = box($('names')).top / IN - 0.55 - box($('price')).height / IN + 'in'
+
+  // layout checks, reported as console errors (the renderer fails on them)
+  const L = {}, err = (m) => console.error('standee: ' + m)
+  const blocks = ['top', 'headline', 'problem', 'board', 'steps', 'price', 'names']
+  for (const id of blocks) {
+    const r = box($(id)); L[id] = { top: +(r.top / IN).toFixed(2), bottom: +(r.bottom / IN).toFixed(2), right: +(r.right / IN).toFixed(2) }
+    if (r.left / IN < 1.5 - 0.01 || r.right / IN > 22.5 + 0.01) err(`${id} leaves the side safe area (${(r.left / IN).toFixed(2)}-${(r.right / IN).toFixed(2)} in)`)
+    if (r.top / IN < 2) err(`${id} above the 2 in top margin`)
+    if (r.bottom / IN > 57) err(`${id} inside the bottom 3 in`)
+    if (!['price', 'names'].includes(id) && r.bottom / IN > 51) err(`${id} enters the low zone (${(r.bottom / IN).toFixed(2)} in)`)
+    $(id).querySelectorAll('*').forEach((el) => { const q = box(el); if (q.width && q.right / IN > 22.5 + 0.01) err(`${id}: ${el.className || el.tagName} runs past the safe area`) })
+  }
+  for (let i = 1; i < blocks.length; i++) if (L[blocks[i]].top < L[blocks[i - 1]].bottom + 0.5) err(`${blocks[i]} is closer than 0.5 in to ${blocks[i - 1]}`)
+  const sizes = [...document.querySelectorAll('body *')].filter((el) => [...el.childNodes].some((n) => n.nodeType === 3 && n.textContent.trim()) && !el.closest('script,style'))
+    .map((el) => parseFloat(getComputedStyle(el).fontSize) * 0.75)
+  if (Math.min(...sizes) < 48) err(`text under 48 pt (${Math.min(...sizes).toFixed(1)})`)
+  window.LAYOUT = L
+  window.READY = true
+})()
+</script>
+</body>
+</html>

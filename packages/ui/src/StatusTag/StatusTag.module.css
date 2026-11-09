@@ -1,0 +1,23 @@
+/* Doubled specificity outranks Tag's soft text, whatever order the sheets load in. */
+/* Tag already sets these; stated here so the status label's case and tracking do not depend on Tag's sheet. */
+.status {
+  letter-spacing: var(--label-tracking);
+  text-transform: var(--label-transform);
+}
+
+/* Each status's words take its own status text colour; slipping takes the attention text. */
+.status.on {
+  color: var(--color-status-on-text);
+}
+
+.status.below {
+  color: var(--color-status-below-text);
+}
+
+.status.new {
+  color: var(--color-status-new-text);
+}
+
+.status.slipping {
+  color: var(--color-attention-text);
+}

@@ -1,0 +1,83 @@
+/* Outside the shell, in the sign-in page's frame: the blended ground fills the viewport, and the card sits in the middle, 400 px at most. */
+.ground {
+  box-sizing: border-box;
+  display: grid;
+  align-content: center;
+  min-block-size: 100dvh;
+  padding: var(--space-8) var(--space-4);
+  /* Clear of a sideways phone's notch, as the shell's columns are. */
+  padding-inline: max(var(--space-4), env(safe-area-inset-left, 0px))
+    max(var(--space-4), env(safe-area-inset-right, 0px));
+}
+
+.main {
+  inline-size: 100%;
+  max-inline-size: 400px;
+  margin-inline: auto;
+}
+
+/* A card's edge is the separator hairline (ARCHITECTURE §9, "Cards"). */
+.main .card {
+  border-color: var(--color-line);
+}
+
+.card {
+  display: grid;
+  gap: var(--space-6);
+}
+
+@media (min-width: 40rem) {
+  .card {
+    padding: var(--space-8);
+  }
+}
+
+.head {
+  display: grid;
+  gap: var(--space-2);
+  justify-items: start;
+}
+
+.head > :first-child {
+  margin-block-end: var(--space-2);
+}
+
+.brand {
+  display: grid;
+  gap: var(--space-1);
+}
+
+.descriptor {
+  margin: 0;
+  color: var(--color-text-soft);
+  font-size: var(--text-14);
+  line-height: var(--leading-body);
+}
+
+/* The page title reads as every other page's does: display type, 32 px from 48rem (PageTitle). */
+.title {
+  margin: 0;
+  font-size: var(--text-32);
+  font-weight: var(--weight-display);
+  line-height: var(--leading-display);
+  text-wrap: balance;
+}
+
+/* Phones: the 34 px large title, as PageTitle's (no bar here to take it over). */
+@media (width < 48rem) {
+  .title {
+    font-size: var(--text-34);
+  }
+}
+
+.lede {
+  margin: 0;
+  color: var(--color-text-soft);
+  font-size: var(--text-16);
+  line-height: var(--leading-body);
+}
+
+.other {
+  display: flex;
+  justify-content: start;
+}

@@ -1,0 +1,67 @@
+/* Four facts across on a laptop, two on a narrower screen, one on a phone. */
+.facts {
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 14rem), 1fr));
+  gap: var(--space-5) var(--space-6);
+}
+
+/* An open form takes the fact's whole width; its Change button is gone meanwhile. */
+.facts dd > span:first-child:has(form) {
+  flex: 1 1 100%;
+}
+
+/* Change is a small quiet button beside its fact; its target still reaches 44 px (NFR-USE-03). The type selector
+   outranks the button's own size class, whichever stylesheet loads first. */
+button.change {
+  min-block-size: calc(var(--space-10) + var(--space-1));
+}
+
+/* From a laptop's width each Change sits one gap after its own value, not at the column's far edge (FactList pushes it
+   there); on the one-column phone it stays at the trailing edge. */
+@media (width >= 48rem) {
+  .facts dd > span:has(> button.change) {
+    margin-inline-start: 0;
+  }
+}
+
+.soft {
+  color: var(--color-text-soft);
+}
+
+.numbers {
+  font-variant-numeric: var(--font-numeric);
+}
+
+.form {
+  display: grid;
+  gap: var(--space-3);
+  inline-size: 100%;
+  min-inline-size: 0;
+}
+
+.optionalLabel {
+  display: inline-flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: var(--space-2);
+}
+
+.optional {
+  color: var(--color-text-soft);
+  font-weight: var(--weight-body);
+}
+
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+}
+
+/* The coach and phone forms sit under the fact's own label: theirs is read by screen readers, not shown. */
+.hidden {
+  position: absolute;
+  inline-size: 1px;
+  block-size: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}

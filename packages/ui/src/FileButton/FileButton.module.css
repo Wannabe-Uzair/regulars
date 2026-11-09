@@ -1,0 +1,32 @@
+.pick {
+  display: inline-flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-2) var(--space-4);
+}
+
+/* The input is hidden, so its keyboard focus shows on the button around it. */
+.button:has(:focus-visible) {
+  outline: var(--focus-width) solid var(--color-focus);
+  outline-offset: var(--focus-offset);
+}
+
+/* Visible to screen readers and the keyboard only; the label is the target. */
+.input {
+  position: absolute;
+  inline-size: 1px;
+  block-size: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+  border: 0;
+}
+
+.name {
+  min-inline-size: 0;
+  color: var(--color-text-soft);
+  font-size: var(--text-14);
+  overflow-wrap: anywhere;
+}

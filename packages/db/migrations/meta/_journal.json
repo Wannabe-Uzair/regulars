@@ -1,0 +1,27 @@
+{
+  "version": "7",
+  "dialect": "sqlite",
+  "entries": [
+    {
+      "idx": 0,
+      "version": "6",
+      "when": 1793962696450,
+      "tag": "0000_last_menace",
+      "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "6",
+      "when": 1794036237199,
+      "tag": "0001_same_tiger_shark",
+      "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "6",
+      "when": 1794036243294,
+      "tag": "0002_flawless_wilson_fisk",
+      "breakpoints": true
+    }
+  ]
+}

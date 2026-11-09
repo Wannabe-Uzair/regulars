@@ -1,0 +1,292 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Tenure reel 16:9</title>
+<link rel="stylesheet" href="../brand/tokens.css">
+<script src="../tools/node_modules/gsap/dist/gsap.min.js"></script>
+<script src="../brand/wordmark.js"></script>
+<script src="../brand/kit.js"></script>
+<script src="board-live.js"></script>
+<script src="cues.js"></script>
+<style>
+  html, body { width: 1920px; height: 1080px; overflow: hidden; background: var(--rubber); }
+  #stage { position: absolute; left: 0; top: 0; width: 1920px; height: 1080px; overflow: hidden; transform-origin: 0 0;
+    background-color: var(--rubber); background-image: url(../brand/assets/speckle-tile.svg); background-size: 512px 512px; }
+  #world, .scene { position: absolute; inset: 0; }
+  .scene, .el { visibility: hidden; }
+  .abs { position: absolute; white-space: nowrap; }
+  svg { display: block; }
+  .hero { font-size: 300px; } .h1 { font-size: 140px; } .h2 { font-size: 84px; } .word1 { font-size: 380px; }
+  .lab { font-size: 28px; }
+  .small { font-size: 24px; }
+  .band { position: absolute; left: 0; width: 1920px; height: 36px; }
+  .slot { display: inline-block; text-align: center; }
+  #yellow { background: var(--yellow); }
+  #panel { background: var(--rubber-2); }
+  #bubble { width: 402px; }
+  #steps .step { white-space: nowrap; padding: 18px 0 17px; border-top: 1px solid var(--rubber-3); color: var(--steel); }
+  #steps .step:last-child { border-bottom: 1px solid var(--rubber-3); }
+  #steps .step.on { color: var(--yellow); }
+  #steps .step.done { color: var(--chalk); }
+  #bubble .msg { background: var(--rubber-2); color: var(--chalk); font-size: 34px; padding: 30px 34px 34px; white-space: normal; }
+  .wipe { position: absolute; top: 0; height: 1080px; visibility: hidden; }
+</style>
+</head>
+<body>
+<div id="stage"><div id="world">
+
+  <!-- A · Day 1 to day 90, the fade -->
+  <section class="scene" id="sA">
+    <div id="a1" class="abs" style="inset:0">
+      <div id="day" class="abs el t-display hero c-chalk"><span>DAY&nbsp;</span><span id="digits"></span></div>
+      <div id="grid" class="abs el" style="left:1080px">
+        <div id="ruler" class="el" style="position:relative;height:48px"></div>
+        <div id="cells"></div>
+      </div>
+    </div>
+    <div id="six" class="abs el t-display hero c-yellow">6 IN 10</div>
+    <div id="gone" class="abs el t-display h1 c-chalk" style="line-height:0.9">NEW MEMBERS QUIT<br>WITHIN THREE MONTHS.</div>
+    <div id="src1" class="abs el t-small small">Sperandei et al., 2016</div>
+    <div id="bandsA"><div class="band hazard" id="bA1" style="top:0"></div><div class="band hazard" id="bA2" style="top:1044px"></div></div>
+  </section>
+
+  <!-- B · the line -->
+  <section class="scene" id="sB">
+    <div id="b1" class="abs" style="inset:0">
+      <div id="ones" class="abs el t-display h1 c-chalk" style="line-height:0.9">MEMBERS<br>WHO STAY</div>
+      <div id="hit3" class="abs el t-display h1 c-chalk" style="line-height:0.9">HIT <span class="c-yellow">3 VISITS<br>A WEEK.</span></div>
+      <div id="plate" class="abs el"></div>
+    </div>
+    <div id="p78" class="abs el"><div id="n78" class="t-display hero c-yellow">78%</div></div>
+    <div id="l78" class="abs el t-label lab c-chalk">OF MEMBERS AT 3+ VISITS A WEEK RENEW</div>
+    <div id="p59" class="abs el"><div id="n59" class="t-display h1 c-steel">59%</div></div>
+    <div id="l59" class="abs el t-label lab c-steel">UNDER ONCE A WEEK</div>
+    <div id="src2" class="abs el t-small small">IHRSA</div>
+  </section>
+
+  <!-- C · the logo -->
+  <section class="scene" id="sC"><div id="logo" class="abs el"></div></section>
+
+  <!-- D · the board -->
+  <section class="scene" id="sD">
+    <div id="head" class="abs el t-display h2 c-chalk" style="line-height:0.95">ONE BOARD FOR EVERY NEW<br>MEMBER'S FIRST <span class="c-yellow">90 DAYS.</span></div>
+    <div id="steps" class="abs el"><div class="step t-label lab">01 — TRACK</div><div class="step t-label lab">02 — FLAG</div><div class="step t-label lab">03 — NUDGE</div></div>
+    <div id="panel" class="abs el">
+      <div id="board" class="abs"></div>
+      <div id="legend" class="abs"></div>
+      <div class="abs sample-tag" id="tagD" style="font-size:22px">Sample data</div>
+    </div>
+    <div id="bubble" class="abs el">
+      <div class="msg t-body"><div style="display:flex;justify-content:flex-end;margin:-6px -8px 16px 0"><span class="sample-tag" style="font-size:22px">Sample message</span></div>Hey Sam, we missed you this week. Want me to save you a spot in Thursday's 6&nbsp;pm class? — Coach Mike</div>
+    </div>
+  </section>
+
+  <!-- E · track, flag, nudge -->
+  <section class="scene" id="sE">
+    <div id="word" class="abs el t-display word1 c-chalk" style="left:0;width:1920px;text-align:center"></div>
+    <div id="tapeE" class="abs el"></div>
+  </section>
+
+  <!-- F · the one yellow sign surface -->
+  <section class="scene" id="sF"><div id="yellow" class="abs" style="inset:0"></div>
+    <div id="free" class="abs el t-display hero c-rubber" style="line-height:0.9">FREE 90-DAY<br>PILOT.</div>
+    <div id="then" class="abs el t-display h1 c-rubber">THEN $99 A MONTH.</div>
+  </section>
+
+  <!-- G · end card -->
+  <section class="scene" id="sG">
+    <div id="lockup" class="abs el"></div>
+    <div id="tag" class="abs el t-display h2 c-chalk" style="left:0;width:1920px;text-align:center">KEEP NEW MEMBERS PAST <span class="c-yellow">DAY 90.</span></div>
+    <div id="bandsG"><div class="band hazard" id="bG1" style="top:0"></div><div class="band hazard" id="bG2" style="top:1044px"></div></div>
+  </section>
+
+</div>
+  <div class="wipe" id="hzWipe"></div>
+  <div class="wipe" id="tpWipe" style="background:var(--yellow)"></div>
+</div>
+
+<script>
+window.READY = false
+const T = window.TENURE, L = window.TENURE_LIVE, Q = window.CUES, S = Q.S
+const $ = (id) => document.getElementById(id)
+const E4 = gsap.parseEase('power4.out')
+const clamp01 = (x) => Math.max(0, Math.min(1, x))
+
+// layout constants (px at 1920 x 1080; margins 120 / 96)
+const MX = 120, MY = 96, W = 1920, H = 1080
+const GRID_W = 720, BOARD_W = 1150, PANEL_PAD = 40, HZ_W = 600, TP_W = 320, LOGO_W = 900, LOCK_W = 680, TAPE_E_W = 1200
+const BASE_A = 700                                // baseline of DAY n
+
+// place a text element so its first baseline sits at y
+function baselineOf(el) {
+  // the marker must sit in the line box of the first text line: descend through block-level first children
+  // (e.g. #p78 > #n78) so it takes that child's font, not the wrapper's default 16 px line
+  let host = el
+  while (host.firstElementChild && host.firstElementChild === host.firstChild && getComputedStyle(host.firstElementChild).display === 'block') host = host.firstElementChild
+  const m = document.createElement('i'); m.style.cssText = 'display:inline-block;width:0;height:0;vertical-align:baseline'
+  host.insertBefore(m, host.firstChild); const off = m.getBoundingClientRect().top - el.getBoundingClientRect().top; m.remove(); return off
+}
+function place(id, x, baseY) { const el = $(id); el.style.left = x + 'px'; el.style.top = '0px'; el.style.top = (baseY - baselineOf(el)) + 'px' }
+
+let slotW = 0
+function layout() {
+  // fixed-width digit slots: Anton's digits are proportional, so every digit gets the widest digit's width
+  const cv = document.createElement('canvas').getContext('2d'); cv.font = '300px Anton'
+  slotW = Math.ceil(Math.max(...'0123456789'.split('').map((d) => cv.measureText(d).width)))
+  $('digits').innerHTML = '<span class="slot" style="width:' + slotW + 'px"></span><span class="slot" style="width:' + slotW + 'px"></span>'
+  place('day', MX, BASE_A)
+  // the member's grid, bottom on the DAY baseline, with the floor-tape ruler (DAY 30 / 60 / 90) above it
+  const gh = 7 * (GRID_W / 16) + 6 * (GRID_W / 16) * 0.25
+  $('grid').style.top = (BASE_A - gh - 48) + 'px'
+  let r = '<div style="position:absolute;left:0;bottom:4px">' + T.tape({ w: GRID_W, h: 11 }) + '</div>'
+  ;['DAY 30', 'DAY 60', 'DAY 90'].forEach((t, i) => { r += '<div class="t-label c-steel" style="position:absolute;font-size:24px;bottom:22px;right:' + (GRID_W - GRID_W * (i + 1) / 3) + 'px;margin-right:-0.14em">' + t + '</div>' })
+  $('ruler').innerHTML = r; $('ruler').style.width = GRID_W + 'px'
+  $('cells').style.width = GRID_W + 'px'
+
+  place('six', MX, 400); place('gone', MX, 400 + 70 + 120); place('src1', MX, 400 + 70 + 120 + 126 + 70)
+  // the line
+  place('ones', MX, 330); place('hit3', MX, 330 + 126 + 160)
+  const PD = 640; $('plate').innerHTML = T.plate({ d: PD }); $('plate').style.left = (W - MX - PD) + 'px'; $('plate').style.top = ((H - PD) / 2) + 'px'
+  place('p78', MX, 600); place('l78', MX, 680); place('p59', 1080, 600); place('l59', 1080, 680); place('src2', MX, 744)
+  // logo, centred (a single-word slam)
+  $('logo').style.left = (W - LOGO_W) / 2 + 'px'; $('logo').style.top = ((H - T.logoHeight(LOGO_W, true)) / 2) + 'px'
+  // board
+  place('head', MX, MY + 72)
+  const bh = T.boardHeight(BOARD_W), PANEL_Y = 300
+  const pw = BOARD_W + PANEL_PAD * 2, legH = 28, ph = PANEL_PAD + bh + 28 + legH + PANEL_PAD
+  Object.assign($('panel').style, { left: MX + 'px', top: PANEL_Y + 'px', width: pw + 'px', height: ph + 'px' })
+  Object.assign($('board').style, { left: PANEL_PAD + 'px', top: PANEL_PAD + 'px' })
+  Object.assign($('legend').style, { left: PANEL_PAD + 'px', top: (PANEL_PAD + bh + 28) + 'px' }); $('legend').innerHTML = T.legend({ w: 640, h: legH })
+  Object.assign($('tagD').style, { right: PANEL_PAD + 'px', top: (PANEL_PAD - 6) + 'px' })
+  // right column, beside the panel: the three steps from the panel's top, the message (21.5 s) on the panel's bottom
+  const bx = MX + pw + 48
+  Object.assign($('steps').style, { left: bx + 'px', top: PANEL_Y + 'px', width: (W - MX - bx) + 'px' })
+  Object.assign($('bubble').style, { left: bx + 'px', width: (W - MX - bx) + 'px' })
+  $('bubble').style.top = (PANEL_Y + ph - $('bubble').offsetHeight) + 'px'
+  // track / flag / nudge
+  place('word', 0, 660); Object.assign($('tapeE').style, { left: (W - TAPE_E_W) / 2 + 'px', top: (660 + 52) + 'px' })
+  // price
+  place('free', MX, 400); place('then', MX, 400 + 270 + 200)
+  // end card
+  const lh = T.logoHeight(LOCK_W, true), cap = LOCK_W * 859.38 / 2738.67
+  $('lockup').style.left = (W - LOCK_W) / 2 + 'px'; $('lockup').style.top = '250px'; $('lockup').innerHTML = T.logo({ w: LOCK_W, descriptor: true })
+  place('tag', 0, 250 + lh + cap + 72)
+  // wipes
+  $('hzWipe').style.width = HZ_W + 'px'; $('hzWipe').innerHTML = T.hazard({ w: HZ_W, h: H, stripe: 54 })
+  $('tpWipe').style.width = TP_W + 'px'
+}
+
+// visibility windows [on, off) for every element; scenes are handled with the wipes below
+const VIS = {
+  day: [S.day1, S.six], grid: [S.ruler, S.six], ruler: [S.ruler, S.six], six: [S.six, 99], gone: [S.gone, 99], src1: [S.gone, 99],
+  ones: [S.ones, S.p78], hit3: [S.hit3, S.p78], plate: [S.plate, S.p78],
+  p78: [S.p78, 99], l78: [S.p78, 99], src2: [S.p78, 99], p59: [S.p59, 99], l59: [S.p59, 99],
+  logo: [S.word, 99], head: [S.head, 99], panel: [S.panel, 99], steps: [S.panel, 99], bubble: [S.ping, 99],
+  word: [S.track, 99], tapeE: [S.track, 99], free: [S.free, 99], then: [S.then, 99],
+  lockup: [S.end, 99], tag: [S.final, 99],
+}
+// scenes: [on, off) outside wipes; each wipe shows the outgoing scene right of the band and the incoming one left of it
+const SCENES = { sA: [0, S.hazardWipe], sB: [S.hazardWipe, S.tapeWipe1], sC: [S.tapeWipe1, S.head], sD: [S.head, S.track], sE: [S.track, S.tapeWipe2], sF: [S.tapeWipe2, S.end], sG: [S.end, 99] }
+const WIPES = [
+  { t: S.hazardWipe, d: S.hazardDur, from: 'sA', to: 'sB', el: 'hzWipe', w: HZ_W },
+  { t: S.tapeWipe1, d: S.tapeDur, from: 'sB', to: 'sC', el: 'tpWipe', w: TP_W },
+  { t: S.tapeWipe2, d: S.tapeDur, from: 'sE', to: 'sF', el: 'tpWipe', w: TP_W },
+]
+
+const tl = gsap.timeline({ paused: true })
+function slam(id, t, origin = 'left center') {
+  tl.fromTo('#' + id, { scale: 1.18, transformOrigin: origin }, { scale: 1, duration: 0.18, ease: 'power4.out', immediateRender: false }, t)
+}
+function build() {
+  // hazard bands slam in along the top and bottom edges
+  for (const [a, b, t] of [['#bA1', '#bA2', S.bands], ['#bG1', '#bG2', S.end]]) {
+    tl.fromTo(a, { y: -36 }, { y: 0, duration: 0.18, ease: 'power4.out' }, t)
+    tl.fromTo(b, { y: 36 }, { y: 0, duration: 0.18, ease: 'power4.out' }, t)
+  }
+  slam('day', S.day1); slam('ruler', S.ruler); slam('digits', S.day90)
+  tl.to('#a1', { x: -W, duration: S.six - S.exit1, ease: 'power2.in' }, S.exit1)
+  slam('six', S.six); slam('gone', S.gone); slam('src1', S.gone)
+  slam('ones', S.ones)
+  // plate spin: a quarter turn rolling in from the right (arc length of a quarter turn), back.out(1.6)
+  tl.fromTo('#plate', { rotation: -90, x: Math.PI * 640 / 4, transformOrigin: '50% 50%' }, { rotation: 0, x: 0, duration: 0.6, ease: 'back.out(1.6)', immediateRender: false }, S.plate)
+  slam('hit3', S.hit3)
+  tl.to('#b1', { x: -W, duration: S.p78 - S.exit2, ease: 'power2.in' }, S.exit2)
+  slam('p78', S.p78); slam('l78', S.p78); slam('p59', S.p59); slam('l59', S.p59)
+  slam('logo', S.word, '50% 50%')
+  slam('head', S.head); slam('panel', S.panel, '0% 0%'); slam('steps', S.panel, '0% 0%')
+  tl.fromTo('#bubble', { x: 560 }, { x: 0, duration: 0.3, ease: 'power4.out', immediateRender: false }, S.ping)
+  for (const t of [S.track, S.flagW, S.nudge]) slam('word', t, '50% 60%')
+  slam('free', S.free); slam('then', S.then)
+  slam('lockup', S.end, '50% 50%'); slam('tag', S.final, '50% 50%')
+  // a 2-4 px shake on the heaviest hits
+  for (const c of Q.list.filter((c) => c.shake)) {
+    const a = c.w > 1 ? 4 : 3
+    tl.to('#world', { keyframes: [{ x: a, y: -a * 0.6, duration: 0.03 }, { x: -a * 0.8, y: a * 0.5, duration: 0.03 }, { x: a * 0.5, y: a * 0.3, duration: 0.03 }, { x: 0, y: 0, duration: 0.03 }], ease: 'none' }, c.t)
+  }
+  tl.set({}, {}, Q.DUR)
+}
+
+// discrete per-frame state: scenes and wipes, the counter, the member's grid, the board, the tapes
+const memo = {}
+const setHTML = (id, key, f) => { if (memo[id] !== key) { memo[id] = key; $(id).innerHTML = f() } }
+const vis = (id, on) => { const v = on ? 'inherit' : 'hidden'; const s = $(id).style; if (s.visibility !== v) s.visibility = v }
+const samBack = T.SAMPLE.map((m) => (m.name === 'Sam O.' ? { ...m, weeks: [...m.weeks, 3] } : m))
+
+function apply(t) {
+  for (const id in VIS) vis(id, t >= VIS[id][0] && t < VIS[id][1])
+  for (const id in SCENES) { vis(id, t >= SCENES[id][0] && t < SCENES[id][1]); $(id).style.clipPath = '' }
+  vis('hzWipe', false); vis('tpWipe', false)
+  for (const w of WIPES) if (t >= w.t && t < w.t + w.d) {
+    const X = -w.w + ((t - w.t) / w.d) * (W + w.w)       // constant speed, like tape pulled off a roll
+    $(w.el).style.transform = `translateX(${X}px)`; vis(w.el, true)
+    vis(w.from, true); vis(w.to, true)
+    $(w.from).style.clipPath = `inset(0 0 0 ${Math.max(0, X + w.w)}px)`
+    $(w.to).style.clipPath = `inset(0 ${Math.max(0, W - X)}px 0 0)`
+  }
+  // counter + grid
+  let upto = 0; if (t >= S.countStart) for (let i = 0; i < 90; i++) if (Q.dayT(i) <= t + 1e-9) upto = i + 1
+  const day = Math.max(1, upto), ds = String(day), slots = $('digits').children
+  setHTML('cells', 'u' + upto, () => L.daysLive({ w: GRID_W, visits: T.SLIPPER, upto }))
+  const key = ds + (t >= S.day90 ? 'y' : 'c')
+  if (memo.digits !== key) { memo.digits = key; slots[0].textContent = ds[0]; slots[1].textContent = ds[1] || ''; slots[1].style.display = ds[1] ? '' : 'none'; $('digits').style.color = t >= S.day90 ? 'var(--yellow)' : '' }
+  // logo tape fill
+  const fill = (times) => times.reduce((a, s) => a + E4(clamp01((t - s) / 0.18)), 0)
+  const lf = fill(S.seg), withDesc = t >= S.desc
+  setHTML('logo', lf.toFixed(4) + withDesc, () => T.logo({ w: LOGO_W, tapeFilled: lf, descriptor: withDesc }))
+  // the board
+  const back = t >= S.back, members = back ? samBack : T.SAMPLE
+  const rowShown = [], rowReveal = [], paceShown = []
+  members.forEach((m, k) => {
+    let n = 0; m.weeks.forEach((v, j) => { if ((back && k === 5 && j === 3) || Q.cellT(k, j) <= t + 1e-9) n++ })
+    rowShown.push(t >= Q.cellT(k, 0)); rowReveal.push(n); paceShown.push(n === m.weeks.length)
+  })
+  const pp = clamp01((t - S.press) / 0.25), chipScale = t >= S.press && pp < 1 ? Math.round((0.9 + 0.1 * E4(pp)) * 1000) / 1000 : 1
+  const flagOn = t >= S.flag
+  setHTML('board', [rowReveal, rowShown, flagOn, chipScale, back].join('|'), () => L.boardLive({ w: BOARD_W, members, rowShown, rowReveal, paceShown, flagOn, chipScale }))
+  const step = t < S.flag ? 0 : t < S.press ? 1 : 2
+  if (memo.step !== step) { memo.step = step; [...$('steps').children].forEach((d, i) => { d.className = 'step t-label lab' + (i === step ? ' on' : i < step ? ' done' : '') }) }
+  // track / flag / nudge, with the floor tape filling under them
+  const w3 = t < S.flagW ? 'TRACK.' : t < S.nudge ? 'FLAG.' : 'NUDGE.'
+  if (memo.word !== w3) { memo.word = w3; $('word').textContent = w3 }
+  const ef = fill([S.track, S.flagW, S.nudge])
+  setHTML('tapeE', ef.toFixed(4), () => T.tape({ w: TAPE_E_W, h: 48, filled: ef }))
+}
+
+window.seek = (t) => { tl.seek(t, false); apply(t) }
+
+;(async () => {
+  await Promise.all(['300px Anton', '600 28px "Barlow Condensed"', '700 28px "Barlow Condensed"', '400 24px Barlow', '500 34px Barlow'].map((f) => document.fonts.load(f)))
+  await document.fonts.ready
+  layout(); build()
+  const q = new URLSearchParams(location.search)
+  if (q.has('play')) {
+    const fit = () => { const k = Math.min(innerWidth / W, innerHeight / H); $('stage').style.transform = `scale(${k})`; document.body.style.background = '#000' }
+    fit(); addEventListener('resize', fit); document.body.style.width = document.body.style.height = '100vw'
+    const t0 = performance.now(); gsap.ticker.add(() => window.seek(((performance.now() - t0) / 1000) % Q.DUR))
+  } else window.seek(q.has('t') ? +q.get('t') : 0)
+  window.READY = true
+})()
+</script>
+</body>
+</html>

@@ -1,0 +1,96 @@
+/* The chart is drawn at its box's width (VisitsChart.tsx), so the box only has to be no wider than its column. */
+.figure {
+  display: grid;
+  gap: var(--space-3);
+  margin: 0;
+  min-inline-size: 0;
+}
+
+.box {
+  min-inline-size: 0;
+}
+
+.svg {
+  display: block;
+  max-inline-size: 100%;
+  overflow: visible;
+}
+
+/* Gridlines are the separator hairline: they recede behind the lines (NFR-USE-01). */
+.grid {
+  stroke: var(--color-line);
+  stroke-width: var(--border-hairline);
+}
+
+.tick {
+  fill: var(--color-text-soft);
+  font-size: var(--text-12);
+  font-variant-numeric: var(--font-numeric);
+}
+
+/* Still coming: solid, in the text colour. */
+.still {
+  fill: none;
+  stroke: var(--color-text);
+  stroke-width: var(--border-thick);
+  stroke-linejoin: round;
+  stroke-linecap: round;
+}
+
+.stillMarker {
+  fill: var(--color-text);
+}
+
+/* Slipped: dashed, in the slipping colour, with a marker on every week. */
+.slipped {
+  fill: none;
+  stroke: var(--color-attention);
+  stroke-width: var(--border-thick);
+  stroke-dasharray: var(--space-2) var(--space-1);
+  stroke-linejoin: round;
+}
+
+.slippedMarker {
+  fill: var(--color-attention);
+  stroke: var(--color-surface);
+  stroke-width: var(--border-thin);
+}
+
+/* The line at 3 a week: dotted, in soft text. Round caps on zero-length dashes draw the dots. */
+.line {
+  stroke: var(--color-text-soft);
+  stroke-width: var(--border-thick);
+  stroke-dasharray: 0 var(--space-2);
+  stroke-linecap: round;
+}
+
+/* The end labels: a halo in the panel's colour keeps them readable where a line passes behind. */
+.label {
+  font-size: var(--text-13);
+  font-weight: var(--weight-heading);
+  paint-order: stroke;
+  stroke: var(--color-surface);
+  stroke-width: var(--space-1);
+  stroke-linejoin: round;
+}
+
+.stillLabel {
+  fill: var(--color-text);
+}
+
+.slippedLabel {
+  fill: var(--color-attention-text);
+}
+
+.lineLabel {
+  fill: var(--color-text-soft);
+}
+
+.caption {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: var(--space-1) var(--space-4);
+  color: var(--color-text-soft);
+  font-size: var(--text-13);
+}

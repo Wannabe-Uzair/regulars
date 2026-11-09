@@ -1,0 +1,108 @@
+/* As in the shell: the column may be narrower than its content. */
+.page {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: var(--space-6);
+  max-inline-size: 48rem;
+}
+
+.head {
+  display: grid;
+  gap: var(--space-1);
+}
+
+.sub {
+  margin: 0;
+  color: var(--color-text-soft);
+}
+
+.error {
+  display: grid;
+  gap: var(--space-4);
+  justify-items: start;
+}
+
+.error p {
+  margin: 0;
+  color: var(--color-danger);
+}
+
+/* One inset grouped list: the rows run to the card's edge, their hairlines inset to the text. */
+.card {
+  padding: 0;
+  overflow: hidden;
+}
+
+.list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.list > li + li {
+  border-block-start: var(--border-hairline) solid var(--color-line);
+  margin-inline-start: var(--space-4);
+}
+
+.list > li + li .row {
+  padding-inline-start: 0;
+}
+
+/* The whole row opens the member (lists in the HIG), at least 44 px. */
+.row {
+  display: grid;
+  gap: var(--space-1);
+  min-block-size: calc(var(--space-10) + var(--space-1));
+  padding: var(--space-3) var(--space-4);
+  color: var(--color-text);
+  text-decoration: none;
+}
+
+@media (hover: hover) {
+  .row:hover {
+    background-color: var(--color-highlight);
+  }
+}
+
+.row:active {
+  background-color: var(--color-highlight-press);
+}
+
+.top {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-1) var(--space-3);
+}
+
+.name {
+  font-weight: var(--weight-heading);
+}
+
+.outcome {
+  color: var(--color-text-soft);
+  font-size: var(--text-14);
+}
+
+.body {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-1) var(--space-3);
+  color: var(--color-text-soft);
+  font-size: var(--text-14);
+}
+
+.when {
+  font-variant-numeric: var(--font-numeric);
+}
+
+.channel {
+  font-weight: var(--weight-interface);
+}

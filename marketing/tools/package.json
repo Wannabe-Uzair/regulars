@@ -1,0 +1,11 @@
+{
+  "name": "tenure-tools",
+  "private": true,
+  "type": "module",
+  "description": "Shared render tools for the Tenure expo pieces (HTML to PDF/PNG, frame capture for the reel)",
+  "dependencies": {
+    "gsap": "^3.12.5",
+    "opentype.js": "^1.3.4",
+    "puppeteer-core": "^23.11.1"
+  }
+}

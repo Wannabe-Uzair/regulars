@@ -1,0 +1,228 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Tenure brochure (A4 tri-fold, roll fold)</title>
+<link rel="stylesheet" href="../brand/tokens.css">
+<style>
+  /* A4 landscape 297 x 210 mm + 3 mm bleed. Page 1 = outside, page 2 = inside. ?guides=1 draws trim, folds, safe areas. */
+  @page { size: 303mm 216mm; margin: 0; }
+  html, body { background: var(--rubber); }
+  .sheet { position: relative; width: 303mm; height: 216mm; overflow: hidden; background: var(--rubber); break-after: page; }
+  .sheet:last-of-type { break-after: auto; }
+  .trim { position: absolute; left: 3mm; top: 3mm; width: 297mm; height: 210mm; }
+  .ground { position: absolute; top: -3mm; height: 216mm; }
+  .speckle { background-color: var(--rubber); background-image: url(../brand/assets/speckle-tile.svg); background-size: 40mm 40mm; }
+  .yellow { background: var(--yellow); }
+  .band { position: absolute; top: -3mm; line-height: 0; }
+  .band svg { display: block; }
+  .panel { position: absolute; top: 8mm; height: 194mm; display: flex; flex-direction: column; color: var(--chalk); }
+  .svg > svg, .svg svg { display: block; }
+
+  /* brochure type scale (tokens.json type.brochure_pt) */
+  .lab   { font-size: 7.5pt; }
+  .h1    { font-size: 36pt; line-height: 0.9; }
+  .h2    { font-size: 22pt; line-height: 0.9; }
+  .body  { font-size: 9.5pt; line-height: 13.5pt; }
+  .small { font-size: 6.8pt; line-height: 9pt; }
+  .sample-tag { font-kerning: none; font-size: 7pt; border: 0.25mm solid var(--rubber-3); padding: 0.5mm 1.4mm 0.4mm; line-height: 1.1; }
+  .screen { background: var(--rubber-2); padding: 4mm; }
+  .screen-head { display: flex; justify-content: flex-end; margin-bottom: 3mm; }
+  .rule { border-top: 0.3mm solid var(--rubber-3); }
+  .on-yellow, .on-yellow .t-small { color: var(--rubber); }
+  .on-yellow .rule { border-top-color: var(--rubber); }
+
+  /* outside */
+  .hero { white-space: nowrap; line-height: 0.94; } /* stacked: 0.94 keeps the two lines of caps apart */
+  .stats { display: grid; grid-template-columns: 1fr 1fr; column-gap: 4mm; }
+  .step { display: flex; flex-direction: column; }
+  .gap { flex: 1; display: flex; align-items: center; min-height: 10mm; }
+  .gap .rule { width: 100%; }
+  .bubble { background: var(--rubber-2); padding: 3.4mm 4mm 3.6mm; }
+  .bubble .t-body { font-size: 9pt; line-height: 12.5pt; }
+  .names { font-family: var(--font-label); font-weight: 700; font-size: 10.5pt; line-height: 13.5pt; letter-spacing: 0.05em; } /* team names: label type, mixed case */
+
+  /* guides (proof only) */
+  .guides { position: absolute; left: 0; top: 0; width: 303mm; height: 216mm; pointer-events: none; }
+</style>
+<script>window.READY = false</script>
+</head>
+<body>
+
+<!-- ============================================================ PAGE 1: OUTSIDE -->
+<section class="sheet" id="outside">
+  <div class="trim">
+    <div class="ground speckle" style="left:-3mm;width:303mm"></div>
+    <div class="ground yellow" style="left:97mm;width:100mm"></div>
+    <!-- front cover hazard band: from the fold at 197 mm to the right bleed, top 6 mm + 3 mm bleed -->
+    <div class="band" style="left:197mm" id="bandFront"></div>
+
+    <!-- inside flap, x 0-97 -->
+    <div class="panel" style="left:8mm;width:81mm">
+      <div class="t-label lab c-yellow">01 — The problem</div>
+      <div class="t-display hero c-yellow" data-fit="81" style="margin-top:20mm">6 IN 10</div>
+      <div class="t-display h1" style="margin-top:9mm">New members<br>quit within<br>three months.</div>
+      <div class="t-small small" style="margin-top:2.6mm">63% of new members quit within three months. Sperandei et al., 2016.</div>
+      <div class="t-body body" style="margin-top:9mm">They rarely quit on day one. They fade, one missed week at a time.</div>
+      <div style="margin-top:auto">
+        <div class="svg" id="daysSlip"></div>
+        <div class="t-label lab c-steel" style="margin-top:2.4mm">A member who slips</div>
+      </div>
+    </div>
+
+    <!-- back cover, x 97-197: the yellow sign surface -->
+    <div class="panel on-yellow" style="left:105mm;width:84mm">
+      <div class="svg" id="logoBack" style="margin-top:15mm"></div>
+      <div class="t-display h1" style="margin-top:14mm">Free 90-day<br>pilot.<br>Then $99<br>a month.</div>
+      <div class="t-body body" style="margin-top:5mm">One flat price per gym. Unlimited members.</div>
+      <div class="t-body body" style="margin-top:3mm">Keep 2 members a month and it pays for itself.</div>
+      <div class="t-small small" style="margin-top:1.4mm">Most US members pay under $50 a month. Health &amp; Fitness Association, 2024.</div>
+      <div style="margin-top:auto">
+        <div class="rule"></div>
+        <div class="t-label lab" style="margin-top:3mm">The team</div>
+        <div class="names" style="margin-top:1.6mm">Uzair Imran · Moiz Hamid ·<br>Zain ul Abideen · Ali Hassan</div>
+        <div class="t-small small" style="margin-top:4mm">Screens show sample data.</div>
+      </div>
+    </div>
+
+    <!-- front cover, x 197-297 -->
+    <div class="panel" style="left:205mm;width:84mm">
+      <div class="svg" id="logoFront" style="margin-top:15mm"></div>
+      <div style="margin-top:auto">
+        <div class="t-display hero" id="heroDay" data-fit="84">DAY<br><span class="c-yellow">90</span></div>
+        <div class="t-display h1" style="margin-top:6mm">Get every new<br>member there.</div>
+      </div>
+    </div>
+  </div>
+  <div class="guides" data-namey="207.4" data-panels="INSIDE FLAP · 97 MM:0:97|BACK COVER · 100 MM:97:197|FRONT COVER · 100 MM:197:297"></div>
+</section>
+
+<!-- ============================================================ PAGE 2: INSIDE -->
+<section class="sheet" id="inside">
+  <div class="trim">
+    <div class="ground speckle" style="left:-3mm;width:303mm"></div>
+
+    <!-- panel 1, x 0-100 -->
+    <div class="panel" style="left:8mm;width:84mm">
+      <div class="t-label lab c-yellow">02 — The line</div>
+      <div class="t-display h1" style="margin-top:4mm">Members who<br>stay hit <span class="c-yellow">3 visits</span><br><span class="c-yellow">a week.</span></div>
+      <div class="svg" id="plate" style="margin:auto 0"></div>
+      <div>
+        <div class="stats">
+          <div><div class="t-display h1 c-yellow">78%</div><div class="t-body body" style="margin-top:2mm">renew at 3+ visits a week</div></div>
+          <div><div class="t-display h1 c-steel">59%</div><div class="t-body body" style="margin-top:2mm">under once a week</div></div>
+        </div>
+        <div class="t-small small" style="margin-top:3mm">78% of members at 3+ visits a week renew. Under once a week: 59%. IHRSA.</div>
+      </div>
+    </div>
+
+    <!-- panel 2, x 100-200 -->
+    <div class="panel" style="left:108mm;width:84mm">
+      <div class="t-label lab c-yellow">03 — Tenure</div>
+      <div class="t-display h1" style="margin-top:4mm">One board for<br>every new<br>member's first<br><span class="c-yellow">90 days.</span></div>
+      <div class="t-body body" style="margin-top:5mm">Tenure watches every new member's first 90 days, flags anyone who drops below the line, and lets you nudge them back in one tap.</div>
+      <div class="screen" style="margin-top:auto;margin-bottom:auto">
+        <div class="screen-head"><span class="sample-tag">Sample data</span></div>
+        <div class="svg" id="board"></div>
+        <div class="svg" id="legend" style="margin-top:4mm"></div>
+      </div>
+    </div>
+
+    <!-- the one hazard band of the inside: bottom edge of panel 3, from the fold at 200 mm into the right and bottom bleed -->
+    <div class="band" style="left:200mm;top:204mm" id="bandInside"></div>
+
+    <!-- panel 3, x 200-297 (ends 8 mm above its hazard band) -->
+    <div class="panel" style="left:208mm;width:81mm;height:188mm">
+      <div class="t-label lab c-yellow">04 — How it works</div>
+
+      <div class="step" style="margin-top:6mm">
+        <div class="t-label lab c-yellow">01</div>
+        <div class="t-display h2" style="margin-top:1mm">Track</div>
+        <div class="t-body body" style="margin-top:2mm">Every new member's check-ins, on one board, for 90&nbsp;days.</div>
+        <div class="svg" id="daysStay" style="margin-top:3mm"></div>
+      </div>
+
+      <div class="gap"><div class="rule"></div></div>
+      <div class="step">
+        <div class="t-label lab c-yellow">02</div>
+        <div class="t-display h2" style="margin-top:1mm">Flag</div>
+        <div class="t-body body" style="margin-top:2mm">Two weak weeks in a row and they're flagged, while there is still time.</div>
+        <div class="screen" style="margin-top:3mm;padding:3mm">
+          <div class="screen-head" style="margin-bottom:2mm"><span class="sample-tag">Sample data</span></div>
+          <div class="svg" id="flagBoard"></div>
+        </div>
+      </div>
+
+      <div class="gap"><div class="rule"></div></div>
+      <div class="step">
+        <div class="t-label lab c-yellow">03</div>
+        <div class="t-display h2" style="margin-top:1mm">Nudge</div>
+        <div class="t-body body" style="margin-top:2mm">One tap sends a personal text from you or their coach.</div>
+        <div class="bubble" style="margin-top:3mm">
+          <div class="screen-head" style="margin-bottom:2mm"><span class="sample-tag">Sample message</span></div>
+          <div class="t-body">Hey Sam, we missed you this week. Want me to save you a spot in Thursday's 6 pm class? — Coach Mike</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="guides" data-namey="7" data-panels="PANEL 1 · 100 MM:0:100|PANEL 2 · 100 MM:100:200|PANEL 3 · 97 MM:200:297"></div>
+</section>
+
+<script src="../brand/wordmark.js"></script>
+<script src="../brand/kit.js"></script>
+<script src="print-kit.js"></script>
+<script>
+(async function () {
+  const T = TENURE, P = TENURE_PRINT, C = T.C, $ = (id) => document.getElementById(id)
+
+  // outside
+  $('bandFront').innerHTML = T.hazard({ w: 103, h: 9, stripe: 3, unit: 'mm' })
+  $('logoFront').innerHTML = T.logo({ w: 52, descriptor: true, unit: 'mm' })
+  $('logoBack').innerHTML = T.logo({ w: 52, word: C.rubber, tapeColor: C.rubber, descriptor: true, descColor: C.rubber, unit: 'mm' })
+  $('daysSlip').innerHTML = T.days({ w: 44, visits: T.SLIPPER, unit: 'mm' })
+
+  // inside
+  $('plate').innerHTML = T.plate({ d: 74.7, unit: 'mm' }) /* value at d x 0.17 = 36 pt, the H1 size */
+  $('board').innerHTML = P.boardPrint({ w: 76, pace: false })
+  $('legend').innerHTML = P.legendPrint({ w: 76, h: 3.8 })
+  $('bandInside').innerHTML = T.hazard({ w: 100, h: 9, stripe: 3, unit: 'mm' })
+  $('daysStay').innerHTML = T.days({ w: 60, visits: T.STAYER, unit: 'mm' })
+  $('flagBoard').innerHTML = P.boardPrint({ w: 75, members: T.SAMPLE.filter(T.isFlagged), header: false, highlight: 'Sam O.' })
+
+  await document.fonts.ready
+
+  // the hero fills the live width: size the first line (DAY) to data-fit mm
+  document.querySelectorAll('[data-fit]').forEach((el) => {
+    const target = +el.dataset.fit * 96 / 25.4
+    const probe = document.createElement('span')
+    probe.className = 't-display'
+    probe.style.cssText = 'position:absolute;visibility:hidden;white-space:nowrap;font-size:100pt'
+    probe.textContent = el.firstChild.textContent
+    document.body.appendChild(probe)
+    const w = probe.getBoundingClientRect().width
+    probe.remove()
+    el.style.fontSize = (100 * target / w).toFixed(2) + 'pt'
+  })
+
+  // guides
+  if (new URLSearchParams(location.search).get('guides') === '1') {
+    const M = '#E6007E', CY = '#00A3E0', F = "'Barlow Condensed', sans-serif"
+    document.querySelectorAll('.guides').forEach((g) => {
+      const panels = g.dataset.panels.split('|').map((s) => { const [n, a, b] = s.split(':'); return { n, a: +a, b: +b } })
+      let s = `<svg xmlns="http://www.w3.org/2000/svg" width="303mm" height="216mm" viewBox="0 0 303 216">`
+      s += `<rect x="3" y="3" width="297" height="210" fill="none" stroke="${M}" stroke-width="0.25"/>`
+      panels.slice(1).forEach((p) => { s += `<line x1="${3 + p.a}" y1="0" x2="${3 + p.a}" y2="216" stroke="${M}" stroke-width="0.25" stroke-dasharray="2 1.2"/>` })
+      panels.forEach((p) => {
+        s += `<rect x="${3 + p.a + 8}" y="11" width="${p.b - p.a - 16}" height="194" fill="none" stroke="${CY}" stroke-width="0.2" stroke-dasharray="1 0.8"/>`
+        s += `<text x="${3 + p.a + 8}" y="${3 + +g.dataset.namey}" font-family="${F}" font-weight="700" font-size="2.3" letter-spacing="0.3" fill="${CY}">${p.n} · SAFE ${p.b - p.a - 16} × 194 MM</text>`
+      })
+      s += `<text x="${3 + 297}" y="215.3" text-anchor="end" font-family="${F}" font-weight="700" font-size="2.3" letter-spacing="0.3" fill="${M}">TRIM 297 × 210 · BLEED 3 · SAFE 8 · FOLD DASHED</text>`
+      g.innerHTML = s + '</svg>'
+    })
+  }
+
+  window.READY = true
+})()
+</script>
+</body>
+</html>

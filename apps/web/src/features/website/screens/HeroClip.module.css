@@ -1,0 +1,25 @@
+/* The hero's clip (or its still): the board card, drawn edge to edge in the file, floats here as the board did, on the
+   large radius over the one float shadow on the page (depth-1). The clip's box keeps its shape from the first paint. */
+.clip {
+  display: block;
+  box-sizing: border-box;
+  inline-size: 100%;
+  block-size: auto;
+  border-radius: var(--radius-xl);
+  background-color: var(--color-surface);
+  box-shadow: var(--shadow-float);
+  margin-inline: auto;
+  pointer-events: none;
+}
+
+/* The phone's cut is drawn for a phone's column: between a phone and 48rem it stops at 26rem, centred, rather than
+   grow taller than the screen. Two classes, so it outranks the page's width for the board whichever sheet loads first. */
+.clip.phone {
+  max-inline-size: 26rem;
+}
+
+/* iOS draws a start-playback glyph when it blocks autoplay (Low Power Mode); the clip is not interactive, so hide it. */
+.clip::-webkit-media-controls-start-playback-button {
+  display: none !important;
+  -webkit-appearance: none;
+}

@@ -1,0 +1,291 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Stall Check</title>
+<style>
+  :root {
+    color-scheme: light;
+    --bg: #f2f2f7;
+    --surface: #ffffff;
+    --text: #1d1d1f;
+    --soft: #606068;
+    --tint: #5444e4;
+    --tint-fill: #eae9fc;
+    --attention: #d40624;
+    --line: #d1d1d6;
+    --shadow: 0 0 2px rgb(0 0 0 / 0.06), 0 4px 8px rgb(0 0 0 / 0.07);
+  }
+  * { box-sizing: border-box; }
+  html { background: var(--bg); }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--text);
+    font: 400 17px/1.5 'Inter Variable', Inter, system-ui, -apple-system, 'Segoe UI', sans-serif;
+    -webkit-font-smoothing: antialiased;
+  }
+  ::selection { background: var(--tint); color: #fff; }
+  :focus-visible { outline: 3px solid var(--tint); outline-offset: 2px; }
+  main { max-width: 40rem; margin: 0 auto; padding: 48px 16px 64px; }
+  .brand { display: flex; align-items: center; gap: 10px; margin-bottom: 40px; }
+  .brand svg { width: 28px; height: 28px; margin-inline: -5px; }
+  .brand span { font-size: 21px; font-weight: 600; letter-spacing: -0.01em; line-height: 1; }
+  h1 { margin: 0 0 8px; font-size: 34px; line-height: 1.1; font-weight: 700; letter-spacing: -0.02em; }
+  #summary { margin: 0 0 32px; font-size: 19px; color: var(--soft); text-wrap: pretty; }
+  #summary.done { color: var(--text); font-weight: 600; }
+  form { display: flex; flex-wrap: wrap; align-items: end; gap: 12px; margin-bottom: 24px; }
+  .field { flex: 1 1 16rem; }
+  label { display: block; margin-bottom: 6px; font-size: 15px; font-weight: 600; }
+  input {
+    width: 100%; min-height: 44px; padding: 10px 14px;
+    border: 1px solid var(--line); border-radius: 12px;
+    background: var(--surface); color: var(--text); font: inherit;
+  }
+  input:focus-visible { outline-offset: 0; border-color: var(--tint); }
+  button {
+    min-height: 44px; padding: 10px 22px; border: 0; border-radius: 999px;
+    background: var(--tint); color: #fff; font: inherit; font-weight: 600; cursor: pointer;
+  }
+  button:hover { background: color-mix(in oklab, var(--tint) 88%, var(--text)); }
+  button:active { background: color-mix(in oklab, var(--tint) 76%, var(--text)); }
+  ol { list-style: none; margin: 0; padding: 0; background: var(--surface); border-radius: 12px; box-shadow: var(--shadow); }
+  li { display: grid; grid-template-columns: 24px 1fr; column-gap: 14px; padding: 16px 20px; }
+  li + li { border-top: 1px solid var(--line); }
+  li > svg { width: 24px; height: 24px; margin-top: 1px; }
+  li h2 { margin: 0; font-size: 17px; font-weight: 600; line-height: 1.5; }
+  li p { grid-column: 2; margin: 2px 0 0; color: var(--soft); max-width: 65ch; }
+  li p.fix { margin-top: 8px; color: var(--text); }
+  li video { grid-column: 2; display: block; width: 100%; max-width: 448px; margin-top: 12px; border-radius: 12px; background: var(--bg); aspect-ratio: 896 / 421; }
+  .ok { color: var(--tint); }
+  .problem { color: var(--attention); }
+  .wait { color: var(--soft); }
+  .wait svg, li[data-state='wait'] > svg { animation: spin 900ms linear infinite; }
+  @keyframes spin { to { transform: rotate(360deg); } }
+  @media (prefers-reduced-motion: reduce) { li[data-state='wait'] > svg { animation: none; } }
+  footer { margin-top: 32px; font-size: 15px; color: var(--soft); }
+  footer p { margin: 0 0 8px; max-width: 65ch; }
+  .sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+</style>
+</head>
+<body>
+<main>
+  <div class="brand">
+    <svg viewBox="0 0 24 24" aria-hidden="true">
+      <path fill="#1d1d1f" d="M4.4 13.3V4.4A15.2 15.2 0 0 1 19.6 19.6H10.7V13.3Z" />
+      <rect fill="#5444e4" x="4.4" y="14.6" width="5" height="5" rx="1.3" />
+    </svg>
+    <span>Regulars</span>
+  </div>
+
+  <h1>Stall Check</h1>
+  <p id="summary" aria-live="polite">Checking this laptop…</p>
+
+  <form id="form">
+    <div class="field">
+      <label for="address">App address</label>
+      <input id="address" name="address" value="http://localhost:5175" autocomplete="off" spellcheck="false">
+    </div>
+    <button type="submit">Check Again</button>
+  </form>
+
+  <ol>
+    <li id="motion"></li>
+    <li id="app"></li>
+    <li id="clip"></li>
+    <li id="browser"></li>
+  </ol>
+
+  <footer>
+    <p>This page only looks; it changes nothing. To check the other laptop's app from here, put the address its start
+      script printed in the box.</p>
+    <p>Made for the 8 Nov build (3c771a7).</p>
+  </footer>
+</main>
+
+<script>
+  const ICONS = {
+    ok: '<svg viewBox="0 0 24 24" aria-hidden="true" class="ok"><circle cx="12" cy="12" r="10" fill="currentColor"/><path d="m7.5 12.3 3 3 6-6.3" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>',
+    problem: '<svg viewBox="0 0 24 24" aria-hidden="true" class="problem"><circle cx="12" cy="12" r="10" fill="currentColor"/><path d="M12 7v6" stroke="#fff" stroke-width="2.2" stroke-linecap="round"/><circle cx="12" cy="16.6" r="1.3" fill="#fff"/></svg>',
+    wait: '<svg viewBox="0 0 24 24" aria-hidden="true" class="wait"><circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-opacity="0.25" stroke-width="2.5"/><path d="M12 3a9 9 0 0 1 9 9" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/></svg>',
+    skip: '<svg viewBox="0 0 24 24" aria-hidden="true" class="wait"><circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-opacity="0.4" stroke-width="2.5"/></svg>',
+  }
+  const LABELS = { ok: 'Passed', problem: 'Needs fixing', wait: 'Checking', skip: 'Not checked yet' }
+
+  const platform = (navigator.userAgentData && navigator.userAgentData.platform) || navigator.platform || ''
+  const isMac = /mac/i.test(platform)
+  const isWindows = /win/i.test(platform)
+  const reduce = window.matchMedia('(prefers-reduced-motion: reduce)')
+  let run = 0
+
+  function el(tag, className, text) {
+    const node = document.createElement(tag)
+    if (className) node.className = className
+    if (text) node.textContent = text
+    return node
+  }
+
+  // One row: its state icon, its title, a sentence, and how to fix it when it needs fixing.
+  function show(id, state, title, detail, fix, extra) {
+    const row = document.getElementById(id)
+    row.dataset.state = state
+    row.replaceChildren()
+    row.insertAdjacentHTML('beforeend', ICONS[state])
+    const heading = el('h2', '', title)
+    heading.append(el('span', 'sr', ': ' + LABELS[state]))
+    row.append(heading, el('p', '', detail))
+    if (fix) row.append(el('p', 'fix', fix))
+    if (extra) row.append(extra)
+    summarise()
+  }
+
+  function summarise() {
+    const rows = [...document.querySelectorAll('ol > li')]
+    const summary = document.getElementById('summary')
+    if (rows.some((row) => row.dataset.state === 'wait')) {
+      summary.className = ''
+      summary.textContent = 'Checking this laptop…'
+      return
+    }
+    const problems = rows.filter((row) => row.dataset.state === 'problem').length
+    summary.className = 'done'
+    summary.textContent =
+      problems === 0
+        ? 'Ready. This laptop shows Regulars as designed.'
+        : problems === 1
+          ? '1 thing to fix before the doors open.'
+          : problems + ' things to fix before the doors open.'
+  }
+
+  function checkMotion() {
+    if (!reduce.matches) {
+      show('motion', 'ok', 'Motion on this laptop', 'Reduce Motion is off, so the app’s animations play.')
+      return
+    }
+    const mac = 'On a Mac: open System Settings, search for Reduce motion, and turn it off.'
+    const windows =
+      'On Windows: Settings, Accessibility, Visual effects: turn Animation effects on. If it is already on, search ' +
+      'Windows for “Adjust the appearance and performance of Windows” and tick “Animate controls and elements inside windows”.'
+    const fix = (isMac ? mac : isWindows ? windows : mac + ' ' + windows) + ' Then press Check Again.'
+    show('motion', 'problem', 'Motion on this laptop', 'Reduce Motion is on, so the app stands completely still.', fix)
+  }
+
+  // Loads a picture from the app; true when it arrives within the time.
+  function probe(url, ms) {
+    return new Promise((resolve) => {
+      const img = new Image()
+      const timer = setTimeout(() => { img.src = ''; resolve(false) }, ms)
+      img.onload = () => { clearTimeout(timer); resolve(true) }
+      img.onerror = () => { clearTimeout(timer); resolve(false) }
+      img.src = url + '?check=' + Date.now()
+    })
+  }
+
+  async function checkApp(base, mine) {
+    const title = 'The app at ' + base.replace(/^https?:\/\//, '')
+    show('app', 'wait', title, 'Looking for Regulars…')
+    const [redesign, any] = await Promise.all([
+      probe(base + '/media/hero-board-wide.webp', 6000),
+      probe(base + '/favicon-32.png', 6000),
+    ])
+    if (mine !== run) return false
+    if (redesign) {
+      show('app', 'ok', title, 'Regulars answers, and it is the redesign build.')
+    } else if (any) {
+      show('app', 'problem', title, 'Something answers, but it is an older build, not the redesign.',
+        'Stop the app and start it again with its start script, and read what it prints. On the Mac, “Using the image built last time” means the new build failed: run scripts/stall.sh again while online.')
+    } else {
+      show('app', 'problem', title, 'Nothing answers at this address.',
+        'Start the app with its start script, wait until it prints the address for phones, then press Check Again. On the Mac: scripts/stall.sh. On Windows: stall-windows.ps1.')
+    }
+    return redesign
+  }
+
+  function checkClip(base, appOk, mine) {
+    const title = 'The home clip'
+    if (!appOk) {
+      show('clip', 'skip', title, 'Checked once the app answers.')
+      return
+    }
+    const video = el('video')
+    video.muted = true
+    video.defaultMuted = true
+    video.loop = true
+    video.playsInline = true
+    video.autoplay = true
+    video.setAttribute('aria-hidden', 'true')
+    for (const [ext, type] of [['mp4', 'video/mp4'], ['webm', 'video/webm']]) {
+      const source = el('source')
+      source.src = base + '/media/hero-board-wide.' + ext
+      source.type = type
+      video.append(source)
+    }
+    let settled = false
+    const finish = (ok) => {
+      if (settled || mine !== run) return
+      settled = true
+      clearTimeout(timer)
+      if (ok) {
+        show('clip', 'ok', title, 'It plays in this browser.', '', video)
+      } else {
+        video.remove()
+        show('clip', 'problem', title, 'The clip did not start by itself.',
+          'Plug the laptop in, turn off Low Power Mode (Mac) or Energy saver (Windows), and press Check Again.')
+      }
+    }
+    const timer = setTimeout(() => finish(false), 10000)
+    video.addEventListener('timeupdate', () => { if (video.currentTime > 0.3) finish(true) })
+    show('clip', 'wait', title, 'Starting the clip…', '', video)
+    const playing = video.play()
+    if (playing && playing.catch) playing.catch(() => {})
+  }
+
+  function checkBrowser() {
+    const ua = navigator.userAgent
+    const edge = ua.match(/Edg\/(\d+)/)
+    const chrome = ua.match(/Chrome\/(\d+)/)
+    const safari = !chrome && ua.match(/Version\/(\d+).*Safari/)
+    const firefox = ua.match(/Firefox\/(\d+)/)
+    const name = edge ? 'Edge' : chrome ? 'Chrome' : safari ? 'Safari' : firefox ? 'Firefox' : 'This browser'
+    const version = (edge || chrome || safari || firefox || [])[1]
+    const label = version ? name + ' ' + version : name
+    const springs = CSS.supports('transition-timing-function', 'linear(0, 1)')
+    const glass = CSS.supports('backdrop-filter', 'blur(1px)') || CSS.supports('-webkit-backdrop-filter', 'blur(1px)')
+    const title = 'This browser'
+    if (!springs || !glass) {
+      show('browser', 'problem', title, label + ' is too old for the app’s springs and frosted glass. The app still works, with plainer motion.',
+        'Update Chrome while online: its menu, Help, About Google Chrome.')
+    } else if (name !== 'Chrome') {
+      show('browser', 'problem', title, label + ' draws the app as designed, but the stall uses Chrome.',
+        'Open this page in Chrome as well: drag stall-check.html onto a Chrome window.')
+    } else {
+      show('browser', 'ok', title, label + ' draws the app’s springs and frosted glass.')
+    }
+  }
+
+  function address() {
+    let value = document.getElementById('address').value.trim() || 'http://localhost:5175'
+    if (!/^https?:\/\//i.test(value)) value = 'http://' + value
+    return value.replace(/\/+$/, '')
+  }
+
+  async function checkAll() {
+    const mine = ++run
+    const base = address()
+    checkMotion()
+    checkBrowser()
+    show('clip', 'skip', 'The home clip', 'Checked once the app answers.')
+    const appOk = await checkApp(base, mine)
+    if (mine === run) checkClip(base, appOk, mine)
+  }
+
+  reduce.addEventListener('change', checkMotion)
+  document.getElementById('form').addEventListener('submit', (event) => {
+    event.preventDefault()
+    checkAll()
+  })
+  checkAll()
+</script>
+</body>
+</html>

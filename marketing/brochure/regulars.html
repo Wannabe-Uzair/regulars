@@ -1,0 +1,227 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Regulars brochure (A4 tri-fold, roll fold)</title>
+<link rel="stylesheet" href="../brand/regulars/tokens.css">
+<style>
+  /* A4 landscape 297 x 210 mm + 3 mm bleed. Page 1 = outside, page 2 = inside. Roll fold: the 97 mm panel folds in
+     first. Safe area 8 mm inside every panel. ?guides=1 draws trim, folds, safe areas and panel names (the proof). */
+  @page { size: 303mm 216mm; margin: 0; }
+  html, body { margin: 0; background: var(--card); }
+  .sheet { position: relative; width: 303mm; height: 216mm; overflow: hidden; background: var(--card); break-after: page; }
+  .sheet:last-of-type { break-after: auto; }
+  .trim { position: absolute; left: 3mm; top: 3mm; width: 297mm; height: 210mm; }
+  .panel { position: absolute; top: 8mm; height: 194mm; display: flex; flex-direction: column; }
+
+  /* brochure type: one face, weights 400 / 600 / 700, sentence case */
+  .eyebrow { font-size: 8pt; line-height: 1.2; font-weight: 600; color: var(--text-soft); }
+  .hero    { font-size: 66pt; line-height: 1; font-weight: 700; letter-spacing: -0.03em; }
+  .h1      { font-size: 22pt; line-height: 1.1; font-weight: 700; letter-spacing: -0.017em; text-wrap: balance; }
+  .h2      { font-size: 15pt; line-height: 1.15; font-weight: 700; letter-spacing: -0.012em; }
+  .fig     { font-size: 46pt; line-height: 1; font-weight: 700; letter-spacing: -0.03em; font-variant-numeric: tabular-nums; }
+  .body    { font-size: 9.5pt; line-height: 13.5pt; text-wrap: pretty; }
+  .small   { font-size: 7pt; line-height: 9.6pt; color: var(--text-soft); text-wrap: pretty; }
+  .caption { font-size: 7.5pt; line-height: 1.2; font-weight: 600; color: var(--text-soft); }
+  .sample-tag { font-size: 6.8pt; }
+  .hair { border-top: 0.5pt solid var(--separator); }
+
+  /* outside */
+  .names { font-size: 10pt; line-height: 14pt; font-weight: 600; }
+
+  /* the line: the status key, an inset grouped list on the app's ground */
+  /* --inset: where the words start; the mark sits in front of it, the hairlines start under the words, not the mark */
+  .key { background: var(--ground); border-radius: 3.2mm; padding: 0 4mm; --inset: 4.6mm; }
+  .key-row { padding: 3.4mm 0 3.6mm; position: relative; }
+  .key-row + .key-row::before { content: ''; position: absolute; left: var(--inset); right: 0; top: 0; border-top: 0.5pt solid var(--separator); }
+  .key-row .rg-status { font-size: 11pt; display: block; }
+  .key-row .rg-status svg { margin-right: calc(var(--inset) - 0.68em); }
+  .key-row .def { font-size: 9pt; line-height: 12pt; color: var(--text-soft); margin-top: 1mm; padding-left: var(--inset); }
+  .stats { display: grid; grid-template-columns: 1fr 1fr; column-gap: 5mm; }
+  .stats .body { text-wrap: balance; }
+
+  /* the board pictures: 7 pt labels */
+  .shot { font-size: 7pt; }
+  .shot .rg-screen { padding: 3mm; border-radius: 3.6mm; }
+  .shot .rg-card { border-radius: 2.4mm; padding: 0 2.6mm; }
+
+  /* how it works */
+  .step { display: flex; flex-direction: column; }
+  .gap { flex: 1; display: flex; align-items: center; min-height: 6mm; }
+  .gap .hair { width: 100%; }
+  .bubble-wrap { background: var(--ground); border-radius: 3.6mm; padding: 3mm; }
+  .bubble-top { display: flex; justify-content: flex-end; margin-bottom: 2.2mm; }
+  .bubble { background: var(--card); border-radius: 3.2mm; padding: 2.6mm 3.2mm 2.8mm; font-size: 9pt; line-height: 12.5pt; }
+
+  .guides { position: absolute; left: 0; top: 0; width: 303mm; height: 216mm; pointer-events: none; }
+</style>
+<script>window.READY = false</script>
+</head>
+<body>
+
+<!-- ============================================================ PAGE 1: OUTSIDE -->
+<section class="sheet" id="outside">
+  <div class="trim">
+
+    <!-- inside flap, x 0-97: the problem -->
+    <div class="panel" style="left:8mm;width:81mm">
+      <div class="eyebrow">01 — The problem</div>
+      <div class="hero num" style="margin-top:16mm">6 in 10</div>
+      <div class="h1" style="margin-top:5mm">New members quit within three months.</div>
+      <div class="small" style="margin-top:3mm">63% of new members quit within three months, at one gym in Rio&nbsp;de&nbsp;Janeiro. Sperandei, Vieira and Reis, Journal of Science and Medicine in Sport, 2016.</div>
+      <div class="body" style="margin-top:8mm">They rarely quit on day one. They fade, one missed week at a time.</div>
+      <div style="margin-top:auto">
+        <div id="daysSlip"></div>
+        <div class="caption" style="margin-top:2.6mm">A member who slips</div>
+      </div>
+    </div>
+
+    <!-- back cover, x 97-197: the plan, the team -->
+    <div class="panel" style="left:105mm;width:84mm">
+      <div class="lockup" style="font-size:15pt;margin-top:13mm" id="lockBack"></div>
+      <div class="caption" style="margin-top:2.4mm">Member retention for independent gyms</div>
+      <div class="h1" style="margin-top:16mm">The plan we’d test: a free 90-day pilot, then $99&nbsp;a&nbsp;month per gym.</div>
+      <div class="body w600" style="margin-top:3mm">Not on sale yet.</div>
+      <div class="body" style="margin-top:6mm">One flat price. Unlimited members.</div>
+      <div class="body" style="margin-top:2mm">Keep 2 members a month, and from&nbsp;the&nbsp;second&nbsp;month it pays for itself.</div>
+      <div class="small" style="margin-top:1.4mm">Most US members pay under $50 a month. Health&nbsp;&amp;&nbsp;Fitness&nbsp;Association, 2024.</div>
+      <div style="margin-top:auto">
+        <div class="hair"></div>
+        <div class="eyebrow" style="margin-top:4mm">The team</div>
+        <div class="names" style="margin-top:1.6mm">Uzair Imran · Moiz Hamid ·<br>Zain ul Abideen · Ali Hassan</div>
+        <div class="small" style="margin-top:4mm">Screens show sample data.</div>
+      </div>
+    </div>
+
+    <!-- front cover, x 197-297: the name and the tagline -->
+    <div class="panel" style="left:205mm;width:84mm">
+      <div class="lockup" style="font-size:27pt;margin-top:13mm" id="lockFront"></div>
+      <div class="caption" style="font-size:9pt;margin-top:3.6mm">Member retention for independent gyms</div>
+      <div style="margin-top:auto">
+        <div id="stripFront"></div>
+        <div class="h1" style="font-size:34pt;line-height:1.04;letter-spacing:-0.025em;margin-top:9mm">Turn new members into regulars.</div>
+      </div>
+    </div>
+  </div>
+  <div class="guides" data-namey="207.4" data-panels="Inside flap · 97 mm:0:97|Back cover · 100 mm:97:197|Front cover · 100 mm:197:297"></div>
+</section>
+
+<!-- ============================================================ PAGE 2: INSIDE -->
+<section class="sheet" id="inside">
+  <div class="trim">
+
+    <!-- panel 1, x 0-100: the line -->
+    <div class="panel" style="left:8mm;width:84mm">
+      <div class="eyebrow">02 — The line</div>
+      <div class="h1" style="margin-top:4mm">Members who stay hit 3 visits a week.</div>
+      <div class="key" style="margin:auto 0">
+        <div class="key-row" data-status="on"><span class="def">3 or more visits last week</span></div>
+        <div class="key-row" data-status="below"><span class="def">1 or 2 visits last week</span></div>
+        <div class="key-row" data-status="slip"><span class="def">Two weeks in a row under 2 visits</span></div>
+      </div>
+      <div>
+        <div class="stats">
+          <div><div class="fig">78%</div><div class="body" style="margin-top:2mm">renewed at 3+&nbsp;visits a&nbsp;week</div></div>
+          <div><div class="fig soft">59%</div><div class="body" style="margin-top:2mm">under once a week</div></div>
+        </div>
+        <div class="small" style="margin-top:3.4mm">In a 2001 UK industry study, members who came 3 or more times a week in their first month renewed 78% of the time. Under once a week, it was 59%.</div>
+      </div>
+    </div>
+
+    <!-- panel 2, x 100-200: Regulars and the board -->
+    <div class="panel" style="left:108mm;width:84mm">
+      <div class="eyebrow">03 — Regulars</div>
+      <div class="h1" style="margin-top:4mm">One board for every new member’s first 90 days.</div>
+      <div class="body" style="margin-top:4mm">With Regulars, you see every new member’s first 90 days, spot anyone who is slipping, and nudge them back with a personal text.</div>
+      <div class="shot" id="board" style="margin:auto 0"></div>
+    </div>
+
+    <!-- panel 3, x 200-297: how it works -->
+    <div class="panel" style="left:208mm;width:81mm">
+      <div class="eyebrow">04 — How it works</div>
+
+      <div class="step" style="margin-top:5mm">
+        <div class="eyebrow">01</div>
+        <div class="h2" style="margin-top:1mm">Track</div>
+        <div class="body" style="margin-top:1.6mm">Every new member’s check-ins, on one board, for 90&nbsp;days.</div>
+        <div id="daysStay" style="margin-top:3mm"></div>
+      </div>
+
+      <div class="gap"><div class="hair"></div></div>
+      <div class="step">
+        <div class="eyebrow">02</div>
+        <div class="h2" style="margin-top:1mm">Flag</div>
+        <div class="body" style="margin-top:1.6mm">Two weeks in a row under 2 visits and they’re flagged as slipping, while there is still time.</div>
+        <div class="shot" id="flagBoard" style="margin-top:3mm"></div>
+      </div>
+
+      <div class="gap"><div class="hair"></div></div>
+      <div class="step">
+        <div class="eyebrow">03</div>
+        <div class="h2" style="margin-top:1mm">Nudge</div>
+        <div class="body" style="margin-top:1.6mm">One tap opens a personal text from you or their coach, ready to send.</div>
+        <div class="bubble-wrap" style="margin-top:3mm">
+          <div class="bubble-top"><span class="sample-tag">Sample message</span></div>
+          <div class="bubble">Hey Sam, we missed you this week. Want me to save you a spot in Thursday’s 6 pm class? — Coach Mike</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="guides" data-namey="7" data-panels="Panel 1 · 100 mm:0:100|Panel 2 · 100 mm:100:200|Panel 3 · 97 mm:200:297"></div>
+</section>
+
+<script src="../brand/regulars/regulars.js"></script>
+<script>
+(async function () {
+  const R = REGULARS, $ = (id) => document.getElementById(id)
+
+  $('lockFront').innerHTML = R.lockup()
+  $('lockBack').innerHTML = R.lockup()
+  // the status key: each row's mark and word, drawn like the board's
+  document.querySelectorAll('.key-row').forEach((row) => row.insertAdjacentHTML('afterbegin', R.status(row.dataset.status)))
+  $('daysSlip').innerHTML = R.days(R.SLIPPER, { width: '52mm' })
+  // a new member becoming a regular: light weeks first, then full ones
+  $('stripFront').innerHTML = R.weeks({ weeks: [1, 2, 2, 3, 2, 3, 3, 4, 3, 3, 4, 3, 4] }, { mark: '4.9mm', label: 'Thirteen weeks, filling in' })
+
+  $('board').innerHTML = R.board({ mark: '3.55mm' })
+  $('daysStay').innerHTML = R.days(R.STAYER, { width: '44mm' })
+  $('flagBoard').innerHTML = R.board({ members: R.SAMPLE.filter(R.isSlipping), mark: '3.45mm', ruler: false, legend: false })
+
+  await document.fonts.ready
+
+  // layout check: every box inside a panel stays inside the panel (the 8 mm safe area). Boxes, not scrollHeight:
+  // tight display leading lets a line's font box poke out while its ink stays inside (check.mjs measures the ink).
+  const MM = 25.4 / 96
+  document.querySelectorAll('.panel').forEach((p, i) => {
+    const name = `page ${i < 3 ? 1 : 2} panel "${p.firstElementChild.textContent.trim().slice(0, 24)}"`
+    const pr = p.getBoundingClientRect()
+    p.querySelectorAll('*').forEach((el) => {
+      const r = el.getBoundingClientRect(), what = el.className || el.tagName
+      if (!r.width) return
+      if (r.right > pr.right + 0.5 || r.left < pr.left - 0.5) console.error(`${name}: ${what} runs past the safe area's side by ${(Math.max(r.right - pr.right, pr.left - r.left) * MM).toFixed(1)} mm`)
+      if (r.bottom > pr.bottom + 0.5 || r.top < pr.top - 0.5) console.error(`${name}: ${what} runs past the safe area's top or bottom by ${(Math.max(r.bottom - pr.bottom, pr.top - r.top) * MM).toFixed(1)} mm`)
+    })
+  })
+
+  // guides (the proof only)
+  if (new URLSearchParams(location.search).get('guides') === '1') {
+    const M = '#E6007E', CY = '#00A3E0'
+    document.querySelectorAll('.guides').forEach((g) => {
+      const panels = g.dataset.panels.split('|').map((s) => { const [n, a, b] = s.split(':'); return { n, a: +a, b: +b } })
+      let s = `<svg xmlns="http://www.w3.org/2000/svg" width="303mm" height="216mm" viewBox="0 0 303 216">`
+      s += `<rect x="3" y="3" width="297" height="210" fill="none" stroke="${M}" stroke-width="0.25"/>`
+      panels.slice(1).forEach((p) => { s += `<line x1="${3 + p.a}" y1="0" x2="${3 + p.a}" y2="216" stroke="${M}" stroke-width="0.25" stroke-dasharray="2 1.2"/>` })
+      panels.forEach((p) => {
+        s += `<rect x="${3 + p.a + 8}" y="11" width="${p.b - p.a - 16}" height="194" fill="none" stroke="${CY}" stroke-width="0.2" stroke-dasharray="1 0.8"/>`
+        s += `<text x="${3 + p.a + 8}" y="${3 + +g.dataset.namey}" font-family="Inter" font-weight="600" font-size="2.3" fill="${CY}">${p.n} · safe ${p.b - p.a - 16} × 194 mm</text>`
+      })
+      s += `<text x="${3 + 297}" y="215.3" text-anchor="end" font-family="Inter" font-weight="600" font-size="2.3" fill="${M}">Trim 297 × 210 · bleed 3 · safe 8 · folds dashed</text>`
+      g.innerHTML = s + '</svg>'
+    })
+  }
+
+  window.READY = true
+})()
+</script>
+</body>
+</html>

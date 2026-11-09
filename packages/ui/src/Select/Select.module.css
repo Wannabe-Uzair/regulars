@@ -1,0 +1,30 @@
+.wrap {
+  position: relative;
+  display: flex;
+  inline-size: 100%;
+}
+
+.select {
+  composes: control from '../Field/control.module.css';
+  appearance: none;
+  padding-inline-end: var(--space-10);
+  cursor: pointer;
+}
+
+.chevron {
+  position: absolute;
+  inset-block: 0;
+  inset-inline-end: var(--space-3);
+  inline-size: var(--space-4);
+  block-size: 100%;
+  fill: none;
+  stroke: var(--color-text);
+  stroke-width: 1.5;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  pointer-events: none;
+}
+
+.select:disabled + .chevron {
+  stroke: var(--color-text-soft);
+}

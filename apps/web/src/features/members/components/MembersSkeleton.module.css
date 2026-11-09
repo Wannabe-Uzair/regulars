@@ -1,0 +1,11 @@
+/* The member cards' placeholder weeks: 13 small marks in a row, as WeekRow draws them at the sm size. */
+.weeks {
+  display: flex;
+  gap: var(--space-1);
+}
+
+.mark {
+  inline-size: 0.75rem;
+  block-size: 0.75rem;
+  border-radius: var(--radius-sm);
+}

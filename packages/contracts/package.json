@@ -1,0 +1,22 @@
+{
+  "name": "@tenure/contracts",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "main": "./src/index.ts",
+  "exports": {
+    ".": "./src/index.ts"
+  },
+  "scripts": {
+    "lint": "eslint .",
+    "test": "vitest run",
+    "typecheck": "tsc -b"
+  },
+  "dependencies": {
+    "@tenure/domain": "*",
+    "zod": "^4.6.7"
+  },
+  "devDependencies": {
+    "@tenure/config": "*"
+  }
+}

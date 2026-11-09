@@ -1,0 +1,4 @@
+/* A plain gutter for the placeholder pages, until the website job builds them. */
+.page {
+  padding: var(--space-6);
+}

@@ -1,0 +1,32 @@
+/* As in the shell: the column may be narrower than its content. */
+.page {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: var(--space-6);
+  max-inline-size: 72rem;
+}
+
+/* One column on a phone and a small laptop, two from 68.75rem, 1100 px at the default text size (the old app's admin grid). */
+.panels {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: var(--space-6);
+  align-items: start;
+}
+
+@media (width >= 68.75rem) {
+  .panels {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+.error {
+  display: grid;
+  gap: var(--space-4);
+  justify-items: start;
+}
+
+.error p {
+  margin: 0;
+  color: var(--color-danger);
+}

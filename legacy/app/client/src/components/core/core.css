@@ -1,0 +1,95 @@
+/* Core screens (Today, Board, Members, Member, Nudges): layout on top of app.css. Brand variables only. */
+.core-today { display: grid; gap: 20px; }
+.core-today-cols { display: grid; gap: 20px; grid-template-columns: minmax(0, 2fr) minmax(0, 1fr); align-items: start; }
+@media (max-width: 1099px) { .core-today-cols { grid-template-columns: minmax(0, 1fr); } }
+.core-empty-line { color: var(--steel); }
+.core-checkin { display: grid; grid-template-columns: minmax(0, 1fr) auto; align-items: baseline; gap: 12px; padding: 14px 0; }
+.core-checkin:first-child { padding-top: 0; }
+.core-checkin:last-child { padding-bottom: 0; }
+.core-checkin .action-name:hover { text-decoration: underline; text-decoration-thickness: 2px; text-underline-offset: 4px; }
+.core-checkin .data { color: var(--steel); }
+
+/* phone: the hazard band runs along the top edge of Today; sections are plain (cards carry the rubber2) */
+.core-phone-hazard { margin: calc(-1 * var(--pad-top)) calc(-1 * var(--pad-x)) var(--pad-top); }
+.core-sec { display: grid; gap: 14px; }
+.core-sec + .core-sec { margin-top: 12px; }
+
+/* filters: status chips, coach select, search */
+.core-filters { display: flex; flex-wrap: wrap; align-items: flex-end; gap: 16px 24px; margin-bottom: 20px; }
+.core-filters .field { min-width: 220px; flex: 1 1 220px; max-width: 360px; }
+.core-chips { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; }
+.core-chips .field-label { width: 100%; }
+.core-chip { height: 44px; padding: 0 14px; background: none; border: 1px solid var(--rubber3); cursor: pointer;
+  font-family: var(--font-label); font-weight: 700; text-transform: uppercase; letter-spacing: 0.12em; font-kerning: none; font-size: 13px; }
+.core-chip.tag-all { color: var(--chalk); }
+.core-chip[aria-pressed="true"] { background: var(--chalk); color: var(--rubber); border-color: var(--chalk); }
+.core-chip:hover:not([aria-pressed="true"]) { border-color: var(--chalk); }
+@media (max-width: 759px) { .core-filters .field { max-width: none; } }
+
+/* legend from COPY */
+.core-legend { display: grid; gap: 10px; margin-top: 20px; }
+.core-legend .legend { list-style: none; padding: 0; margin: 0; }
+.core-legend .legend > li { display: inline-flex; align-items: center; gap: 10px; color: var(--steel); }
+.core-legend .cell-future { box-shadow: none; }
+.core-legend .cell-future::after { content: ""; }
+
+/* members table */
+.core-table { width: 100%; border-collapse: collapse; }
+.core-table th { text-align: left; padding: 0 12px 12px 0; font-family: var(--font-label); font-weight: 700; text-transform: uppercase;
+  letter-spacing: 0.12em; font-kerning: none; font-size: 13px; color: var(--steel); }
+.core-table td { padding: 12px 12px 12px 0; border-top: 1px solid var(--rubber3); vertical-align: middle; }
+.core-table td.data { font-size: 16px; white-space: nowrap; }
+.core-table .num { text-align: right; }
+.core-table a { font-family: var(--font-label); font-weight: 600; text-transform: uppercase; font-size: 18px; text-decoration: none; letter-spacing: 0.02em; }
+.core-table a:hover { text-decoration: underline; text-underline-offset: 4px; }
+.core-table tr.flag a { color: var(--red); }
+.core-count { margin-bottom: 14px; }
+
+/* member page */
+.core-member-head { display: flex; flex-wrap: wrap; align-items: center; gap: 12px 20px; margin-top: 16px; }
+.core-facts { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 20px 24px; }
+@media (max-width: 1099px) { .core-facts { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 759px) { .core-facts { grid-template-columns: minmax(0, 1fr); } }
+.core-fact { display: grid; gap: 6px; align-content: start; }
+.core-fact .data { font-size: 18px; }
+.core-fact .btn-quiet { height: 32px; justify-self: start; }
+/* hit areas of at least 44 px without moving anything: padding grows the box, an equal negative margin gives the space back */
+.core-fact .btn.btn-quiet { height: 44px; margin-block: -6px; }
+.core-fact a.data { padding-block: max(0px, calc((45px - 1lh) / 2)); margin-block: min(0px, calc((1lh - 45px) / 2)); }
+.core-edit { display: grid; gap: 10px; }
+.core-member-grid { display: grid; gap: 20px; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); align-items: start; }
+.core-member-side { display: grid; gap: 20px; align-content: start; }
+@media (max-width: 1099px) { .core-member-grid { grid-template-columns: minmax(0, 1fr); } }
+.core-weeks { --cell: 30px; flex-wrap: wrap; }
+@media (max-width: 759px) { .core-weeks { --cell: calc((100vw - 36px - 40px) / 15.64); } }
+.core-week-meta { margin-top: 14px; }
+.core-scroll { max-height: 420px; overflow-y: auto; }
+.core-line { display: flex; justify-content: space-between; gap: 12px; padding: 10px 0; }
+.core-line:first-child { padding-top: 0; }
+.core-nudge { display: grid; gap: 8px; padding: 14px 0; }
+.core-nudge:first-child { padding-top: 0; }
+.core-nudge:last-child { padding-bottom: 0; }
+.core-nudge-top { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 14px; }
+.core-nudge-top .tag { color: var(--yellow); }
+.core-nudge .action-name:hover { text-decoration: underline; text-underline-offset: 4px; }
+
+/* composer */
+.core-composer { display: grid; gap: 18px; }
+.core-number { display: grid; gap: 6px; }
+.core-number .data { font-size: 22px; }
+.core-nophone { display: grid; gap: 6px; }
+
+/* member names in action lists (Today, Members cards, Nudges): a 44 px tall hit area, same line box */
+a.action-name { display: block; padding-block: max(0px, calc((44px - 1lh) / 2)); margin-block: min(0px, calc((1lh - 44px) / 2)); }
+.card-top > a.action-name, .core-nudge-top > a.action-name { display: inline-block; }
+/* board names: the whole row is the link (::after), and the name itself is 44 px tall */
+.board .board-row a.board-name { padding-block: max(0px, calc((44px - 1lh) / 2)); margin-block: min(0px, calc((1lh - 44px) / 2)); }
+/* the ruler's labels drop the tracking after their last letter instead of pulling past the cell */
+.board .board-ruler .marks span { margin-right: 0; }
+.board-ruler .marks .last { letter-spacing: 0; }
+/* dialog CLOSE: 44 px tall, same place */
+.dialog .dialog-head .btn-quiet { height: 44px; margin-block: calc((1lh - 44px) / 2); }
+/* phone Today: the hazard band runs edge to edge inside .main-inner instead of spilling out of it */
+@media (max-width: 759px) {
+  .main-inner:has(> .core-phone-hazard) { margin-inline: calc(-1 * var(--pad-x)); padding-inline: var(--pad-x); }
+}

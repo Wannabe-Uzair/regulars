@@ -1,0 +1,26 @@
+/* Today's placeholder parts, inside Today's own classes. */
+
+/* The live sentence's two lines on a phone, where it wraps; one on a laptop. Its padding stays inside the card. */
+.headline {
+  box-sizing: border-box;
+}
+
+/* A time's figures end level with the column's end. */
+.time {
+  margin-inline-start: auto;
+}
+
+@media (width >= 48rem) {
+  .headline {
+    --skeleton-width: 60%;
+  }
+
+  .headline > :last-child {
+    display: none;
+  }
+
+  /* A row's meta line wraps on a phone ("Last visit 9 days ago ·", then the coach), not on a laptop. */
+  .slipping > :last-child {
+    display: none;
+  }
+}

@@ -1,0 +1,32 @@
+node_modules/
+build/
+*.mkv
+legacy/app/server/data/
+legacy/app/client/dist/
+
+# build and tool output
+dist/
+.turbo/
+coverage/
+*.tsbuildinfo
+
+# local databases
+*.db
+*.db-wal
+*.db-shm
+apps/api/data/
+
+# environment
+.env
+.env.*
+!.env.example
+
+# end-to-end test output, the e2e databases and server logs, and the shared WebKit download (npm run e2e:install)
+playwright-report/
+test-results/
+apps/e2e/.data/
+.cache/
+
+# parallel agent worktrees
+.worktrees/
+.claude/settings.local.json

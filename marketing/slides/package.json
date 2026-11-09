@@ -1,0 +1,1 @@
+{"name":"tenure-slides","private":true,"description":"Builds the Tenure pitch deck (PDF + PPTX) from slides.html","dependencies":{"pptxgenjs":"^3.12.0"}}

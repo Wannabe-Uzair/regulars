@@ -1,0 +1,163 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Tenure standee, 2 x 5 ft</title>
+<link rel="stylesheet" href="../brand/tokens.css">
+<style>
+  /* Tenure standee: 24 x 60 in roll-up banner, laid out at real size (DESIGN.md §7, §10).
+     Safe area 1.5 in sides, 2 in top. Low zone = bottom 9 in (51-60 in): price, names and hazard band only;
+     nothing but the band within 3 in of the bottom (57-60 in). Nothing smaller than 48 pt.
+     Anton sizes on this surface (three): hero 556 pt, H1 230 pt, H2 140 pt.
+     Open with ?guides=1 to see the safe area, the top third and the low zone. */
+  @page { size: 24in 60in; margin: 0; }
+
+  /* tokens.vars.css names these --rubber-2 / --rubber-3; tokens.css (.sample-tag) and kit docs say --rubber2 / --rubber3 */
+  :root { --rubber2: var(--rubber-2); --rubber3: var(--rubber-3); }
+
+  html, body { width: 24in; height: 60in; overflow: hidden; background: var(--rubber); }
+  body { position: relative; }
+  .ground { position: absolute; inset: 0; background-color: var(--rubber); background-image: url(../brand/assets/speckle-tile.svg); background-size: 6in 6in; }
+
+  .band { position: absolute; left: 0; width: 24in; --band: 2in; --stripe: 1in; }
+  .band svg { display: block; }
+  .at { position: absolute; left: 1.5in; }
+
+  /* Anton blocks: line height 0.9, so the line box hugs the caps (cap top 0.0145 em below the box top, baseline 0.8735 em).
+     Each block is pulled left by its first glyph's side bearing so the stems sit on the 1.5 in margin. */
+  .hero  { font-size: 556pt; white-space: nowrap; margin-left: -0.038em; }
+  .h1    { font-size: 230pt; margin-left: -0.031em; }
+  .h2    { font-size: 140pt; }
+  .lsb6  { margin-left: -0.026em; }
+  .lsbF  { margin-left: -0.038em; }
+  .lsbT  { margin-left: -0.010em; }
+
+  .source { font-size: 50pt; line-height: 1.2; }
+
+  .panel { position: absolute; left: 1.5in; width: 21in; background: var(--rubber2); padding: 0.7in; }
+  .panel svg { display: block; }
+  .tagrow { position: relative; }
+  .tagrow .sample-tag { position: absolute; left: 0; top: 0; font-size: 52pt; line-height: 1.1; border-width: 3pt; letter-spacing: 0.09em; }
+  .gap-a { height: 0.45in; } .gap-b { height: 0.55in; }
+
+  .steps { position: absolute; left: 1.5in; width: 21in; display: flex; }
+  .steps > div { width: 7in; }
+
+  .names { font-family: var(--font-label); font-weight: 700; font-size: 60pt; line-height: 1.2; letter-spacing: 0.04em; color: var(--steel); white-space: nowrap; }
+
+  /* guides (?guides=1): working view only, never printed */
+  .guide { position: absolute; pointer-events: none; display: none; }
+  .guides .guide { display: block; }
+  .g-safe { left: 1.5in; top: 2in; width: 21in; height: 49in; outline: 4pt dashed #00B4FF; }
+  .g-third { left: 0; top: 20in; width: 24in; border-top: 4pt dashed #00B4FF; }
+  .g-low { left: 0; top: 51in; width: 24in; height: 9in; background: rgba(255, 0, 200, 0.14); border-top: 4pt solid #FF00C8; }
+  .g-nogo { left: 0; top: 57in; width: 24in; height: 3in; background: rgba(255, 0, 200, 0.22); border-top: 4pt dashed #FF00C8; }
+</style>
+</head>
+<body class="g-rubber">
+<div class="ground"></div>
+
+<div class="band" id="bandTop" style="top:0"></div>
+
+<!-- logo lockup: word 14 in wide (descriptor then sets at 48 pt) -->
+<div class="at" id="logo" style="top:4.3in"></div>
+
+<!-- the hook -->
+<div class="at t-display hero" style="top:13.688in">DAY <span class="c-yellow">90</span></div>
+<div class="at t-display h1" style="top:21.004in">GET EVERY NEW<br>MEMBER THERE.</div>
+
+<!-- the problem, with its source -->
+<div class="at t-display h2 lsb6" id="problem" style="top:27.552in"><span class="c-yellow">6 IN 10</span> NEW MEMBERS QUIT<br>WITHIN THREE MONTHS.</div>
+<div class="at t-small source" style="top:31.19in">Sperandei et al., 2016</div>
+
+<!-- the board on a screen panel -->
+<div class="panel" id="panel" style="top:32.65in">
+  <div class="tagrow"><span class="sample-tag">SAMPLE DATA</span><div id="ruler"></div></div>
+  <div class="gap-a"></div>
+  <div id="board"></div>
+  <div class="gap-b"></div>
+  <div id="legend"></div>
+</div>
+
+<!-- track, flag, nudge -->
+<div class="steps t-display h2" id="steps" style="top:48.372in">
+  <div class="lsbT">TRACK</div><div class="lsbF">FLAG</div><div>NUDGE <span class="arrow">→</span></div>
+</div>
+
+<!-- low zone: price, names, hazard band -->
+<div class="at t-display h2 c-yellow lsbF" id="price" style="top:51.942in">FREE 90-DAY PILOT.<br>THEN $99 A MONTH.</div>
+<div class="at names" id="names" style="top:55.967in">Uzair Imran · Moiz Hamid · Zain ul Abideen · Ali Hassan</div>
+
+<div class="band" id="bandBottom" style="top:58in"></div>
+
+<div class="guide g-safe"></div><div class="guide g-third"></div><div class="guide g-low"></div><div class="guide g-nogo"></div>
+
+<script src="../brand/wordmark.js"></script>
+<script src="../brand/kit.js"></script>
+<script src="ruler.js"></script>
+<script>
+  window.READY = false
+  const T = window.TENURE
+  const PT = 72                      // points per inch
+  const BOARD_W = (21 - 2 * 0.7) * PT // board inside the panel padding, in pt
+
+  if (/[?&]guides=1\b/.test(location.search)) document.body.classList.add('guides')
+
+  // hazard bands: 2 in tall, 1 in stripes, full width, top and bottom edges only
+  const band = T.hazard({ w: 24, h: 2, stripe: 1, unit: 'in' })
+  document.getElementById('bandTop').innerHTML = band
+  document.getElementById('bandBottom').innerHTML = T.hazard({ w: 24, h: 2, stripe: 1, unit: 'in' })
+
+  document.getElementById('logo').innerHTML = T.logo({ w: 14, descriptor: true, unit: 'in' })
+
+  // The kit board with pace and status columns off and no header: at this width that keeps every board label
+  // at 48 pt or more (names 52 pt). The DAY 30 / 60 / 90 ruler is redrawn above it at label size (ruler.js).
+  const opts = { w: BOARD_W, header: false, pace: false, status: false, unit: 'pt' }
+  document.getElementById('board').innerHTML = T.board(opts)
+  document.getElementById('ruler').innerHTML = STANDEE.ruler({ w: BOARD_W, labelPt: 52, tracking: 0.09, baseline: 65.4, tapeTop: 110.8, unit: 'pt' })
+  document.getElementById('legend').innerHTML = T.legend({ w: BOARD_W, h: 80, unit: 'pt' })
+
+  // Large-format rule (DESIGN.md §6): with the status column off, each flagged row carries its status just after its
+  // last week: SLIPPING in red, and the NUDGE → chip on the highlighted member. Geometry is kit.board's, for this w.
+  {
+    const s = (BOARD_W * 0.79) / (13 + 12 * 0.22), gap = s * 0.22, rowH = s * 1.62, x0 = BOARD_W * 0.19
+    const boardEl = document.getElementById('board')
+    boardEl.style.position = 'relative'
+    T.SAMPLE.forEach((m, k) => {
+      if (!T.isFlagged(m)) return
+      const hi = m.name === 'Sam O.'
+      const el = document.createElement('div')
+      el.className = 't-label'
+      el.innerHTML = hi ? 'NUDGE <span class="arrow">→</span>' : 'SLIPPING'
+      Object.assign(el.style, {
+        position: 'absolute', left: `${x0 + m.weeks.length * (s + gap) + s * 0.45}pt`, top: `${k * rowH + rowH / 2}pt`,
+        transform: 'translateY(-50%)', fontSize: '52pt', lineHeight: '1', letterSpacing: '0.12em', fontKerning: 'none',
+        whiteSpace: 'nowrap', color: hi ? 'var(--rubber)' : 'var(--red)', background: hi ? 'var(--yellow)' : 'none',
+        padding: hi ? '14pt 24pt 10pt' : '4pt 0 0',
+      })
+      boardEl.appendChild(el)
+    })
+  }
+
+  // layout check, once the brand fonts are in: the panel must clear the steps, only the price, names and bands
+  // may enter the low zone (from 51 in), and nothing but the band may come within 3 in of the bottom (57 in)
+  document.fonts.ready.then(() => {
+    const box = (id) => document.getElementById(id).getBoundingClientRect()
+    const px = 96
+    const L = {
+      heroRight: document.querySelector('.hero').scrollWidth / px,
+      panelBottom: box('panel').bottom / px, stepsTop: box('steps').top / px, stepsBottom: box('steps').bottom / px,
+      problemRight: box('problem').right / px,
+      priceTop: box('price').top / px, namesBottom: box('names').bottom / px, namesRight: box('names').right / px,
+    }
+    if (L.panelBottom > L.stepsTop - 0.75) console.error('panel too close to steps', L.panelBottom, L.stepsTop)
+    if (L.stepsBottom > 51) console.error('steps enter the low zone', L.stepsBottom)
+    if (L.namesBottom > 57) console.error('names inside the bottom 3 in', L.namesBottom)
+    if (L.namesRight > 22.5) console.error('names past the safe area', L.namesRight)
+    if (L.problemRight > 22.5) console.error('problem line past the safe area', L.problemRight)
+    window.LAYOUT = L
+    window.READY = true
+  })
+</script>
+</body>
+</html>

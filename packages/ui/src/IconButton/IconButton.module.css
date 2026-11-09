@@ -1,0 +1,28 @@
+/* Doubled classes outrank Button's own size padding and minimum height, whatever order the sheets load in. The
+   centred dialog's 32 px close keeps its size: phones always get the sheet's 44 px one. */
+.icon.md {
+  inline-size: calc(var(--space-10) + var(--space-1));
+  block-size: calc(var(--space-10) + var(--space-1));
+  padding: 0;
+}
+
+.icon.sm {
+  inline-size: var(--space-8);
+  block-size: var(--space-8);
+  min-block-size: var(--space-8);
+  padding: 0;
+}
+
+.glyph {
+  display: inline-flex;
+}
+
+.glyph > svg {
+  inline-size: var(--space-5);
+  block-size: var(--space-5);
+}
+
+.sm .glyph > svg {
+  inline-size: var(--space-4);
+  block-size: var(--space-4);
+}

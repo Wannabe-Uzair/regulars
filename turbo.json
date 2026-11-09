@@ -1,0 +1,21 @@
+{
+  "$schema": "https://turborepo.com/schema.json",
+  "globalDependencies": [
+    "tsconfig.base.json",
+    "tsconfig.node.json",
+    "tsconfig.web.json",
+    "eslint.config.js",
+    "vitest.config.ts"
+  ],
+  "tasks": {
+    "generate": {
+      "inputs": ["$TURBO_DEFAULT$", "!src/catalogue.generated.ts", "!src/tokens.css"],
+      "outputs": ["src/catalogue.generated.ts", "src/tokens.css"]
+    },
+    "build": { "dependsOn": ["^build", "generate"], "outputs": ["dist/**"] },
+    "typecheck": { "outputs": ["*.tsbuildinfo"] },
+    "lint": { "outputs": [] },
+    "test": { "outputs": [] },
+    "dev": { "dependsOn": ["generate"], "persistent": true, "cache": false, "passThroughEnv": ["PORT", "HOST"] }
+  }
+}

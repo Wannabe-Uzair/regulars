@@ -1,0 +1,31 @@
+# A fixed project name, so the image is tenure-tenure and the volume tenure-data whatever this folder is called.
+name: tenure
+
+services:
+  tenure:
+    build: .
+    ports:
+      # TENURE_PORT moves the app off 5175 when something else holds it. The server listens on the same port inside, so
+      # the kiosk, phone and invite links it prints name the port phones must open.
+      - "${TENURE_PORT:-5175}:${TENURE_PORT:-5175}"
+    volumes:
+      - tenure-data:/data
+    environment:
+      PORT: ${TENURE_PORT:-5175}
+      # scripts/stall.sh sets this (or keeps yours); a container can't see the laptop's LAN address. Without it (plain
+      # `docker compose up`) the server prints localhost and a hint instead of phone links: start with scripts/stall.sh,
+      # or set TENURE_LAN_IPS to this laptop's address.
+      TENURE_LAN_IPS: ${TENURE_LAN_IPS:-}
+      # The demo gym's time zone for the first seed. scripts/stall.sh passes the laptop's; plain `docker compose up`
+      # passes America/Chicago, the seed's own default.
+      TENURE_TZ: ${TENURE_TZ:-America/Chicago}
+      # The demo gym's country (US, CA, GB, PK or AE), for the seed and "Reset the demo". Empty: the zone's country,
+      # or the US outside the open markets.
+      TENURE_COUNTRY: ${TENURE_COUNTRY:-}
+    restart: unless-stopped
+
+volumes:
+  tenure-data:
+    # TENURE_VOLUME names another volume, for a trial run beside the stall's own data (with COMPOSE_PROJECT_NAME set
+    # too, so it gets its own container). scripts/backup.sh reads the same variable.
+    name: ${TENURE_VOLUME:-tenure-data}

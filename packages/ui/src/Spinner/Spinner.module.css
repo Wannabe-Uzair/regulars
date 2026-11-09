@@ -1,0 +1,77 @@
+/* It waits out its delay hidden (from screen readers too), then fades in over --motion-fast (pick F2). Outside the
+   reduced-motion block on purpose: there --motion-fast is zero, so it still waits and then appears without fading. */
+.spinner {
+  display: inline-flex;
+  flex: none;
+  inline-size: 1em;
+  block-size: 1em;
+  color: inherit;
+  vertical-align: middle;
+  animation: spinner-in var(--motion-fast) var(--ease-standard) var(--spinner-delay, var(--delay-busy)) both;
+}
+
+.graphic {
+  inline-size: 100%;
+  block-size: 100%;
+  overflow: visible;
+}
+
+.ring {
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 3;
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: spin calc(var(--motion-slow) * 2.5) linear infinite;
+}
+
+.track {
+  stroke-opacity: var(--opacity-spinner-track);
+}
+
+.arc {
+  stroke-linecap: round;
+}
+
+.dots {
+  display: none;
+  fill: currentColor;
+}
+
+/* Visible to screen readers only. */
+.label {
+  position: absolute;
+  inline-size: 1px;
+  block-size: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+  border: 0;
+}
+
+@keyframes spinner-in {
+  from {
+    opacity: 0;
+    visibility: hidden;
+  }
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(1turn);
+  }
+}
+
+/* A still ellipsis reads as "working" without anything turning. */
+@media (prefers-reduced-motion: reduce) {
+  .ring {
+    display: none;
+    animation: none;
+  }
+
+  .dots {
+    display: inline;
+  }
+}

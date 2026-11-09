@@ -1,0 +1,5 @@
+/* A link inside a sentence: underlined in both themes, since its colour alone stands under 3:1 from the text. */
+.textLink {
+  color: var(--color-link);
+  text-decoration: var(--link-decoration);
+}

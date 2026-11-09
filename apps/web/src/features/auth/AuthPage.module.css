@@ -1,0 +1,131 @@
+/*
+ * The blended ground fills the viewport; the card, 400 px at most with gutters on phones, hangs from a fixed top edge a little above the
+ * middle, so an error line grows it downwards and nothing above the error moves (B2-10). svh, not dvh: the edge stays put while
+ * Safari's toolbar slides. A long form (.long, Set Up) starts at the top margin instead, so its button stays on a laptop's screen.
+ */
+.ground {
+  box-sizing: border-box;
+  display: grid;
+  align-content: start;
+  min-block-size: 100dvh;
+  padding: var(--space-8) var(--space-4);
+  padding-block-start: max(var(--space-8), 18svh);
+  /* Clear of a sideways phone's notch, as the shell's columns are (F26). */
+  padding-inline: max(var(--space-4), env(safe-area-inset-left, 0px))
+    max(var(--space-4), env(safe-area-inset-right, 0px));
+}
+
+.ground.long {
+  padding-block-start: var(--space-8);
+}
+
+.main {
+  inline-size: 100%;
+  max-inline-size: 400px;
+  margin-inline: auto;
+}
+
+/* A card's edge is the separator hairline (ARCHITECTURE §9, "Cards"); its inputs, on its surface, keep theirs. */
+.main .card {
+  border-color: var(--color-line);
+}
+
+.card {
+  display: grid;
+  gap: var(--space-6);
+}
+
+@media (min-width: 40rem) {
+  .card {
+    padding: var(--space-8);
+  }
+}
+
+.head {
+  display: grid;
+  gap: var(--space-2);
+  justify-items: start;
+}
+
+.head > :first-child {
+  margin-block-end: var(--space-2);
+}
+
+.brand {
+  display: grid;
+  gap: var(--space-1);
+}
+
+.descriptor {
+  margin: 0;
+  color: var(--color-text-soft);
+  font-size: var(--text-14);
+  line-height: var(--leading-body);
+}
+
+/* The page title reads as every other page's does: display type, 32 px from 48rem (PageTitle). */
+.title {
+  margin: 0;
+  font-size: var(--text-32);
+  font-weight: var(--weight-display);
+  line-height: var(--leading-display);
+  text-wrap: balance;
+}
+
+/* Phones: the 34 px large title, as PageTitle's (no bar here to take it over). */
+@media (width < 48rem) {
+  .title {
+    font-size: var(--text-34);
+  }
+}
+
+.lede {
+  margin: 0;
+  color: var(--color-text-soft);
+  font-size: var(--text-16);
+  line-height: var(--leading-body);
+}
+
+.form {
+  display: grid;
+  gap: var(--space-5);
+}
+
+.formError {
+  margin: 0;
+  color: var(--color-danger);
+  font-size: var(--text-14);
+  line-height: var(--leading-body);
+}
+
+.submit {
+  inline-size: 100%;
+}
+
+/* The prompt, then the small secondary-button link; the link drops under the prompt when the line is too narrow. */
+.other {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2) var(--space-3);
+}
+
+.prompt {
+  margin: 0;
+  color: var(--color-text-soft);
+  font-size: var(--text-14);
+  line-height: var(--leading-body);
+}
+
+/* At the stall, Try the Demo in the link's place, centred, with its own failure line under it. */
+.demo {
+  display: grid;
+  justify-items: center;
+  gap: var(--space-2);
+}
+
+/* Holds the place of Try the Demo or the sign-up row (a 44 px button) while the stall question is open, so the card keeps its height. */
+.slot {
+  min-block-size: calc(var(--space-10) + var(--space-1));
+}

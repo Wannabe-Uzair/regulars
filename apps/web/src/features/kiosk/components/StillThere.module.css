@@ -1,0 +1,35 @@
+/* "Still there?": ui's Dialog with one 64 px button across it, on a phone's sheet and a laptop's centred dialog. */
+.keep {
+  flex: 1;
+}
+
+/* Every kiosk control is at least 64 px, and the sheet has one: the shared Dialog's corner X goes for this sheet only
+   (it is portalled out of the kiosk's tree, so :has() finds it by its button). Escape, a tap on the scrim and any key
+   still close it. Until ui's Dialog can leave the X out (bridge still-there-1). */
+:global([role='dialog']):has(.keep) > :first-child > button {
+  display: none;
+}
+
+/* The question in the kiosk's title style, centred over the countdown, both read from a step away. Radix's Title is
+   the sheet's h2 and its Description the p straight under the sheet, found by Keep Going as the X is. */
+:global([role='dialog']):has(.keep) h2 {
+  flex: 1;
+  font-size: var(--text-32);
+  font-weight: var(--weight-display);
+  line-height: var(--leading-display);
+  text-align: center;
+  text-wrap: balance;
+}
+
+:global([role='dialog']):has(.keep) > p {
+  font-size: var(--text-21);
+  font-variant-numeric: tabular-nums;
+  line-height: var(--leading-heading);
+  text-align: center;
+}
+
+/* Any key answers this sheet, so a focus ring on Keep Going guides no one. Forced-colors mode still draws its own
+   outline. Until ui's Dialog can start focus on the content (bridge still-there-1). */
+.keep:focus-visible {
+  outline-color: transparent;
+}

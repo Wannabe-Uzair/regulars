@@ -1,0 +1,7 @@
+legacy/
+marketing/
+docs/
+package-lock.json
+dist/
+coverage/
+.turbo/

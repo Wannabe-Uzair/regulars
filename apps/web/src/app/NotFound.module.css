@@ -1,0 +1,79 @@
+/* In the shell: the title, the sentence and the way back, 16 px apart, start-aligned, as Member Not Found (B2-09). */
+.body {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: var(--space-4);
+  justify-items: start;
+}
+
+/*
+ * Out of the shell, the bad invite's frame (the sign-in page's card and layout): the blended ground fills the
+ * viewport, and the card sits in the middle, 400 px at most, clear of the screen's edges and a sideways phone's notch.
+ */
+.ground {
+  box-sizing: border-box;
+  display: grid;
+  align-content: center;
+  min-block-size: 100dvh;
+  padding: var(--space-8) var(--space-4);
+  padding-inline: max(var(--space-4), env(safe-area-inset-left, 0px))
+    max(var(--space-4), env(safe-area-inset-right, 0px));
+}
+
+.main {
+  inline-size: 100%;
+  max-inline-size: 400px;
+  margin-inline: auto;
+}
+
+/* A card's edge is the separator hairline (ARCHITECTURE §9, "Cards"). */
+.main .card {
+  border-color: var(--color-line);
+}
+
+.card {
+  display: grid;
+  gap: var(--space-6);
+}
+
+@media (min-width: 40rem) {
+  .card {
+    padding: var(--space-8);
+  }
+}
+
+/* The mark and the tagline, then the title and the sentence under it. */
+.head {
+  display: grid;
+  gap: var(--space-2);
+  justify-items: start;
+}
+
+.head > :first-child {
+  margin-block-end: var(--space-2);
+}
+
+.brand {
+  display: grid;
+  gap: var(--space-1);
+}
+
+.descriptor {
+  margin: 0;
+  color: var(--color-text-soft);
+  font-size: var(--text-14);
+  line-height: var(--leading-body);
+}
+
+.other {
+  display: flex;
+  justify-content: start;
+}
+
+.line {
+  margin: 0;
+  color: var(--color-text-soft);
+  font-size: var(--text-16);
+  line-height: var(--leading-body);
+  text-wrap: pretty;
+}

@@ -1,0 +1,14 @@
+/* Inside the page's padding, as the shell's main sets it, so the spinner lands where a screen's would. */
+.wait {
+  padding: var(--space-6);
+  padding-inline: max(var(--space-6), env(safe-area-inset-left, 0px))
+    max(var(--space-6), env(safe-area-inset-right, 0px));
+}
+
+@media (width < 48rem) {
+  .wait {
+    padding: var(--space-4);
+    padding-inline: max(var(--space-4), env(safe-area-inset-left, 0px))
+      max(var(--space-4), env(safe-area-inset-right, 0px));
+  }
+}

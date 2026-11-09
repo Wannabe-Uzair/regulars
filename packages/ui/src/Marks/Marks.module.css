@@ -1,0 +1,175 @@
+/* The board's marks, on the mark tokens (ARCHITECTURE §9, "board marks"). */
+.mark {
+  box-sizing: border-box;
+  display: inline-block;
+  flex: none;
+  border: var(--border-thin) solid transparent;
+  border-radius: var(--radius-sm);
+  vertical-align: middle;
+}
+
+.sm {
+  inline-size: 0.75rem;
+  block-size: 0.75rem;
+}
+
+.md {
+  inline-size: 1rem;
+  block-size: 1rem;
+}
+
+.lg {
+  inline-size: 1.75rem;
+  block-size: 1.75rem;
+}
+
+@media (width < 48rem) {
+  .md {
+    inline-size: 0.875rem;
+    block-size: 0.875rem;
+  }
+}
+
+.mark[data-mark='full'] {
+  background-color: var(--color-mark-full);
+}
+
+.mark[data-mark='some'] {
+  background-color: var(--color-mark-some);
+}
+
+.mark[data-mark='none'] {
+  border-color: var(--color-line-strong);
+  background-color: var(--color-mark-none);
+}
+
+.mark[data-mark='outline'] {
+  border: var(--border-thick) solid var(--color-mark-outline);
+  background-color: var(--color-mark-none);
+}
+
+.mark[data-mark='future'] {
+  background-color: var(--color-mark-future);
+}
+
+/* A slipping member's last two finished weeks take the attention edge. */
+.mark[data-flag] {
+  border: var(--border-thick) solid var(--color-attention);
+}
+
+.week {
+  display: inline-flex;
+  flex-wrap: nowrap;
+  gap: var(--space-1);
+}
+
+.legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2) var(--space-4);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  color: var(--color-text-soft);
+  font-size: var(--text-13);
+}
+
+.legend li {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+}
+
+/* The 90 days: as wide as its column allows, up to 32.5 rem, keeping its shape. */
+.days {
+  display: block;
+  inline-size: 100%;
+  max-inline-size: 32.5rem;
+  block-size: auto;
+}
+
+.day[data-day='visited'] {
+  fill: var(--color-mark-full);
+}
+
+.day[data-day='missed'] {
+  fill: var(--color-mark-none);
+  stroke: var(--color-line-strong);
+  stroke-width: 1;
+}
+
+.day[data-day='ahead'] {
+  fill: var(--color-mark-future);
+}
+
+/* The weeks' numbers over the 90 days (flow-5C), hidden: the grid's label says it all. */
+.weekNumber {
+  fill: var(--color-text-soft);
+  font-family: inherit;
+  font-variant-numeric: var(--font-numeric);
+  font-weight: var(--weight-body);
+}
+
+/* The current week's column, ringed in the in-progress week's outline: a shape cue, not colour alone. */
+.currentWeek {
+  fill: none;
+  stroke: var(--color-mark-outline);
+  stroke-width: 1;
+}
+
+/* In a Windows contrast theme every mark keeps its form in the system's colours rather than being repainted: filled in
+   the text colour (3+ visits, a visited day) or its grey (1-2 visits, a day ahead), an outline for an empty week or a
+   missed day, a thick one for the week in progress, a grey edge for a week not reached, and a flagged week's edge in
+   the highlight (ARCHITECTURE §9, the status marks). */
+@media (forced-colors: active) {
+  .mark,
+  .days {
+    forced-color-adjust: none;
+  }
+
+  .mark[data-mark='full'] {
+    border-color: CanvasText;
+    background-color: CanvasText;
+  }
+
+  .mark[data-mark='some'] {
+    border-color: GrayText;
+    background-color: GrayText;
+  }
+
+  .mark[data-mark='none'],
+  .mark[data-mark='outline'] {
+    border-color: CanvasText;
+    background-color: Canvas;
+  }
+
+  .mark[data-mark='future'] {
+    border-color: GrayText;
+    background-color: Canvas;
+  }
+
+  .mark[data-flag] {
+    border-color: Highlight;
+  }
+
+  .day[data-day='visited'] {
+    fill: CanvasText;
+  }
+
+  .day[data-day='missed'] {
+    fill: Canvas;
+    stroke: CanvasText;
+  }
+
+  .day[data-day='ahead'] {
+    fill: GrayText;
+  }
+
+  .weekNumber {
+    fill: CanvasText;
+  }
+
+  .currentWeek {
+    stroke: CanvasText;
+  }
+}

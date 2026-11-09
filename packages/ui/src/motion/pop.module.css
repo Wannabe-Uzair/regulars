@@ -1,0 +1,14 @@
+/* The pop (ARCHITECTURE §2 "Motion"): the check-in's week cell and the kiosk welcome's entrance scale from
+   --scale-pop down to 1 over the slow duration, with the emphasised easing. Declared only when motion is welcome, so
+   nothing moves under reduced motion. The caller sets transform-origin when the pop grows from an edge. */
+@media (prefers-reduced-motion: no-preference) {
+  .pop {
+    animation: pop var(--motion-slow) var(--ease-emphasised);
+  }
+}
+
+@keyframes pop {
+  from {
+    transform: scale(var(--scale-pop));
+  }
+}

@@ -1,0 +1,14 @@
+/* Every screen's h1 reads the same: 32 px at the display leading, as tokens.ts asks of 32 px and up. */
+.title {
+  margin: 0;
+  font-size: var(--text-32);
+  font-weight: var(--weight-display);
+  line-height: var(--leading-display);
+}
+
+/* Phones: the large title, 34 px, at the top of the content; the shell's bar takes it over as you scroll. */
+@media (width < 48rem) {
+  .title {
+    font-size: var(--text-34);
+  }
+}

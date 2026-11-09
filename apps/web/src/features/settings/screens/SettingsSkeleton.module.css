@@ -1,0 +1,6 @@
+/* Settings' placeholder parts, inside the panels' own classes. */
+
+/* A field's control, at the 44 px every Input and Select stands at (the controls' min-block-size). */
+.control {
+  block-size: calc(var(--space-10) + var(--space-1));
+}

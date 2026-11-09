@@ -1,0 +1,202 @@
+REGULARS ON THE WINDOWS LAPTOP: THE STALL'S SPARE
+==================================================
+
+The plan (Uzair, 8 Nov):
+- The MacBook Air runs the app at the stall, as docs\DEMO.md says.
+- This Windows laptop runs the app too, all day, with a copy of the Air's data made each
+  morning. It also plays the reel loop and the live deck.
+- If the Air stops working, the phones scan this laptop's QR codes and carry on.
+  The kiosk link is the same on both laptops; only the address changes.
+- A phone hotspot connects everything. There is no internet at the stall.
+
+This folder is Regulars as tested on 8 Nov (the redesign, commit 3c771a7), with five
+files at the top: this one, stall-windows.ps1 (starts the app), backup-windows.ps1
+(backs up and restores its data), stall-check.html (says whether the app will look as
+designed) and regulars-image-amd64.tar.gz (the app itself, ready-made: the 8 Nov build,
+made and tested on the Mac mini, so nothing is built here).
+
+It comes two ways: in regulars-for-windows.zip, or from GitHub at
+https://github.com/Wannabe-Uzair/regulars, where the ready-made build is a separate
+download (section 1, step 3).
+
+You need: Docker Desktop, Google Chrome, and a USB stick formatted exFAT or FAT32
+(a Mac can't write to an NTFS stick).
+
+Every command below is typed in Terminal, opened in C:\Regulars: open the folder in
+File Explorer, right-click an empty space, and choose Open in Terminal.
+
+
+1. AT YOUR FRIEND'S HOUSE (online, once)
+----------------------------------------
+
+1. Install Docker Desktop for Windows from docker.com (Download for Windows - AMD64).
+   Accept WSL 2 if it asks, and restart when it asks. Open Docker Desktop; you can skip
+   signing in. In its Settings, General, turn on "Start Docker Desktop when you sign in".
+   If it says virtualization is off, turn on "Intel Virtualization Technology" (VT-x) in
+   the laptop's BIOS.
+2. Install Google Chrome if it isn't there.
+3. Put the project in C:\Regulars (a short path, outside OneDrive), one of two ways:
+   - From the zip: right-click regulars-for-windows.zip, Extract All, and choose C:\ as
+     the destination. It makes C:\Regulars.
+   - From GitHub: install Git for Windows from git-scm.com (the default choices are
+     fine). Open Terminal from the Start menu and run these two commands:
+
+     git clone https://github.com/Wannabe-Uzair/regulars C:\Regulars
+     curl.exe -L -o C:\Regulars\regulars-image-amd64.tar.gz https://github.com/Wannabe-Uzair/regulars/releases/latest/download/regulars-image-amd64.tar.gz
+
+     The second one downloads the ready-made build (98 MB) into the folder.
+4. Start the app:
+
+     powershell -ExecutionPolicy Bypass -File .\stall-windows.ps1
+
+   The first start loads the ready-made build into Docker, which takes a minute or two
+   and needs no internet. Later starts take seconds. It prints "Running the ready-made
+   build of 8 Nov (3c771a7)".
+5. If Windows Firewall asks about "Docker Desktop Backend", tick both Private and Public
+   networks and choose Allow. Without this, phones can't reach the laptop.
+6. Open http://localhost:5175 in Chrome. You should see the Regulars home page and
+   Try the Demo. To stop the app, click its Terminal window and press Ctrl+C.
+7. Set the laptop up for a long day:
+   - Settings, System, Power & battery: when plugged in, the screen never turns off and
+     the laptop never sleeps.
+   - Control Panel, Power Options, "Choose what closing the lid does": when plugged in,
+     Do nothing.
+   - Settings, Windows Update: Pause updates for 1 week, so it can't restart at the stall.
+   - Settings, Accessibility, Visual effects: turn Animation effects on. When it is off,
+     Chrome tells the app to stand still and none of its animations play. Then search
+     Windows for "Adjust the appearance and performance of Windows" and check "Animate
+     controls and elements inside windows" is ticked.
+8. Drag stall-check.html onto Chrome. It should say "Ready. This laptop shows Regulars as
+   designed." If it doesn't, it says what to fix.
+
+
+2. THE REHEARSAL (at his house, about 20 minutes)
+-------------------------------------------------
+
+Do this once, with a phone's hotspot standing in for the stall's.
+
+1. Turn on a phone's hotspot. Join this laptop to it (Wi-Fi icon, bottom right).
+   Then Settings, Network & internet, Wi-Fi, the hotspot's name: set Network profile type
+   to Private, and turn Metered connection on.
+2. Stop the app (Ctrl+C) and start it again with the command above. Check the address it
+   prints ("Phones on this network can open ...") matches the IPv4 address that "ipconfig"
+   shows for the Wi-Fi adapter.
+3. Join a second phone to the hotspot. In Chrome on the laptop, press Try the Demo, open
+   Settings, and scan the Kiosk QR code with that phone. Check in on the phone: the
+   check-in appears on Today on the laptop within a few seconds.
+4. Scan the Open on a Phone QR code with the phone. Open a slipping member, press Nudge,
+   then Text Message: Messages opens with the text filled in. Don't send it.
+5. The copy drill: take a backup on the Air and restore it here (section 4). Then scan
+   this laptop's Kiosk QR code again. Its link ends the same way as the Air's.
+6. The offline drill: turn off the hotspot phone's mobile data, stop the app, start it
+   again. It starts as before: the ready-made build needs no internet.
+7. Play the reel loop and the deck (section 5).
+
+
+3. AT THE STALL, BEFORE THE DOORS OPEN
+--------------------------------------
+
+1. Plug the laptop in. Turn on Do not disturb (Settings, System, Notifications).
+2. Join the hotspot first, then open Docker Desktop and wait until the engine is running.
+3. Once the Air's team has done its final Reset the Demo, copy the Air's data here
+   (section 4).
+4. Start the app (the command in section 1). Open http://localhost:5175 in Chrome, press
+   Try the Demo, and check Settings shows the QR codes. Don't scan them: the phones stay
+   on the Air. Drag stall-check.html onto Chrome: it should say Ready.
+5. Start the reel loop (section 5). The app keeps running behind it all day.
+
+
+4. COPYING THE AIR'S DATA HERE (each morning)
+---------------------------------------------
+
+On the Air, in a second Terminal window, in the tenure folder:
+
+     scripts/backup.sh backup
+
+It prints the backup's file, in tenure/apps/api/data/backups. Copy that file to the USB
+stick (in Finder: Go, Go to Folder, ~/tenure/apps/api/data/backups), then eject the stick.
+
+On this laptop:
+
+1. Stop the app: click its Terminal window and press Ctrl+C, and wait for it to finish.
+2. Plug in the stick. File Explorer shows its letter, for example E:. Restore the file,
+   with its real name:
+
+     powershell -ExecutionPolicy Bypass -File .\backup-windows.ps1 restore E:\tenure-2026-11-08-090000.db
+
+   It copies the file into apps\api\data\backups, keeps a copy of the data it replaces,
+   and refuses a file that isn't a Regulars backup. It refuses while the app runs.
+3. Start the app again. Open http://localhost:5175 and press Try the Demo again.
+
+Both laptops now have the same sample gym and the same kiosk link. Later changes on the Air
+(check-ins, nudges, a Reset the Demo) don't reach this laptop, and a visitor won't notice.
+
+To back up this laptop's own data (safe while it runs):
+
+     powershell -ExecutionPolicy Bypass -File .\backup-windows.ps1 backup
+
+
+5. THE REEL LOOP AND THE LIVE DECK
+----------------------------------
+
+The loop (no voice, for the walkway): open
+marketing\exports\Regulars-reel-16x9-loop.mp4 in the Media Player app, turn on Repeat,
+and make it full screen. With the voice, to play aloud: marketing\exports\Regulars-reel-16x9.mp4.
+
+The deck: drag marketing\slides\slides.html onto Chrome, click the address bar, add
+?present to the end of the address, and press Enter. Press F11 for full screen. The arrow
+keys move between slides; after slide 3 the reel plays with its voice. The words for each
+slide are in marketing\slides\notes.md. Backup: marketing\exports\Regulars-pitch.pdf.
+
+
+6. IF THE AIR STOPS WORKING
+---------------------------
+
+1. On this laptop, leave the reel's full screen (Esc).
+2. In Chrome, open http://localhost:5175. If it shows Log In, press Try the Demo.
+3. Open Settings. With the kiosk phone, scan the Kiosk QR code. With the coach phone,
+   scan the Open on a Phone QR code.
+4. Carry on from docs\DEMO.md, section 3. This laptop is now the stall laptop: the laptop
+   driver uses it, and is still the only one who presses Reset the Demo.
+
+Check-ins made on the Air since the morning's copy aren't here. Nobody else will know.
+
+
+7. WHEN SOMETHING GOES WRONG
+----------------------------
+
+- "Docker Desktop is not running": open Docker Desktop, wait until the engine is running,
+  and start the app again.
+- A phone can't open the address: check the phone and the laptop are on the same hotspot,
+  with the phone's mobile data off. Check the firewall: Windows Security, Firewall & network
+  protection, Allow an app through firewall, Docker Desktop Backend: tick Private and
+  Public. Check the hotspot's network profile is Private (section 2, step 1).
+- The address it prints is wrong (it doesn't match ipconfig's Wi-Fi IPv4 address): start
+  it with that address:
+
+     powershell -ExecutionPolicy Bypass -File .\stall-windows.ps1 -Address 172.20.10.4
+
+- "port is already allocated": another copy is running. Press Ctrl+C in its window, or
+  stop it in Docker Desktop, Containers.
+- Times or "today" look wrong after the laptop slept: quit Docker Desktop (right-click its
+  whale icon by the clock, Quit), open it again, and start the app again.
+- "Running scripts is disabled on this system": type the whole command as written, with
+  -ExecutionPolicy Bypass.
+- The app stands still, with no animations: open stall-check.html in Chrome. It says what
+  to fix (usually Animation effects, section 1, step 7).
+- The ready-made build won't load: build the app from this folder instead, online
+  (several minutes):
+
+     powershell -ExecutionPolicy Bypass -File .\stall-windows.ps1 -Build
+
+- Still broken: stop the app, then run "docker compose down -v" and start it again. This
+  wipes this laptop's data and sets up a new sample gym with a new kiosk link. Copy the Air's
+  data again (section 4) if the Air is still working.
+
+
+8. AFTER THE STALL
+------------------
+
+Backups taken after visitors checked in hold their names. Delete them from
+C:\Regulars\apps\api\data\backups and from the USB stick once the day is done, as
+docs\DEMO.md, section 4, says.

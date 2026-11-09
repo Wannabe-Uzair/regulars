@@ -1,0 +1,37 @@
+/* GENERATED from tokens.json by tools/make-assets.mjs. Do not edit. */
+:root {
+  --rubber: #141414;
+  --rubber2: #1F1F1F;
+  --rubber-2: #1F1F1F;
+  --rubber3: #2B2B2B;
+  --rubber-3: #2B2B2B;
+  --chalk: #EDEBE6;
+  --steel: #8C9098;
+  --yellow: #FFD60A;
+  --red: #FF4B3E;
+  --display-line-height: 0.9;
+  --display-tracking: 0.01em;
+  --label-tracking: 0.14em;
+  --body-line-height: 1.38;
+  --screen-hero: 300px;
+  --screen-h1: 140px;
+  --screen-h2: 84px;
+  --screen-h3: 56px;
+  --screen-label: 28px;
+  --screen-body: 36px;
+  --screen-small: 24px;
+  --brochure-hero: 110pt;
+  --brochure-h-1: 38pt;
+  --brochure-h-2: 22pt;
+  --brochure-h-3: 15pt;
+  --brochure-label: 7.5pt;
+  --brochure-body: 9.5pt;
+  --brochure-body-leading: 13.5pt;
+  --brochure-small: 6.8pt;
+  --standee-h1: 230pt;
+  --standee-h2: 140pt;
+  --standee-h3: 96pt;
+  --standee-label: 56pt;
+  --standee-body: 74pt;
+  --standee-small: 50pt;
+}

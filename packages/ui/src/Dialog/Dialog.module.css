@@ -1,0 +1,185 @@
+/* Stacking comes from the --layer-* tokens: dialogs under menus and tooltips, toasts on top. */
+
+.overlay {
+  position: fixed;
+  inset: 0;
+  z-index: var(--layer-dialog);
+  background-color: var(--color-scrim);
+}
+
+.content {
+  box-sizing: border-box;
+  position: fixed;
+  z-index: var(--layer-dialog);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+  padding: var(--space-6);
+  border: var(--border-hairline) solid var(--color-line);
+  background-color: var(--color-raised);
+  box-shadow: var(--shadow-modal);
+  color: var(--color-text);
+}
+
+.content:focus-visible {
+  outline: var(--focus-width) solid var(--color-focus);
+  outline-offset: var(--focus-offset);
+}
+
+/* Centred: margin auto inside a full inset keeps transform free for the animation. */
+.content[data-presentation='dialog'] {
+  inset: 0;
+  margin: auto;
+  inline-size: min(100% - var(--space-8), 35rem);
+  block-size: fit-content;
+  max-block-size: calc(100% - var(--space-8));
+  border-radius: var(--radius-lg);
+}
+
+/* Sheet: full width along the bottom edge, clear of the home indicator. */
+.content[data-presentation='sheet'] {
+  inset: auto 0 0;
+  inline-size: 100%;
+  max-block-size: calc(100% - var(--space-12));
+  padding-block-end: calc(var(--space-6) + env(safe-area-inset-bottom, 0));
+  border-block-end: 0;
+  border-inline: 0;
+  border-radius: var(--radius-xl) var(--radius-xl) 0 0;
+}
+
+.header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: var(--space-4);
+}
+
+.title {
+  margin: 0;
+  font-size: var(--text-21);
+  font-weight: var(--weight-heading);
+  line-height: var(--leading-heading);
+}
+
+/* With a Cancel: three cells, Cancel at the leading edge, the title centred, and an empty end cell the same width as
+   the leading one, so the title sits in the middle whatever Cancel's words. */
+.header[data-dismiss='cancel'] {
+  display: grid;
+  grid-template-columns: 1fr minmax(0, auto) 1fr;
+  align-items: center;
+}
+
+.header[data-dismiss='cancel'] .title {
+  /* The inline title of an iOS sheet: 21 px beside a 16 px Cancel reads heavy. */
+  font-size: var(--text-17);
+  text-align: center;
+}
+
+/* Cancel's words line up with the content's edge; its capsule and 44 px box reach into the padding. */
+.cancel {
+  justify-self: start;
+  margin-inline-start: calc(-1 * var(--space-5));
+}
+
+/* Sits on the title's first line rather than pushing the header taller. */
+.close {
+  flex: none;
+  margin-block: calc(-1 * var(--space-1));
+  margin-inline-end: calc(-1 * var(--space-2));
+}
+
+/* Body text, like every other line under a title, so a confirm's "what happens" line isn't its smallest text. */
+.description {
+  margin: 0;
+  color: var(--color-text-soft);
+  font-size: var(--text-16);
+}
+
+/* Room for a focus ring inside the frame that scrolls and clips it, taken back by the margin so nothing moves. */
+.body {
+  min-block-size: 0;
+  margin: calc(-1 * (var(--focus-width) + var(--focus-offset)));
+  padding: calc(var(--focus-width) + var(--focus-offset));
+  overflow-y: auto;
+  overscroll-behavior: contain;
+}
+
+.footer {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: var(--space-3);
+}
+
+/* On a phone the actions stack, the main one on top, each full width. */
+.content[data-presentation='sheet'] .footer {
+  flex-direction: column-reverse;
+  align-items: stretch;
+}
+
+/* Motion, only for people who have not asked for less: with reduced motion they appear and leave at once, and with
+   no animation at all Radix unmounts the closing element straight away. Dialogs and sheets rise on the smooth spring
+   and leave on the quick one; the scrim fades over base both ways (ARCHITECTURE §9 "Motion"). */
+@media (prefers-reduced-motion: no-preference) {
+  .overlay[data-state='open'] {
+    animation: fade-in var(--motion-base) var(--ease-standard);
+  }
+
+  .overlay[data-state='closed'] {
+    animation: fade-out var(--motion-base) var(--ease-standard);
+  }
+
+  .content[data-presentation='dialog'][data-state='open'] {
+    animation: dialog-in var(--motion-spring) var(--ease-spring);
+  }
+
+  .content[data-presentation='dialog'][data-state='closed'] {
+    animation: dialog-out var(--motion-spring-quick) var(--ease-spring-quick);
+  }
+
+  .content[data-presentation='sheet'][data-state='open'] {
+    animation: sheet-in var(--motion-spring) var(--ease-spring);
+  }
+
+  .content[data-presentation='sheet'][data-state='closed'] {
+    animation: sheet-out var(--motion-spring-quick) var(--ease-spring-quick);
+  }
+}
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+}
+
+@keyframes fade-out {
+  to {
+    opacity: 0;
+  }
+}
+
+@keyframes dialog-in {
+  from {
+    opacity: 0;
+    transform: translateY(var(--space-2)) scale(0.98);
+  }
+}
+
+@keyframes dialog-out {
+  to {
+    opacity: 0;
+    transform: scale(0.98);
+  }
+}
+
+@keyframes sheet-in {
+  from {
+    transform: translateY(100%);
+  }
+}
+
+@keyframes sheet-out {
+  to {
+    transform: translateY(100%);
+  }
+}

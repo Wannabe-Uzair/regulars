@@ -1,0 +1,14 @@
+/* The chevron sits close to its word, and the capsule's own padding is taken back at the start, so the chevron lines up
+   with the page's edge, as a back button does. The capsule stays 44 px tall (NFR-USE-03). The type selector outranks
+   the button's own size class, whichever stylesheet loads first. */
+a.back {
+  justify-self: start;
+  gap: var(--space-1);
+  margin-inline-start: calc(-1 * var(--space-2));
+  padding-inline-start: var(--space-1);
+}
+
+.chevron {
+  flex: none;
+  font-size: var(--text-17);
+}

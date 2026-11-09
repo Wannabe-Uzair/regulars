@@ -1,0 +1,48 @@
+<!doctype html>
+<html><head><meta charset="utf-8">
+<link rel="stylesheet" href="/Users/apple/myo-app/tenure/brand/tokens.css">
+<style>html,body{margin:0;padding:0;background:#141414;overflow:hidden}canvas{display:block}</style>
+</head><body><canvas id="c"></canvas>
+<script>
+window.READY = false
+const v = new URLSearchParams(location.search).get('v') || 'normal'
+const S = innerWidth
+;(async () => {
+  await document.fonts.load('1000px Anton', 'T')
+  const cv = document.getElementById('c'); cv.width = S; cv.height = S
+  const g = cv.getContext('2d')
+  g.fillStyle = '#141414'; g.fillRect(0, 0, S, S)
+  // measure T at 1000px
+  g.font = '1000px Anton'
+  const m = g.measureText('T')
+  const asc = m.actualBoundingBoxAscent, l = m.actualBoundingBoxLeft, r = m.actualBoundingBoxRight
+  const small = v === 'small'
+  const frac = v === 'maskable' ? 0.44 : small ? 0.66 : 0.56
+  // cap height c; T ink width at 1000px = l + r (left is positive to the left of origin)
+  const k = 1 / asc                       // scale so cap height = 1 unit
+  const tw1 = (r + l) * k                 // T ink width in cap units
+  const sw = small ? 0.07 : 0             // stroke width (heavier T)
+  const gapBelow = small ? 0.10 : 0.16
+  const barT = small ? 0.20 : 0.15
+  const groupH = 1 + sw + gapBelow + barT
+  const c = frac * S / groupH
+  const fs = 1000 * k * c
+  const topY = (S - frac * S) / 2
+  const baseline = topY + sw * c / 2 + c
+  const inkW = (tw1 + sw) * c
+  const x0 = (S - inkW) / 2
+  g.font = fs + 'px Anton'; g.textAlign = 'left'; g.textBaseline = 'alphabetic'
+  g.fillStyle = '#EDEBE6'
+  const tx = x0 + sw * c / 2 + l * k * c
+  g.fillText('T', tx, baseline)
+  if (small) { g.lineJoin = 'miter'; g.miterLimit = 10; g.lineWidth = sw * c; g.strokeStyle = '#EDEBE6'; g.strokeText('T', tx, baseline) }
+  const by = baseline + sw * c / 2 + gapBelow * c
+  g.fillStyle = '#FFD60A'
+  if (small) g.fillRect(x0, by, inkW, barT * c)
+  else {
+    const gap = 0.07 * c, bw = (inkW - 2 * gap) / 3
+    for (let i = 0; i < 3; i++) g.fillRect(x0 + i * (bw + gap), by, bw, barT * c)
+  }
+  window.READY = true
+})()
+</script></body></html>

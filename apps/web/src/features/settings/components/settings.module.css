@@ -1,0 +1,89 @@
+.form {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: var(--space-4);
+}
+
+.save {
+  justify-self: start;
+}
+
+.stack {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: var(--space-4);
+}
+
+.steps {
+  display: grid;
+  gap: var(--space-1);
+}
+
+.steps p,
+.line,
+.soft {
+  margin: 0;
+}
+
+.soft {
+  color: var(--color-text-soft);
+}
+
+/* QR code first, then the panel's line, then Show Link and, while it is open, the link with its Copy button. */
+.link {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: var(--space-3);
+  justify-items: start;
+}
+
+/* The SVG carries its own white quiet zone; a hairline edge makes it the code's white tile, so the code's inset from the
+   text beside it reads as the tile's margin. */
+.qr {
+  box-sizing: border-box;
+  inline-size: calc(var(--space-24) * 2);
+  block-size: calc(var(--space-24) * 2);
+  border: var(--border-hairline) solid var(--color-line);
+  border-radius: var(--radius-md);
+}
+
+/* The disclosure's words line up with the text above it; its capsule keeps the 44 px target around them. */
+.disclosure {
+  margin-inline-start: calc(var(--space-5) * -1);
+}
+
+.reveal {
+  justify-self: stretch;
+}
+
+.icon {
+  flex: none;
+}
+
+.open,
+.logout {
+  justify-self: start;
+}
+
+.logout {
+  margin-inline-start: calc(var(--space-5) * -1);
+}
+
+.error {
+  margin: 0;
+  color: var(--color-danger);
+}
+
+/* Open on a Phone: a phone is already there, so the panel shows from 64rem (1024 px at the default text size). */
+@media (width < 64rem) {
+  .laptopOnly {
+    display: none;
+  }
+}
+
+/* The Account group: from 64rem the sidebar holds Log Out at its foot, so Settings shows its own below that only. */
+@media (width >= 64rem) {
+  .noSidebar {
+    display: none;
+  }
+}

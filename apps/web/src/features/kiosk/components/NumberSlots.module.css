@@ -1,0 +1,51 @@
+/* The typed number in slots (FR-KIOSK-02, kiosk-1). Its height is the number's at full size, whatever it shows, so the
+   keypad under it never moves. The font is the kiosk size (--text-kiosk, up to 128 px), and smaller when a long number
+   needs it: --number-em is the number's width in em, from NumberSlots.tsx. */
+.number {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  block-size: calc(var(--text-kiosk) * (var(--leading-display) + 0.16));
+  font-size: min(var(--text-kiosk), calc(100cqi / var(--number-em)));
+  font-variant-numeric: tabular-nums;
+  font-weight: var(--weight-heading);
+  line-height: var(--leading-display);
+  white-space: nowrap;
+}
+
+/* A digit, or an empty place for one: a figure's width over a 2 px rounded rule. */
+.slot,
+.empty {
+  position: relative;
+  box-sizing: content-box;
+  display: inline-block;
+  min-inline-size: 1ch;
+  block-size: calc(1em * var(--leading-display));
+  margin-inline: 0.05em;
+  padding-block-end: 0.16em;
+  color: var(--color-text);
+  text-align: center;
+}
+
+.slot::after,
+.empty::after {
+  content: '';
+  position: absolute;
+  inset-block-end: 0;
+  inset-inline: 0.04em;
+  block-size: var(--border-thick);
+  border-radius: var(--radius-full);
+  background-color: var(--color-text);
+}
+
+.empty::after {
+  background-color: var(--color-line-strong);
+}
+
+/* A separator stands bare, and lines up with the digits; a space keeps its width. */
+.mark {
+  display: inline-block;
+  padding-block-end: 0.16em;
+  color: var(--color-text);
+  white-space: pre;
+}

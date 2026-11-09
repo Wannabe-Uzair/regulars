@@ -1,0 +1,36 @@
+.empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-2);
+  padding: var(--space-10) var(--space-6);
+  color: var(--color-text);
+  text-align: center;
+}
+
+/* The symbol, an icon at 44 px in the soft text, a step above the title. */
+.symbol {
+  display: flex;
+  margin-block-end: var(--space-2);
+  color: var(--color-text-soft);
+  font-size: var(--text-44);
+  line-height: 1;
+}
+
+.title {
+  margin: 0;
+  font-size: var(--text-18);
+  font-weight: var(--weight-heading);
+  line-height: var(--leading-heading);
+}
+
+.body {
+  margin: 0;
+  color: var(--color-text-soft);
+  font-size: var(--text-16);
+  line-height: var(--leading-body);
+}
+
+.action {
+  margin-block-start: var(--space-4);
+}

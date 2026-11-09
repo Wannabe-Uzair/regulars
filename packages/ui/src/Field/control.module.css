@@ -1,0 +1,58 @@
+/* The shared look of Input, Select and Textarea, composed into each one's own module. */
+.control {
+  box-sizing: border-box;
+  inline-size: 100%;
+  min-block-size: calc(var(--space-10) + var(--space-1));
+  margin: 0;
+  padding: var(--space-2) var(--space-3);
+  border: var(--border-thin) solid var(--color-line-strong);
+  border-radius: var(--radius-md);
+  background-color: var(--color-surface);
+  color: var(--color-text);
+  font-family: inherit;
+  /* 16 px keeps phones from zooming in on focus. */
+  font-size: var(--text-16);
+  font-weight: var(--weight-body);
+  line-height: var(--leading-body);
+  transition: border-color var(--motion-fast) var(--ease-standard);
+}
+
+.control::placeholder {
+  color: var(--color-text-soft);
+  opacity: 1;
+}
+
+/* Hover only where the pointer can hover, so a tapped field on a phone doesn't keep the hover edge. An invalid field
+   keeps its danger border. */
+@media (hover: hover) {
+  .control:hover:not(:disabled, [aria-invalid='true']) {
+    border-color: var(--color-text-soft);
+  }
+}
+
+/* A press takes the edge one step past hover, to the text colour, at once, easing back on release (pick E2). */
+.control:active:not(:disabled, [aria-invalid='true']) {
+  border-color: var(--color-text);
+  transition: none;
+}
+
+.control:focus {
+  outline: var(--focus-width) solid var(--color-focus);
+  outline-offset: var(--focus-offset);
+}
+
+.control[aria-invalid='true'] {
+  border-color: var(--color-danger);
+}
+
+/* An invalid field's focus ring takes its border's red, so it shows one colour. */
+.control[aria-invalid='true']:focus {
+  outline-color: var(--color-danger);
+}
+
+.control:disabled {
+  border-color: var(--color-line);
+  background-color: var(--color-control-disabled);
+  color: var(--color-text-soft);
+  cursor: not-allowed;
+}

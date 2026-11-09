@@ -1,0 +1,1 @@
+ALTER TABLE `gyms` ADD `country` text DEFAULT 'US' NOT NULL;

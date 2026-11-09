@@ -1,0 +1,52 @@
+/* Tenure — Gym floor. The design code as CSS. Every HTML piece links this file first.
+   Colour and size values live in tokens.json; tokens.vars.css is generated from it (tools/make-assets.mjs). */
+@import url("tokens.vars.css");
+
+@font-face { font-family: "Anton"; src: url("fonts/Anton-Regular.ttf") format("truetype"); font-weight: 400; font-style: normal; font-display: block; }
+@font-face { font-family: "Barlow Condensed"; src: url("fonts/BarlowCondensed-Medium.ttf") format("truetype"); font-weight: 500; font-display: block; }
+@font-face { font-family: "Barlow Condensed"; src: url("fonts/BarlowCondensed-SemiBold.ttf") format("truetype"); font-weight: 600; font-display: block; }
+@font-face { font-family: "Barlow Condensed"; src: url("fonts/BarlowCondensed-Bold.ttf") format("truetype"); font-weight: 700; font-display: block; }
+@font-face { font-family: "Barlow"; src: url("fonts/Barlow-Regular.ttf") format("truetype"); font-weight: 400; font-display: block; }
+@font-face { font-family: "Barlow"; src: url("fonts/Barlow-Medium.ttf") format("truetype"); font-weight: 500; font-display: block; }
+@font-face { font-family: "Barlow"; src: url("fonts/Barlow-SemiBold.ttf") format("truetype"); font-weight: 600; font-display: block; }
+@font-face { font-family: "Barlow"; src: url("fonts/Barlow-Bold.ttf") format("truetype"); font-weight: 700; font-display: block; }
+
+:root {
+  --font-display: "Anton", Impact, "Arial Narrow", sans-serif;
+  --font-label: "Barlow Condensed", "Arial Narrow", sans-serif;
+  --font-body: "Barlow", "Helvetica Neue", Arial, sans-serif;
+}
+
+/* Grounds */
+.g-rubber { background: var(--rubber); color: var(--chalk); }
+.g-yellow { background: var(--yellow); color: var(--rubber); }   /* the "sign" surface: at most one per piece */
+.g-panel  { background: var(--rubber2); color: var(--chalk); }
+
+/* Type roles. Sizes are set per medium (see DESIGN.md §3); these carry everything else. */
+.t-display { font-family: var(--font-display); font-weight: 400; text-transform: uppercase; line-height: var(--display-line-height); letter-spacing: var(--display-tracking); }
+.t-label   { font-family: var(--font-label); font-weight: 700; text-transform: uppercase; letter-spacing: var(--label-tracking); line-height: 1.1; }
+.t-data    { font-family: var(--font-label); font-weight: 600; font-variant-numeric: tabular-nums; letter-spacing: 0.02em; }
+.t-body    { font-family: var(--font-body); font-weight: 500; line-height: var(--body-line-height); }
+.t-small   { font-family: var(--font-body); font-weight: 400; line-height: 1.35; color: var(--steel); }
+
+/* Arrows: Barlow and Barlow Condensed have no → glyph, so an arrow is always set in Anton. */
+.arrow { font-family: var(--font-display); font-weight: 400; letter-spacing: 0; }
+
+.c-chalk { color: var(--chalk); } .c-steel { color: var(--steel); } .c-yellow { color: var(--yellow); }
+.c-red { color: var(--red); } .c-rubber { color: var(--rubber); }
+
+/* Floor tape: a solid yellow bar, square ends. Use the kit's tape() for the three-segment version. */
+.tape { background: var(--yellow); height: var(--tape-h, 12px); }
+
+/* Hazard tape: 45° stripes, equal widths, only along the top or bottom edge of a frame, never behind text. */
+.hazard {
+  height: var(--band, 36px);
+  background: repeating-linear-gradient(-45deg, var(--yellow) 0 var(--stripe, 18px), var(--rubber) var(--stripe, 18px) calc(var(--stripe, 18px) * 2));
+}
+
+/* Sample-data tag that every dashboard visual carries */
+.sample-tag { font-family: var(--font-label); font-weight: 700; text-transform: uppercase; letter-spacing: var(--label-tracking); color: var(--steel); border: 1px solid var(--rubber3); padding: 0.25em 0.6em; }
+
+* { box-sizing: border-box; }
+html, body { margin: 0; padding: 0; }
+body { font-family: var(--font-body); -webkit-font-smoothing: antialiased; text-rendering: geometricPrecision; -webkit-print-color-adjust: exact; print-color-adjust: exact; }

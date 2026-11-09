@@ -1,0 +1,13 @@
+/* The fill in action on the future mark: contrast.test.ts checks the pair at 3:1. */
+.track {
+  overflow: hidden;
+  block-size: var(--space-2);
+  border-radius: var(--radius-full);
+  background-color: var(--color-mark-future);
+}
+
+.fill {
+  block-size: 100%;
+  border-radius: var(--radius-full);
+  background-color: var(--color-action);
+}

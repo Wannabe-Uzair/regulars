@@ -1,0 +1,24 @@
+{
+  "name": "tenure-client",
+  "private": true,
+  "type": "module",
+  "description": "Tenure app client: React + Vite. Imports the brand straight from ../../brand/.",
+  "scripts": {
+    "copy": "node scripts/copy-from-md.mjs",
+    "predev": "node scripts/copy-from-md.mjs",
+    "dev": "vite",
+    "prebuild": "node scripts/copy-from-md.mjs",
+    "build": "vite build",
+    "preview": "vite preview",
+    "shoot": "node scripts/shoot.mjs"
+  },
+  "dependencies": {
+    "react": "^19.3.1",
+    "react-dom": "^19.3.1",
+    "react-router-dom": "^7.18.5"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-react": "^6.2.1",
+    "vite": "^8.3.6"
+  }
+}

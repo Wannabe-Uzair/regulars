@@ -1,0 +1,209 @@
+.button {
+  box-sizing: border-box;
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0;
+  border: var(--border-thin) solid transparent;
+  border-radius: var(--radius-full);
+  background-color: transparent;
+  color: var(--color-text);
+  font-family: inherit;
+  font-weight: var(--weight-interface);
+  line-height: var(--leading-heading);
+  text-align: center;
+  text-decoration: none;
+  white-space: nowrap;
+  cursor: pointer;
+  transition:
+    background-color var(--motion-fast) var(--ease-standard),
+    border-color var(--motion-fast) var(--ease-standard),
+    box-shadow var(--motion-fast) var(--ease-standard),
+    color var(--motion-fast) var(--ease-standard),
+    transform var(--motion-spring-quick) var(--ease-spring-quick);
+}
+
+.button:focus-visible {
+  outline: var(--focus-width) solid var(--color-focus);
+  outline-offset: var(--focus-offset);
+}
+
+.content {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+}
+
+/* Sizes. md and sm keep the 44 px touch target (sm with a smaller label and padding); lg is the kiosk's 64 px. */
+.lg {
+  min-block-size: var(--space-16);
+  padding: var(--space-3) var(--space-8);
+  font-size: var(--text-21);
+}
+
+.md {
+  min-block-size: calc(var(--space-10) + var(--space-1));
+  padding: var(--space-2) var(--space-5);
+  font-size: var(--text-16);
+}
+
+.sm {
+  min-block-size: calc(var(--space-10) + var(--space-1));
+  padding: var(--space-1) var(--space-3);
+  font-size: var(--text-14);
+}
+
+/* Variants, every one a capsule. Hover colours are theme tokens, so contrast.test.ts checks the text on each of them. */
+.primary {
+  background-color: var(--color-action);
+  color: var(--color-on-action);
+}
+
+.secondary {
+  border-color: var(--color-line-strong);
+}
+
+.plain {
+  color: var(--color-action);
+}
+
+.tinted {
+  background-color: var(--color-tint-fill);
+  color: var(--color-on-tint-fill);
+}
+
+.danger {
+  border-color: var(--color-danger);
+  color: var(--color-danger);
+}
+
+/* An alert's destructive confirm: the red fill under white words, deepening toward the text on hover and press. */
+.destructive {
+  background-color: var(--color-danger);
+  color: var(--color-on-danger);
+}
+
+/* Hover only where the pointer can hover, so a tapped button on a phone doesn't stay lit. A busy button keeps its hover
+   fill (pick F2), though a press on it shows nothing, since it ignores clicks. No tint behind danger text: it would take
+   the text under 4.5:1. The edge thickens instead; plain has no fill either, so its tint words deepen. */
+@media (hover: hover) {
+  .primary:hover:not(:disabled) {
+    background-color: var(--color-action-hover);
+  }
+
+  .secondary:hover:not(:disabled),
+  .quiet:hover:not(:disabled) {
+    background-color: var(--color-highlight);
+  }
+
+  .plain:hover:not(:disabled) {
+    color: var(--color-action-hover);
+  }
+
+  .tinted:hover:not(:disabled) {
+    background-color: var(--color-tint-fill-hover);
+  }
+
+  .danger:hover:not(:disabled) {
+    box-shadow: inset 0 0 0 var(--border-thin) var(--color-danger);
+  }
+
+  .destructive:hover:not(:disabled) {
+    background-color: var(--color-danger-hover);
+  }
+}
+
+/* A press goes one step past hover at once, and eases back over --motion-fast on release (pick E2). Nothing moves, so
+   it looks the same under reduced motion. Danger has no fill to deepen, so it keeps its thicker edge. */
+.primary:active:not(:disabled, .loading) {
+  background-color: var(--color-action-press);
+  transition: none;
+}
+
+.secondary:active:not(:disabled, .loading),
+.quiet:active:not(:disabled, .loading) {
+  background-color: var(--color-highlight-press);
+  transition: none;
+}
+
+.plain:active:not(:disabled, .loading) {
+  color: var(--color-action-press);
+  transition: none;
+}
+
+.tinted:active:not(:disabled, .loading) {
+  background-color: var(--color-tint-fill-press);
+  transition: none;
+}
+
+.danger:active:not(:disabled, .loading) {
+  box-shadow: inset 0 0 0 var(--border-thin) var(--color-danger);
+  transition: none;
+}
+
+.destructive:active:not(:disabled, .loading) {
+  background-color: var(--color-danger-press);
+  transition: none;
+}
+
+.button:disabled {
+  border-color: transparent;
+  background-color: var(--color-disabled-fill);
+  color: var(--color-text-soft);
+  cursor: not-allowed;
+}
+
+.quiet:disabled,
+.plain:disabled {
+  background-color: transparent;
+}
+
+/* Under a finger only, a press also gives 3% (--scale-press) as its colour changes, and springs back on the quick
+   spring when let go (the rest rule's transition). Nothing moves with a mouse, and under reduced motion base.css sets
+   --scale-press to 1 and the motion to 0 ms. Same specificity as the variants' press rules and later, so its
+   transition wins: the colour lands at once, as theirs does, and only the give eases in. */
+@media (pointer: coarse) {
+  .button:active:not(:disabled, .loading) {
+    transform: scale(var(--scale-press));
+    transition: transform var(--motion-fast) var(--ease-standard);
+  }
+}
+
+/* Done: the check springs in before the words, which the caller swaps ("Nudged"), on the smooth spring. Still under
+   reduced motion, where the spring's duration is 0 ms. */
+.check {
+  flex: none;
+  animation: done-check-in var(--motion-spring) var(--ease-spring) both;
+}
+
+/* Loading: for --delay-busy the button looks as it did, with its working words; then the label fades out as the
+   spinner (which waits the same delay) fades in over it. The label keeps the width and the accessible name. Under
+   reduced motion --motion-fast is zero, so the swap happens at once when the delay ends. */
+.loading {
+  cursor: progress;
+}
+
+.loading .content {
+  animation: busy-label-out var(--motion-fast) var(--ease-standard) var(--delay-busy) both;
+}
+
+.spinner {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+}
+
+@keyframes done-check-in {
+  from {
+    opacity: 0;
+    transform: scale(0.5);
+  }
+}
+
+@keyframes busy-label-out {
+  to {
+    opacity: 0;
+  }
+}

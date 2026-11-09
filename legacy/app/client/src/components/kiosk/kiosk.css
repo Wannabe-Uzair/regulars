@@ -1,0 +1,122 @@
+/* Front-desk kiosk (DESIGN §12, the loudest screen): rubber ground, Anton titles, floor tape, touch targets of 64 px or more.
+   Two columns from 760 px (prompt and number left, keypad right); one column on phones. Only the brand variables;
+   red only for form errors (a refused or unknown number). Square corners everywhere. */
+
+main.kiosk { --btn-h: 64px; display: flex; flex-direction: column; min-height: 100dvh; padding: 24px var(--pad-x) 32px; }
+
+/* gym name top left, SAMPLE DATA top right (demo only) */
+.kiosk-top { width: 100%; max-width: 1240px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; gap: 16px; min-height: 40px; }
+.kiosk-gym { font-family: var(--font-label); font-weight: 700; text-transform: uppercase; letter-spacing: 0.12em; font-kerning: none;
+  font-size: 17px; line-height: 1.1; color: var(--chalk); }
+
+/* buttons and inputs at kiosk size */
+.kiosk .btn { font-size: 18px; padding: 0 28px; }
+.kiosk .btn-quiet { padding: 0; }
+.kiosk .btn .arrow { font-size: 1.2em; }
+.kiosk-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 12px 32px; }
+.kiosk .field-label { font-size: 15px; }
+.kiosk .kiosk-input { height: 64px; font-size: 22px; padding: 0 18px; }
+.kiosk .field-error { font-size: 18px; }
+.kiosk-optional { color: var(--steel); font-weight: 600; margin-left: 0.4em; }
+
+/* titles */
+.kiosk-head { display: grid; justify-items: start; }
+.kiosk-title { font-family: var(--font-display); font-weight: 400; text-transform: uppercase; letter-spacing: var(--display-tracking);
+  line-height: 0.9; font-size: clamp(64px, min(9vw, 15vh), 128px); }
+.kiosk-title-tape { --tw: 300px; --th: 12px; margin-top: 16px; }
+.kiosk-prompt { margin-top: 20px; font-family: var(--font-body); font-weight: 500; font-size: clamp(20px, 2.2vw, 26px); line-height: 1.3; }
+
+/* sentences under the number */
+.kiosk-error { font-family: var(--font-body); font-weight: 500; font-size: 20px; line-height: 1.35; color: var(--red); max-width: 30em; }
+.kiosk-hint { display: block; margin-top: 6px; font-family: var(--font-body); font-weight: 400; font-size: 18px; line-height: 1.35; color: var(--steel); }
+.kiosk-note { font-family: var(--font-body); font-weight: 500; font-size: 20px; line-height: 1.35; color: var(--chalk); }
+
+/* ------------------------------------------------------------------ idle: number + keypad */
+.kiosk-idle { flex: 1; width: 100%; max-width: 1240px; margin: 0 auto; display: grid; align-items: center;
+  grid-template-columns: minmax(0, 1fr) minmax(320px, 440px); gap: 64px; padding-top: 16px; }
+.kiosk-left { display: flex; flex-direction: column; min-width: 0; }
+.kiosk-left > .kiosk-head { margin-bottom: 36px; }
+.kiosk-display { border-bottom: 3px solid var(--rubber3); padding-bottom: 10px; max-width: 560px; }
+.kiosk-number { display: block; min-height: 1.15em; font-family: var(--font-label); font-weight: 600; font-variant-numeric: tabular-nums;
+  letter-spacing: 0.04em; font-size: clamp(44px, 5vw, 64px); line-height: 1.15; color: var(--chalk); white-space: nowrap; overflow: hidden; text-overflow: clip; }
+.kiosk-problem { margin-top: 16px; min-height: 64px; }
+.kiosk-actions-idle { margin-top: 8px; }
+
+.kiosk-right { display: grid; gap: 16px; }
+.kiosk-keys { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; }
+.kiosk-key { height: clamp(64px, 11vh, 96px); border: 0; border-radius: 0; background: var(--rubber2); color: var(--chalk); cursor: pointer;
+  font-family: var(--font-display); font-weight: 400; font-size: clamp(32px, 5vh, 44px); line-height: 1; touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent; user-select: none; }
+.kiosk-key:hover:not(:disabled), .kiosk-key:active:not(:disabled) { background: var(--rubber3); }
+.kiosk-key-fn { background: var(--rubber); box-shadow: inset 0 0 0 2px var(--rubber3); }
+.kiosk-key-fn > span { font-family: var(--font-label); font-weight: 600; font-size: 0.9em; }
+.kiosk-key:disabled { opacity: 0.4; cursor: not-allowed; }
+.kiosk-go.btn { height: 72px; font-size: 20px; touch-action: manipulation; }
+
+/* ------------------------------------------------------------------ search and join: one column */
+.kiosk-single { flex: 1; width: 100%; max-width: 760px; margin: 0 auto; display: flex; flex-direction: column; gap: 32px;
+  padding-top: clamp(16px, 5vh, 56px); }
+.kiosk-single .kiosk-title { font-size: clamp(56px, min(8vw, 12vh), 104px); }
+.kiosk-single .kiosk-prompt { margin-top: 16px; }
+.kiosk-search { display: grid; gap: 20px; }
+.kiosk-hits { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+.kiosk-hit { width: 100%; min-height: 72px; padding: 0 22px; border: 0; border-radius: 0; background: var(--rubber2); color: var(--chalk);
+  text-align: left; cursor: pointer; touch-action: manipulation; font-family: var(--font-display); font-weight: 400; text-transform: uppercase;
+  letter-spacing: var(--display-tracking); font-size: 30px; line-height: 1; }
+.kiosk-hit:hover:not(:disabled), .kiosk-hit:active:not(:disabled) { background: var(--rubber3); }
+.kiosk-hit:disabled { opacity: 0.4; }
+.kiosk-join.form { gap: 18px; }
+.kiosk-join .kiosk-actions { margin-top: 6px; }
+
+/* ------------------------------------------------------------------ welcome: the loud moment */
+.kiosk-welcome { flex: 1; width: 100%; max-width: 1240px; margin: 0 auto; display: flex; flex-direction: column; justify-content: center;
+  cursor: pointer; padding: 24px 0 8px; }
+.kiosk-welcome-line { font-family: var(--font-display); font-weight: 400; text-transform: uppercase; letter-spacing: var(--display-tracking);
+  line-height: 1.08; font-size: clamp(56px, min(11vw, 19vh), 210px); text-wrap: balance; overflow-wrap: anywhere;
+  transform-origin: left center; animation: kiosk-slam 0.3s var(--ease-slam) both; }
+.kiosk-welcome-tape { --tw: min(100%, 640px); --th: 16px; margin-top: 32px; }
+.kiosk-welcome-sub { margin-top: 28px; font-family: var(--font-body); font-weight: 500; font-size: clamp(24px, 3vw, 38px); line-height: 1.25; }
+.kiosk-welcome-sub.is-on { font-family: var(--font-label); font-weight: 700; text-transform: uppercase; letter-spacing: 0.12em; font-kerning: none; color: var(--yellow); }
+.kiosk-reset { margin-top: 44px; font-family: var(--font-body); font-weight: 400; font-size: 20px; color: var(--steel); }
+@keyframes kiosk-slam { from { transform: scale(1.25); } to { transform: scale(1); } }
+
+/* ------------------------------------------------------------------ bad link: the sentence alone */
+main.kiosk-fatal { align-items: center; justify-content: center; gap: 32px; text-align: center; }
+.kiosk-fatal-text { font-family: var(--font-body); font-weight: 500; font-size: clamp(26px, 3.4vw, 40px); line-height: 1.3; max-width: 20em; }
+
+/* ------------------------------------------------------------------ tablet and phone */
+@media (max-width: 1099px) {
+  .kiosk-idle { gap: 40px; grid-template-columns: minmax(0, 1fr) minmax(300px, 400px); }
+}
+@media (max-width: 759px) {
+  main.kiosk { padding: 16px var(--pad-x) calc(24px + var(--safe-b)); }
+  .kiosk-gym { font-size: 15px; }
+  .kiosk .btn { padding: 0 22px; }
+  .kiosk .btn-quiet { padding: 0; }
+  .kiosk-idle { display: flex; flex-direction: column; align-items: stretch; gap: 0; padding-top: 20px; }
+  .kiosk-left { display: contents; }
+  .kiosk-left > .kiosk-head { order: 1; margin-bottom: 24px; }
+  .kiosk-display { order: 2; }
+  .kiosk-problem { order: 3; margin-top: 10px; min-height: 0; }
+  .kiosk-right { order: 4; margin-top: 18px; gap: 12px; }
+  .kiosk-actions-idle { order: 5; margin-top: 20px; justify-content: space-between; }
+  .kiosk-title, .kiosk-single .kiosk-title { font-size: 64px; }
+  .kiosk-title-tape { --tw: 200px; --th: 8px; margin-top: 12px; }
+  .kiosk-prompt { margin-top: 14px; font-size: 18px; }
+  .kiosk-number { font-size: 40px; }
+  .kiosk-keys { gap: 10px; }
+  .kiosk-key { height: 64px; font-size: 32px; }
+  .kiosk-go.btn { height: 64px; }
+  .kiosk-single { gap: 24px; padding-top: 20px; }
+  .kiosk-hits { grid-template-columns: minmax(0, 1fr); }
+  .kiosk-hit { font-size: 28px; min-height: 64px; }
+  .kiosk-error { font-size: 18px; }
+  .kiosk-hint { font-size: 16px; }
+  .kiosk-welcome-line { font-size: 64px; }
+  .kiosk-welcome-tape { --th: 10px; margin-top: 24px; }
+  .kiosk-reset { font-size: 18px; margin-top: 32px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .kiosk-welcome-line { animation: none; }
+}

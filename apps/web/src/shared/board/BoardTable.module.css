@@ -1,0 +1,315 @@
+/* The frame and the table round it may be shorter than the rows (min-block-size: 0), where a screen holds the board
+   to a height: the frame then scrolls (a laptop's board page, audit B2-18). */
+.wrap {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: var(--space-4);
+  min-block-size: 0;
+}
+
+/* From 48rem the board can be wider than its column: it scrolls sideways, with the names held at the left edge. The
+   frame has room for a focus ring at either end of a row and under the last one (each row's name link), taken back by
+   the margin so nothing moves, as ui's Table gives its own. At the start it keeps a head button's padding instead, which
+   is more (audit B2-19). */
+.scroll {
+  --focus-room: calc(var(--focus-width) + var(--focus-offset));
+
+  margin: 0 calc(-1 * var(--focus-room)) calc(-1 * var(--focus-room));
+  margin-inline-start: calc(-1 * var(--space-2));
+  padding: 0 var(--focus-room) var(--focus-room);
+  padding-inline-start: var(--space-2);
+  min-block-size: 0;
+  overflow-x: auto;
+  border-radius: var(--radius-md);
+}
+
+.scroll:focus-visible {
+  outline: var(--focus-width) solid var(--color-focus);
+  outline-offset: var(--focus-offset);
+}
+
+.board {
+  border-collapse: collapse;
+  inline-size: 100%;
+  font-size: var(--text-14);
+}
+
+.board th {
+  font-weight: var(--weight-interface);
+  text-align: start;
+}
+
+/* One padding for every head cell, so "New member" sits level with Weeks and Status. */
+.board thead th {
+  padding-block: 0 var(--space-2);
+  color: var(--color-text-soft);
+  font-size: var(--label-size);
+  font-weight: var(--label-weight);
+  letter-spacing: var(--label-tracking);
+  text-transform: var(--label-transform);
+  white-space: nowrap;
+}
+
+/* A sorting head cell: its 44 px button sets the head row's height, so the cell adds no padding of its own. */
+.board thead th:has(> .sort) {
+  padding-block: 0;
+}
+
+.board tbody tr + tr > * {
+  border-block-start: var(--border-hairline) solid var(--color-line);
+}
+
+/* No block padding: the name link's 44 px block sets the row's height (NFR-USE-03). */
+.name {
+  position: sticky;
+  inset-inline-start: 0;
+  z-index: var(--layer-sticky);
+  min-inline-size: 7rem;
+  padding-block: 0;
+  padding-inline-end: var(--space-3);
+  background-color: var(--color-surface);
+  white-space: nowrap;
+}
+
+/* The row's way to its member (FR-BOARD-02): the name, a block at least 44 px high. */
+.link {
+  display: flex;
+  align-items: center;
+  min-block-size: calc(var(--space-10) + var(--space-1));
+  color: var(--color-text);
+  text-decoration: none;
+}
+
+/* A head cell's words as a button (FR-BOARD-04): 44 px high, with the sort's direction after the words. It pads its
+   words, a capsule as the app's other rings are, and its start margin takes the padding back, so the words stay level
+   with the column (audit B2-19). */
+.sort {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-1);
+  min-block-size: calc(var(--space-10) + var(--space-1));
+  min-inline-size: calc(var(--space-10) + var(--space-1));
+  padding: 0 var(--space-2);
+  margin-inline-start: calc(-1 * var(--space-2));
+  border: 0;
+  border-radius: var(--radius-full);
+  background: none;
+  color: inherit;
+  font: inherit;
+  letter-spacing: inherit;
+  text-transform: inherit;
+  cursor: pointer;
+}
+
+/* Inside the button, so the frame's top edge doesn't cut it. */
+.sort:focus-visible {
+  outline-offset: calc(-1 * var(--focus-width));
+}
+
+.caret {
+  color: var(--color-text);
+}
+
+/* The pace column is right-aligned: its caret comes first, so the word ends level with the figures below, the end
+   margin taking back the padding there. */
+.board .paceHead .sort {
+  flex-direction: row-reverse;
+  margin-inline: 0 calc(-1 * var(--space-2));
+}
+
+/* Unsorted columns keep the caret's room, so a header doesn't shift when it sorts. */
+.unsorted {
+  visibility: hidden;
+}
+
+.weeksHead {
+  padding-inline: var(--space-1);
+}
+
+.cell {
+  padding: var(--space-2) var(--border-thick);
+  line-height: 0;
+}
+
+.paceHead,
+.paceCell,
+.statusHead,
+.statusCell {
+  padding-inline-start: var(--space-3);
+  white-space: nowrap;
+}
+
+/* After the pace, status starts a step further off, so the two head buttons' padding meet without overlapping. */
+.paceHead + .statusHead,
+.paceCell + .statusCell {
+  padding-inline-start: var(--space-4);
+}
+
+/* Figures line up at their end, under their header (the phone card sets the pace after the weeks instead). */
+.board .paceHead,
+.paceCell {
+  text-align: end;
+}
+
+/* A live check-in tints its row (FR-BOARD-03): each cell starts in the tint's fill and fades to its own background over
+   --motion-linger, which base.css zeroes under reduced motion. The week's own pop runs on its mark. */
+.fresh > * {
+  animation: tint var(--motion-linger) var(--ease-standard);
+}
+
+@keyframes tint {
+  from {
+    background-color: var(--color-tint-fill);
+  }
+}
+
+/* Read by screen readers, not shown: the slipping suffix on a member's name (the row already shows the status). */
+.hidden {
+  position: absolute;
+  inline-size: 1px;
+  block-size: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+@media (hover: hover) {
+  .link:hover {
+    text-decoration: underline;
+  }
+
+  .sort:hover .unsorted {
+    visibility: visible;
+    color: var(--color-text-soft);
+  }
+}
+
+/* A laptop's compact table (FR-BOARD-04): from 64rem with a fine pointer the cells pad less, the rows sit at the name
+   link's 44 px, and the frame scrolls both ways inside the window, so the head row stays in view (a sticky head can't
+   stick to the page from inside a sideways scroller). The corner cell sticks both ways, a layer above the rest. */
+@media (pointer: fine) and (width >= 64rem) {
+  /* A column whose frame gives way, when a screen holds the board to the window's height (audit B2-18). */
+  .wrap {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .scroll {
+    max-block-size: calc(100dvh - 14rem);
+    overflow: auto;
+  }
+
+  .board thead th {
+    position: sticky;
+    inset-block-start: 0;
+    z-index: calc(var(--layer-sticky) + 1);
+    background-color: var(--color-surface);
+    box-shadow: inset 0 calc(-1 * var(--border-hairline)) 0 var(--color-line);
+  }
+
+  .board thead .name {
+    z-index: calc(var(--layer-sticky) + 2);
+  }
+
+  /* A head button's ring reaches past its own cell, so the focused cell rises over its neighbours' fills. */
+  .board thead th:has(> .sort:focus-visible) {
+    z-index: calc(var(--layer-sticky) + 3);
+  }
+
+  .cell {
+    padding: var(--space-1) var(--border-thick);
+  }
+}
+
+/* Below 48rem each member is a two-line card that is one link, with a line between cards and no sideways scroll (pick
+   I3): the name and the status on the first line; the 13 weeks, then the pace where it shows, on the second. The
+   name link's ::after covers the card. The table's own markup stays, laid out as flex lines, so it reads the same. */
+@media (width < 48rem) {
+  .board,
+  .board tbody {
+    display: block;
+  }
+
+  .board thead {
+    display: none;
+  }
+
+  .board tbody tr {
+    position: relative;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    padding-block: 0 var(--space-3);
+  }
+
+  .board tbody tr + tr {
+    border-block-start: var(--border-hairline) solid var(--color-line);
+  }
+
+  .board tbody tr + tr > * {
+    border-block-start: none;
+  }
+
+  /* The break after the first line. */
+  .board tbody tr::before {
+    content: '';
+    order: 3;
+    flex-basis: 100%;
+  }
+
+  .name {
+    position: static;
+    order: 1;
+    min-inline-size: 0;
+    padding: 0;
+    margin-inline-end: var(--space-2);
+    background-color: transparent;
+  }
+
+  .link::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: var(--radius-md);
+  }
+
+  /* The ring goes round the whole card, inside it, so the frame doesn't cut it. */
+  .link:focus-visible {
+    outline: none;
+  }
+
+  .link:focus-visible::after {
+    outline: var(--focus-width) solid var(--color-focus);
+    outline-offset: calc(-1 * var(--focus-width));
+  }
+
+  .statusCell {
+    order: 2;
+    margin-inline-start: auto;
+    padding: 0;
+  }
+
+  .paceCell + .statusCell {
+    padding: 0;
+  }
+
+  .cell {
+    order: 4;
+    padding: var(--space-1) var(--space-1) 0 0;
+  }
+
+  .paceCell {
+    order: 5;
+    padding: var(--space-1) 0 0 var(--space-2);
+  }
+
+  /* The card is one box here, so the tint fills it whole, between the cells too; the cells, see-through, take no tint of
+     their own (one over the other would show each cell darker than the card). */
+  .fresh {
+    animation: tint var(--motion-linger) var(--ease-standard);
+  }
+
+  .fresh > * {
+    animation: none;
+  }
+}

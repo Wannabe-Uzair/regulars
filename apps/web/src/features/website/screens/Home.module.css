@@ -1,0 +1,324 @@
+/* The product page (home-1): a sticky opaque bar, the centred hero on surface, the floating board across the edge from
+   surface to the ground, the sourced figures, the close and the footer. No glass and no blend anywhere on it. */
+.ground {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  grid-template-rows: auto 1fr auto;
+  min-block-size: 100dvh;
+  background-color: var(--color-bg);
+  color: var(--color-text);
+}
+
+/* The page's column, inside every band: 70rem of content at most, centred, clear of a sideways phone's notch at
+   every width, as the shell's columns are (F26). */
+.page {
+  box-sizing: border-box;
+  inline-size: 100%;
+  max-inline-size: calc(70rem + 2 * var(--space-16));
+  margin-inline: auto;
+  padding-inline: max(var(--space-4), env(safe-area-inset-left, 0px))
+    max(var(--space-4), env(safe-area-inset-right, 0px));
+}
+
+/* The bar: sticky, opaque white over a hairline, the mark and the name leading, the way in trailing (44 px). */
+.bar {
+  position: sticky;
+  inset-block-start: 0;
+  z-index: var(--layer-sticky);
+  background-color: var(--color-surface);
+  border-block-end: var(--border-hairline) solid var(--color-line);
+}
+
+.barRow {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-2) var(--space-3);
+  padding-block: var(--space-1);
+}
+
+.barActions {
+  display: flex;
+  gap: var(--space-2);
+}
+
+/* The place a way in holds while the stall question is open (B2-04): its box, unseen. */
+.held {
+  visibility: hidden;
+}
+
+/* The hero: centred words on surface, the name over the headline. */
+.hero {
+  padding-block: var(--space-16) var(--space-10);
+  background-color: var(--color-surface);
+  text-align: center;
+}
+
+.heroWords {
+  display: grid;
+  justify-items: center;
+  gap: var(--space-4);
+}
+
+.brand {
+  margin: 0;
+  font-size: var(--text-21);
+  font-weight: var(--weight-heading);
+  line-height: var(--leading-heading);
+}
+
+.title {
+  margin: 0;
+  font-size: var(--text-48);
+  font-weight: var(--weight-display);
+  line-height: var(--leading-display);
+  text-wrap: balance;
+}
+
+.lede {
+  max-inline-size: 36ch;
+  margin: 0;
+  color: var(--color-text-soft);
+  font-size: var(--text-18);
+  line-height: var(--leading-body);
+  text-wrap: balance;
+}
+
+.offer {
+  margin: 0;
+  color: var(--color-text-soft);
+  font-size: var(--text-16);
+  line-height: var(--leading-body);
+}
+
+/* Outside stall mode, Set Up Your Gym then Log In, side by side and centred, wrapping on a narrow phone. */
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: var(--space-3);
+}
+
+.hero .actions,
+.hero .offer {
+  margin-block-start: var(--space-2);
+}
+
+/* The board's band: surface over its top part and the ground under the rest, so the board sits across the edge. */
+.band {
+  position: relative;
+  padding-block-end: var(--space-16);
+  background-color: var(--color-bg);
+}
+
+.band::before {
+  content: '';
+  position: absolute;
+  inset-inline: 0;
+  inset-block-start: 0;
+  block-size: 40%;
+  background-color: var(--color-surface);
+}
+
+.band > .page {
+  position: relative;
+}
+
+.board {
+  max-inline-size: 56rem;
+  margin-inline: auto;
+}
+
+/* Section titles: display type, centred. */
+.heading {
+  margin: 0;
+  font-size: var(--text-34);
+  font-weight: var(--weight-display);
+  line-height: var(--leading-display);
+  text-align: center;
+  text-wrap: balance;
+}
+
+/* The figures on surface, each on a ground-filled tile with no edge or shadow: one column, three from 48rem. */
+.figures {
+  padding-block: var(--space-16);
+  background-color: var(--color-surface);
+}
+
+.figureList {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: var(--space-4);
+  margin: var(--space-10) 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.figure {
+  display: grid;
+  align-content: start;
+  gap: var(--space-3);
+  padding: var(--space-8) var(--space-6);
+  border-radius: var(--radius-xl);
+  background-color: var(--color-bg);
+}
+
+.value {
+  margin: 0;
+  font-size: var(--text-64);
+  font-weight: var(--weight-display);
+  font-variant-numeric: var(--font-numeric);
+  line-height: var(--leading-display);
+}
+
+.label {
+  margin: 0;
+  color: var(--color-text-soft);
+  font-size: var(--text-17);
+  line-height: var(--leading-body);
+  text-wrap: pretty;
+}
+
+.footnote {
+  line-height: 0;
+}
+
+/* Each footnote number takes a tap 44 px across, centred on it, without growing the line (A19). */
+.footnote a {
+  position: relative;
+}
+
+.footnote a::after {
+  content: '';
+  position: absolute;
+  inset-block-start: 50%;
+  inset-inline-start: 50%;
+  inline-size: calc(var(--space-10) + var(--space-1));
+  block-size: calc(var(--space-10) + var(--space-1));
+  translate: -50% -50%;
+}
+
+/* The close: the way in again, centred on the ground. */
+.close {
+  padding-block: var(--space-20);
+  text-align: center;
+}
+
+.closeWords {
+  display: grid;
+  justify-items: center;
+  gap: var(--space-6);
+}
+
+/* The footer on the ground, under a hairline: the sources, what the app never does, and Reset the Demo. */
+.footer {
+  padding-block: var(--space-8) max(var(--space-10), env(safe-area-inset-bottom, 0px));
+  border-block-start: var(--border-hairline) solid var(--color-line);
+  color: var(--color-text-soft);
+  font-size: var(--text-13);
+  line-height: var(--leading-body);
+}
+
+.footerColumn {
+  display: grid;
+  gap: var(--space-3);
+}
+
+.sourcesTitle {
+  margin: 0;
+  color: var(--color-text);
+  font-size: var(--text-13);
+  font-weight: var(--weight-heading);
+  line-height: var(--leading-heading);
+}
+
+.sources {
+  display: grid;
+  gap: var(--space-2);
+  margin: 0;
+  padding-inline-start: var(--space-5);
+}
+
+/* A footnote jumped to lands clear of the sticky bar. */
+.sources > li {
+  scroll-margin-block-start: var(--space-20);
+}
+
+.footerRow {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-2) var(--space-6);
+  margin-block-start: var(--space-3);
+  padding-block-start: var(--space-3);
+  border-block-start: var(--border-hairline) solid var(--color-line);
+}
+
+.notes {
+  display: grid;
+  gap: var(--space-1);
+}
+
+.notes p {
+  margin: 0;
+}
+
+/* Reset the Demo is quiet, with no fill: its words line up with the column's edge, not its padding. */
+.footerRow button {
+  margin-inline: calc(-1 * var(--space-3));
+}
+
+@media (min-width: 40rem) {
+  .page {
+    padding-inline: max(var(--space-8), env(safe-area-inset-left, 0px))
+      max(var(--space-8), env(safe-area-inset-right, 0px));
+  }
+}
+
+@media (min-width: 48rem) {
+  .figureList {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+/* From 64rem: the headline at 96 px, more air between the bands. */
+@media (min-width: 64rem) {
+  .page {
+    padding-inline: max(var(--space-16), env(safe-area-inset-left, 0px))
+      max(var(--space-16), env(safe-area-inset-right, 0px));
+  }
+
+  .hero {
+    padding-block: var(--space-12) var(--space-10);
+  }
+
+  .title {
+    font-size: var(--text-96);
+  }
+
+  .lede {
+    font-size: var(--text-21);
+  }
+
+  .band {
+    padding-block-end: var(--space-24);
+  }
+
+  .heading {
+    font-size: var(--text-48);
+  }
+
+  .figures {
+    padding-block: var(--space-24);
+  }
+
+  .figureList {
+    margin-block-start: var(--space-16);
+  }
+
+  .close {
+    padding-block: var(--space-24);
+  }
+}

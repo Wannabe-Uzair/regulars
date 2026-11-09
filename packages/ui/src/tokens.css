@@ -1,0 +1,277 @@
+/* Generated from src/tokens.ts by scripts/generate.ts. Do not edit: run `npm run generate`. */
+
+:root {
+  --font-sans: 'Inter Variable', system-ui, sans-serif;
+  --font-numeric: tabular-nums;
+  --text-12: 0.75rem;
+  --text-13: 0.8125rem;
+  --text-14: 0.875rem;
+  --text-16: 1rem;
+  --text-17: 1.0625rem;
+  --text-18: 1.125rem;
+  --text-21: 1.3125rem;
+  --text-24: 1.5rem;
+  --text-32: 2rem;
+  --text-34: 2.125rem;
+  --text-44: 2.75rem;
+  --text-48: 3rem;
+  --text-64: 4rem;
+  --text-96: 6rem;
+  --text-kiosk: min(8rem, calc((100cqi - 2 * var(--space-8)) / 7.7));
+  --weight-body: 400;
+  --weight-interface: 600;
+  --weight-heading: 600;
+  --weight-display: 700;
+  --leading-body: 1.5;
+  --leading-heading: 1.25;
+  --leading-display: 1.1;
+  --label-size: 0.75rem;
+  --label-weight: 600;
+  --label-tracking: normal;
+  --label-transform: none;
+  --motion-fast: 120ms;
+  --motion-base: 200ms;
+  --motion-slow: 320ms;
+  --motion-crossfade: 240ms;
+  --motion-spring: 740ms;
+  --motion-spring-quick: 450ms;
+  --motion-spring-bounce: 820ms;
+  --motion-linger: 1600ms;
+  --ease-standard: cubic-bezier(0.2, 0, 0, 1);
+  --ease-emphasised: cubic-bezier(0.05, 0.7, 0.1, 1);
+  --ease-spring: cubic-bezier(0.2, 0.8, 0.2, 1);
+  --ease-spring-quick: cubic-bezier(0.2, 0.8, 0.2, 1);
+  --ease-spring-bounce: cubic-bezier(0.34, 1.45, 0.64, 1);
+  --scale-pop: 1.25;
+  --scale-press: 0.97;
+  --delay-busy: 400ms;
+  --space-0: 0;
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 20px;
+  --space-6: 24px;
+  --space-8: 32px;
+  --space-10: 40px;
+  --space-12: 48px;
+  --space-16: 64px;
+  --space-20: 80px;
+  --space-24: 96px;
+  --radius-sm: 4px;
+  --radius-md: 8px;
+  --radius-lg: 12px;
+  --radius-xl: 24px;
+  --radius-full: 999px;
+  --border-thin: 1px;
+  --border-hairline: 1px;
+  --border-thick: 2px;
+  --border-band: 4px;
+  --focus-width: 2px;
+  --focus-offset: 2px;
+  --size-kiosk-key: 4.75rem;
+  --material-bar-filter: saturate(180%) blur(20px);
+  --material-tabs-filter: saturate(180%) blur(30px);
+  --layer-behind: -1;
+  --layer-sticky: 1;
+  --layer-nav: 30;
+  --layer-dialog: 40;
+  --layer-menu: 50;
+  --layer-tooltip: 50;
+  --layer-toast: 60;
+  --toast-clearance: 0px;
+  --opacity-disabled: 0.5;
+  --opacity-spinner-track: 0.25;
+  --opacity-skeleton-pulse: 0.55;
+  --tracking-logo: -0.01em;
+}
+
+:root {
+  color-scheme: only light;
+  --color-bg: #f2f2f7;
+  --color-bg-alt: #f2f2f7;
+  --color-surface: #ffffff;
+  --color-raised: #ffffff;
+  --color-text: #1d1d1f;
+  --color-text-soft: #606068;
+  --color-tint: #5444e4;
+  --color-action: var(--color-tint);
+  --color-on-action: #ffffff;
+  --color-attention: #e0102e;
+  --color-attention-fill: #eae9fc;
+  --color-on-attention: var(--color-tint);
+  --color-tint-fill: #eae9fc;
+  --color-on-tint-fill: var(--color-tint);
+  --color-attention-text: #d40624;
+  --color-status-below: var(--color-text);
+  --color-status-below-text: var(--color-text);
+  --color-status-on: var(--color-text);
+  --color-status-on-text: var(--color-text);
+  --color-status-new: var(--color-text-soft);
+  --color-status-new-text: var(--color-text);
+  --color-link: var(--color-tint);
+  --color-focus: var(--color-tint);
+  --color-danger: #d40624;
+  --color-on-danger: #ffffff;
+  --color-logo-dot: var(--color-tint);
+  --color-line: #d1d1d6;
+  --color-line-strong: color-mix(in oklab, var(--color-text) 47%, var(--color-surface));
+  --color-line-blend: var(--color-line-strong);
+  --color-action-hover: color-mix(in oklab, var(--color-action) 88%, var(--color-text));
+  --color-action-press: color-mix(in oklab, var(--color-action) 76%, var(--color-text));
+  --color-danger-hover: color-mix(in oklab, var(--color-danger) 88%, var(--color-text));
+  --color-danger-press: color-mix(in oklab, var(--color-danger) 76%, var(--color-text));
+  --color-highlight: color-mix(in oklab, var(--color-text) 8%, transparent);
+  --color-highlight-press: color-mix(in oklab, var(--color-text) 14%, transparent);
+  --color-disabled-fill: color-mix(in oklab, var(--color-text) 8%, transparent);
+  --color-control-disabled: color-mix(in oklab, var(--color-text) 7%, var(--color-surface));
+  --color-skeleton: color-mix(in oklab, var(--color-text) 7%, transparent);
+  --color-scrim: color-mix(in oklab, var(--color-bg) 72%, transparent);
+  --color-attention-fill-hover: color-mix(in oklab, var(--color-attention-fill) 97%, var(--color-text));
+  --color-attention-fill-press: color-mix(in oklab, var(--color-attention-fill) 94%, var(--color-text));
+  --color-tint-fill-hover: color-mix(in oklab, var(--color-tint-fill) 97%, var(--color-text));
+  --color-tint-fill-press: color-mix(in oklab, var(--color-tint-fill) 94%, var(--color-text));
+  --color-material-bar: color-mix(in oklab, var(--color-surface) 86%, transparent);
+  --color-material-tabs: color-mix(in oklab, var(--color-surface) 94%, transparent);
+  --color-mark-full: var(--color-text);
+  --color-mark-some: color-mix(in oklab, var(--color-text) 44%, var(--color-surface));
+  --color-mark-none: transparent;
+  --color-mark-outline: var(--color-mark-some);
+  --color-mark-future: color-mix(in oklab, var(--color-text) 7%, var(--color-surface));
+  --shadow-lift: 0 0 2px rgb(0 0 0 / 0.06), 0 4px 8px rgb(0 0 0 / 0.07);
+  --shadow-flyout: 0 0 2px rgb(0 0 0 / 0.08), 0 8px 16px rgb(0 0 0 / 0.12);
+  --shadow-float: 0 0 8px rgb(0 0 0 / 0.08), 0 14px 28px rgb(0 0 0 / 0.14);
+  --shadow-modal: 0 0 8px rgb(0 0 0 / 0.1), 0 32px 64px rgb(0 0 0 / 0.18);
+  --shadow-raised: var(--shadow-flyout);
+  --link-decoration: underline;
+  --opacity-grain: 0;
+  --blend-kiosk: none;
+}
+
+@supports (transition-timing-function: linear(0, 1)) {
+  :root {
+    --ease-spring: linear(
+      0,
+      0.004 1%,
+      0.019 2.3%,
+      0.043 3.5%,
+      0.08 5%,
+      0.116 6.3%,
+      0.163 7.8%,
+      0.366 13.8%,
+      0.461 16.8%,
+      0.555 20%,
+      0.594 21.5%,
+      0.636 23.3%,
+      0.705 26.5%,
+      0.738 28.2%,
+      0.767 30%,
+      0.794 31.8%,
+      0.821 33.8%,
+      0.863 37.5%,
+      0.901 42%,
+      0.931 46.8%,
+      0.955 52.3%,
+      0.972 58.5%,
+      0.984 65.5%,
+      0.992 73.8%,
+      1
+    );
+    --ease-spring-quick: linear(
+      0,
+      0.004 1%,
+      0.02 2.3%,
+      0.044 3.5%,
+      0.082 5%,
+      0.118 6.3%,
+      0.158 7.5%,
+      0.363 13.5%,
+      0.46 16.5%,
+      0.555 19.8%,
+      0.595 21.3%,
+      0.637 23%,
+      0.671 24.5%,
+      0.707 26.3%,
+      0.74 28%,
+      0.77 29.8%,
+      0.82 33.3%,
+      0.863 37%,
+      0.884 39.3%,
+      0.902 41.5%,
+      0.931 46.3%,
+      0.955 51.7%,
+      0.973 58%,
+      0.984 65%,
+      0.992 73.3%,
+      0.996 83%,
+      1
+    );
+    --ease-spring-bounce: linear(
+      0,
+      0.001 0.5%,
+      0.008 1.3%,
+      0.029 2.5%,
+      0.062 3.8%,
+      0.113 5.3%,
+      0.162 6.5%,
+      0.216 7.8%,
+      0.484 13.5%,
+      0.594 16%,
+      0.655 17.5%,
+      0.702 18.8%,
+      0.746 20%,
+      0.787 21.3%,
+      0.824 22.5%,
+      0.858 23.8%,
+      0.888 25%,
+      0.92 26.5%,
+      0.943 27.8%,
+      0.967 29.3%,
+      0.984 30.5%,
+      1.001 32%,
+      1.022 34.5%,
+      1.036 37%,
+      1.044 39.8%,
+      1.046 42.8%,
+      1.041 48%,
+      1.012 62.7%,
+      1.003 70.5%,
+      0.998 82.3%,
+      1
+    );
+  }
+}
+
+@media (min-resolution: 2dppx) {
+  :root {
+    --border-hairline: 0.5px;
+  }
+}
+
+@supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+  :root {
+    --color-material-bar: var(--color-surface);
+    --color-material-tabs: var(--color-surface);
+    --material-bar-filter: none;
+    --material-tabs-filter: none;
+  }
+}
+
+@media (prefers-reduced-transparency: reduce) {
+  :root {
+    --color-material-bar: var(--color-surface);
+    --color-material-tabs: var(--color-surface);
+    --material-bar-filter: none;
+    --material-tabs-filter: none;
+  }
+}
+
+@media (prefers-contrast: more) {
+  :root {
+    --color-material-bar: var(--color-surface);
+    --color-material-tabs: var(--color-surface);
+    --material-bar-filter: none;
+    --material-tabs-filter: none;
+    --focus-width: 3px;
+  }
+}

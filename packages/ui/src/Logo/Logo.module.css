@@ -1,0 +1,30 @@
+/* Proportions from the colour-round canvas: a 28 px mark, a 10 px gap and a 21 px name. */
+.logo {
+  display: inline-flex;
+  align-items: center;
+  gap: calc(var(--logo-size) * 0.36);
+  color: var(--color-text);
+}
+
+/* The drawing sits 4.4 of the grid's 24 units in from each side, so the box gives that margin back: the quarter's edge
+   lines up with the text column, and the gap to the name is measured from the drawing. */
+.mark {
+  flex: none;
+  margin-inline: calc(var(--logo-size) * -4.4 / 24);
+}
+
+.quarter {
+  fill: var(--color-text);
+}
+
+.square {
+  fill: var(--color-logo-dot);
+}
+
+/* The name as live text: Inter 600, title case, tracked slightly tight. */
+.wordmark {
+  font-size: calc(var(--logo-size) * 0.75);
+  font-weight: var(--weight-heading);
+  letter-spacing: var(--tracking-logo);
+  line-height: 1;
+}

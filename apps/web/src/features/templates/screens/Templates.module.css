@@ -1,0 +1,56 @@
+/* As in the shell: the column may be narrower than its content. */
+.page {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: var(--space-6);
+  max-inline-size: 48rem;
+}
+
+.head {
+  display: grid;
+  gap: var(--space-1);
+}
+
+.sub {
+  margin: 0;
+  color: var(--color-text-soft);
+}
+
+.error {
+  display: grid;
+  gap: var(--space-4);
+  justify-items: start;
+}
+
+.error p {
+  margin: 0;
+  color: var(--color-danger);
+}
+
+.list {
+  display: grid;
+  gap: var(--space-4);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.card {
+  display: grid;
+  gap: var(--space-2);
+}
+
+.name {
+  margin: 0;
+  font-size: var(--text-17);
+  font-weight: var(--weight-heading);
+  text-wrap: balance;
+}
+
+.body {
+  margin: 0;
+  max-inline-size: 65ch;
+  overflow-wrap: anywhere;
+  white-space: pre-line;
+  text-wrap: pretty;
+}

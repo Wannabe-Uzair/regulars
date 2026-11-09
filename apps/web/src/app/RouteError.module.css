@@ -1,0 +1,15 @@
+.error {
+  display: grid;
+  gap: var(--space-4);
+  justify-items: start;
+}
+
+.page {
+  padding: var(--space-12) var(--space-6);
+}
+
+.body {
+  margin: 0;
+  color: var(--color-text-soft);
+  font-size: var(--text-16);
+}

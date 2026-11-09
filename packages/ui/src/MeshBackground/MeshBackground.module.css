@@ -1,0 +1,57 @@
+/* The colour-round mesh (docs/research/colour-round-2/canvas/Main.dc.html): soft blobs of bg-alt drifting over a
+   gentle bg-to-bg-alt wash, in OKLab like the canvas. Built on the theme roles, so it follows the theme: in light, Iris
+   makes bg-alt the ground itself and the grain 0, so the ground is plain (ARCHITECTURE §9, "Ground"). */
+.root {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  background-color: var(--color-bg);
+  color: var(--color-text);
+}
+
+.mesh {
+  /* bg-alt mixed into bg at a share, as the canvas's mix(A, B, t). */
+  --mesh-72: color-mix(in oklab, var(--color-bg-alt) 72%, var(--color-bg));
+  --mesh-50: color-mix(in oklab, var(--color-bg-alt) 50%, var(--color-bg));
+  --mesh-46: color-mix(in oklab, var(--color-bg-alt) 46%, var(--color-bg));
+  --mesh-22: color-mix(in oklab, var(--color-bg-alt) 22%, var(--color-bg));
+  /* The top-left lift: none in light, where Iris's ground is plain (bg-alt is bg, so every stop here is the ground); a
+     touch of bg-alt in dark. color-scheme comes from tokens.css. */
+  --mesh-lift: light-dark(
+    var(--color-bg-alt),
+    color-mix(in oklab, var(--color-bg-alt) 18%, var(--color-bg))
+  );
+
+  position: absolute;
+  inset: 0;
+  z-index: var(--layer-behind);
+  pointer-events: none;
+  background-image:
+    radial-gradient(56% 72% at 98% 4%, color-mix(in oklab, var(--color-bg-alt) 95%, transparent) 0%, transparent 70%),
+    radial-gradient(46% 60% at 64% 106%, color-mix(in oklab, var(--mesh-72) 90%, transparent) 0%, transparent 72%),
+    radial-gradient(42% 56% at -6% 74%, color-mix(in oklab, var(--mesh-50) 75%, transparent) 0%, transparent 70%),
+    radial-gradient(52% 60% at 14% -8%, color-mix(in oklab, var(--mesh-lift) 90%, transparent) 0%, transparent 70%),
+    linear-gradient(160deg, var(--color-bg) 0%, var(--mesh-22) 55%, var(--mesh-46) 100%);
+}
+
+/* The kiosk's blend: each theme block of tokens.css sets the whole gradient list in --blend-kiosk. Dark draws N1 "Soft
+   corners" (kiosk-blend.md); light's is none, a plain ground (FR-KIOSK-07). */
+.mesh.kiosk {
+  background-image: var(--blend-kiosk);
+}
+
+/* Fine grain, as the canvas: fractal noise in overlay blend, at the theme's --opacity-grain (8% dark, none light). */
+.grain {
+  position: absolute;
+  inset: 0;
+  z-index: var(--layer-behind);
+  inline-size: 100%;
+  block-size: 100%;
+  pointer-events: none;
+  opacity: var(--opacity-grain);
+  mix-blend-mode: overlay;
+}
+
+.content {
+  position: relative;
+}

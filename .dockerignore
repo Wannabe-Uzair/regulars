@@ -1,0 +1,16 @@
+# Host files, at any depth: the image installs and builds its own.
+**/node_modules
+**/dist
+**/coverage
+**/.turbo
+**/*.tsbuildinfo
+**/*.db*
+**/.DS_Store
+.git
+.claude
+.worktrees
+legacy
+marketing
+docs/research
+apps/api/data
+.env*

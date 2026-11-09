@@ -1,0 +1,23 @@
+/* "Sept 2026" stays on one line; the table scrolls sideways instead. */
+.month {
+  white-space: nowrap;
+}
+
+/* The table's frame is the container its cells measure (FR-REPORT-04). */
+.cohorts {
+  container-type: inline-size;
+}
+
+/* On a phone the gaps between columns tighten to one even 12 px, so Joined, Members and Days 30, 60 and 90 fit side by
+   side in 316 px (FR-REPORT-04). The figures are end-aligned, so each cell keeps its gap at the start and the outer ends
+   stay flush. The extra "table" outranks the Table's own cell padding, its sticky column's included, whatever order the
+   sheets load in. */
+@container (width < 24rem) {
+  .cohorts table :is(th, td) {
+    padding-inline: var(--space-3) 0;
+  }
+
+  .cohorts table :is(th, td):first-child {
+    padding-inline: 0 var(--space-1);
+  }
+}

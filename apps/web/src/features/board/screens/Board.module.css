@@ -1,0 +1,51 @@
+/* As in the shell: the column may be narrower than the board, which then scrolls inside its own frame. */
+.page {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: var(--space-6);
+  max-inline-size: 72rem;
+}
+
+.error {
+  display: grid;
+  gap: var(--space-4);
+  justify-items: start;
+}
+
+.error p {
+  margin: 0;
+  color: var(--color-danger);
+}
+
+/* The count sits close over the table it counts. */
+.results {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: var(--space-2);
+}
+
+.count {
+  margin: 0;
+  color: var(--color-text-soft);
+  font-size: var(--text-14);
+  font-variant-numeric: var(--font-numeric);
+}
+
+/* A laptop's board fits the window, so only its frame scrolls (audit B2-18): the page is a column no taller than the
+   window less the shell's padding round it, and the results, the card and the board's frame give way, in that order
+   down, while the title, the filter line, the count and the legend keep their height. Few rows take only their room. A short window keeps the frame its head and about three rows
+   (28rem), and the page scrolls a little instead. */
+@media (pointer: fine) and (width >= 64rem) {
+  .page {
+    display: flex;
+    flex-direction: column;
+    max-block-size: max(calc(100dvh - 2 * var(--space-6)), 28rem);
+  }
+
+  .results,
+  .card {
+    display: flex;
+    flex-direction: column;
+    min-block-size: 0;
+  }
+}

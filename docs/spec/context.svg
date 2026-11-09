@@ -1,0 +1,160 @@
+<svg xmlns="http://www.w3.org/2000/svg" id="tenure-context" viewBox="0 0 1240 830" width="1240" height="830" role="img" aria-labelledby="tenure-context-title tenure-context-desc">
+  <title id="tenure-context-title">Tenure at the stall: system context</title>
+  <desc id="tenure-context-desc">On the laptop's local network, a kiosk tablet and a phone or laptop run Tenure's browser app in Chrome or Safari. Both talk over HTTP to the API server on the stall laptop, a Mac, which runs in a Docker container or with npm run stall. The API reads and writes one SQLite database file, and sends email through stand-in adapters, which put every email in the outbox table of that database. A nudge opens the coach's own Messages or WhatsApp with the message filled in, and the coach sends it to the member's phone. The operator runs commands at the laptop's terminal.</desc>
+  <style>
+    #tenure-context {
+      --ctx-ground: #F1FAEE;
+      --ctx-zone: #DFF2EA;
+      --ctx-box: #FFFFFF;
+      --ctx-inner: #F1FAEE;
+      --ctx-node: #FFFFFF;
+      --ctx-text: #1D3557;
+      --ctx-soft: #3F5571;
+      --ctx-line: #738297;
+      --ctx-accent: #457B9D;
+      --ctx-arrow: #1D3557;
+    }
+    @media (prefers-color-scheme: dark) {
+      #tenure-context {
+        --ctx-ground: #202734;
+        --ctx-zone: #293143;
+        --ctx-box: #2B3447;
+        --ctx-inner: #202734;
+        --ctx-node: #36415A;
+        --ctx-text: #E0F8C7;
+        --ctx-soft: #ADC1A2;
+        --ctx-line: #7C8C81;
+        --ctx-accent: #B7D894;
+        --ctx-arrow: #E0F8C7;
+      }
+    }
+    #tenure-context text {
+      font-family: "Hanken Grotesk", "Helvetica Neue", Helvetica, Arial, sans-serif;
+      fill: #1D3557;
+      fill: var(--ctx-text);
+    }
+    #tenure-context .ctx-title { font-size: 16px; font-weight: 600; }
+    #tenure-context .ctx-label { font-size: 13px; }
+    #tenure-context .ctx-strong { font-weight: 600; }
+    #tenure-context .ctx-detail,
+    #tenure-context .ctx-soft,
+    #tenure-context .ctx-edge { fill: #3F5571; fill: var(--ctx-soft); }
+    #tenure-context .ctx-detail { font-size: 13px; }
+    #tenure-context .ctx-edge { font-size: 12px; }
+    #tenure-context .ctx-ground { fill: #F1FAEE; fill: var(--ctx-ground); }
+    #tenure-context .ctx-zone { fill: #DFF2EA; fill: var(--ctx-zone); stroke: #738297; stroke: var(--ctx-line); stroke-width: 1.5; }
+    #tenure-context .ctx-box { fill: #FFFFFF; fill: var(--ctx-box); stroke: #738297; stroke: var(--ctx-line); stroke-width: 1; }
+    #tenure-context .ctx-inner { fill: #F1FAEE; fill: var(--ctx-inner); stroke: #738297; stroke: var(--ctx-line); stroke-width: 1; }
+    #tenure-context .ctx-node { fill: #FFFFFF; fill: var(--ctx-node); stroke: #457B9D; stroke: var(--ctx-accent); stroke-width: 2; }
+    #tenure-context .ctx-ext { fill: #FFFFFF; fill: var(--ctx-box); stroke: #3F5571; stroke: var(--ctx-soft); stroke-width: 1.5; stroke-dasharray: 6 5; }
+    #tenure-context .ctx-arrow { fill: none; stroke: #1D3557; stroke: var(--ctx-arrow); stroke-width: 1.75; }
+    #tenure-context .ctx-dashed { stroke-dasharray: 6 5; }
+    #tenure-context .ctx-head { fill: #1D3557; fill: var(--ctx-arrow); }
+  </style>
+  <defs>
+    <marker id="tenure-context-end" viewBox="0 0 10 10" refX="10" refY="5" markerWidth="11" markerHeight="11" markerUnits="userSpaceOnUse" orient="auto">
+      <path class="ctx-head" d="M0,0 L10,5 L0,10 z" fill="#1D3557"/>
+    </marker>
+    <marker id="tenure-context-start" viewBox="0 0 10 10" refX="0" refY="5" markerWidth="11" markerHeight="11" markerUnits="userSpaceOnUse" orient="auto">
+      <path class="ctx-head" d="M10,0 L0,5 L10,10 z" fill="#1D3557"/>
+    </marker>
+  </defs>
+
+  <!-- Ground: the diagram carries its own background, so it reads on any page -->
+  <rect class="ctx-ground" x="0" y="0" width="1240" height="830" fill="#F1FAEE"/>
+
+  <!-- The laptop's local network -->
+  <rect class="ctx-zone" x="16" y="16" width="1208" height="636" rx="18" fill="#DFF2EA" stroke="#738297" stroke-width="1.5"/>
+  <text class="ctx-label" x="40" y="46"><tspan class="ctx-strong">The laptop's local network</tspan><tspan class="ctx-soft">: its Wi-Fi, Internet Sharing or a phone's hotspot</tspan></text>
+
+  <!-- Kiosk tablet -->
+  <rect class="ctx-box" x="40" y="72" width="330" height="172" rx="14" fill="#FFFFFF" stroke="#738297"/>
+  <text class="ctx-label" x="60" y="98"><tspan class="ctx-strong">Kiosk tablet</tspan><tspan class="ctx-soft"> · Chrome or Safari</tspan></text>
+  <rect class="ctx-node" x="60" y="114" width="290" height="110" rx="10" fill="#FFFFFF" stroke="#457B9D" stroke-width="2"/>
+  <text class="ctx-title" x="80" y="146">Kiosk page</text>
+  <text class="ctx-detail" x="80" y="170">/kiosk/:token, with no sign-in</text>
+  <text class="ctx-detail" x="80" y="190">members check in, visitors join</text>
+
+  <!-- Phone or laptop -->
+  <rect class="ctx-box" x="40" y="272" width="330" height="356" rx="14" fill="#FFFFFF" stroke="#738297"/>
+  <text class="ctx-label" x="60" y="298"><tspan class="ctx-strong">Phone or laptop</tspan><tspan class="ctx-soft"> · Chrome or Safari</tspan></text>
+  <rect class="ctx-node" x="60" y="314" width="290" height="110" rx="10" fill="#FFFFFF" stroke="#457B9D" stroke-width="2"/>
+  <text class="ctx-title" x="80" y="346">Browser app</text>
+  <text class="ctx-detail" x="80" y="370">the website, the app, and the</text>
+  <text class="ctx-detail" x="80" y="390">invite and reset pages</text>
+  <rect class="ctx-ext" x="60" y="510" width="290" height="96" rx="10" fill="#FFFFFF" stroke="#3F5571" stroke-dasharray="6 5"/>
+  <text class="ctx-title" x="80" y="542">Messages and WhatsApp</text>
+  <text class="ctx-detail" x="80" y="566">the coach's own apps,</text>
+  <text class="ctx-detail" x="80" y="586">outside Tenure</text>
+  <line class="ctx-arrow" x1="110" y1="424" x2="110" y2="510" stroke="#1D3557" marker-end="url(#tenure-context-end)"/>
+  <text class="ctx-edge" x="124" y="462">a nudge opens one, with</text>
+  <text class="ctx-edge" x="124" y="480">the message filled in</text>
+
+  <!-- Stall laptop -->
+  <rect class="ctx-box" x="520" y="72" width="680" height="556" rx="14" fill="#FFFFFF" stroke="#738297"/>
+  <text class="ctx-label" x="540" y="98"><tspan class="ctx-strong">Stall laptop</tspan><tspan class="ctx-soft"> · a Mac</tspan></text>
+
+  <!-- Docker container, or npm run stall -->
+  <rect class="ctx-inner" x="540" y="114" width="640" height="268" rx="12" fill="#F1FAEE" stroke="#738297"/>
+  <text class="ctx-label" x="560" y="140"><tspan class="ctx-strong">Docker container</tspan><tspan class="ctx-soft"> (scripts/stall.sh), or npm run stall</tspan></text>
+  <rect class="ctx-node" x="560" y="156" width="290" height="206" rx="10" fill="#FFFFFF" stroke="#457B9D" stroke-width="2"/>
+  <text class="ctx-title" x="580" y="188">API server</text>
+  <text class="ctx-detail" x="580" y="212">Hono on Node 26, port 5175</text>
+  <text class="ctx-detail" x="580" y="240">serves the built web app,</text>
+  <text class="ctx-detail" x="580" y="260">answers JSON requests and</text>
+  <text class="ctx-detail" x="580" y="280">streams live events (SSE)</text>
+  <rect class="ctx-node" x="890" y="196" width="270" height="126" rx="10" fill="#FFFFFF" stroke="#457B9D" stroke-width="2"/>
+  <text class="ctx-title" x="910" y="228">Stand-in adapters</text>
+  <text class="ctx-detail" x="910" y="252">email, texts and payments</text>
+  <text class="ctx-detail" x="910" y="272">nothing leaves the laptop</text>
+  <text class="ctx-detail" x="910" y="292">real providers plug in later</text>
+  <line class="ctx-arrow" x1="850" y1="259" x2="890" y2="259" stroke="#1D3557" marker-end="url(#tenure-context-end)"/>
+  <text class="ctx-edge" x="868" y="250" text-anchor="middle">email</text>
+
+  <!-- SQLite database -->
+  <rect class="ctx-inner" x="540" y="414" width="640" height="194" rx="12" fill="#F1FAEE" stroke="#738297"/>
+  <text class="ctx-label" x="560" y="440"><tspan class="ctx-strong">SQLite database</tspan><tspan class="ctx-soft"> · one file, in the tenure-data volume under Docker</tspan></text>
+  <rect class="ctx-node" x="560" y="456" width="290" height="132" rx="10" fill="#FFFFFF" stroke="#457B9D" stroke-width="2"/>
+  <text class="ctx-title" x="580" y="488">App data</text>
+  <text class="ctx-detail" x="580" y="512">gyms, staff, members,</text>
+  <text class="ctx-detail" x="580" y="532">check-ins, nudges, templates</text>
+  <rect class="ctx-node" x="890" y="456" width="270" height="132" rx="10" fill="#FFFFFF" stroke="#457B9D" stroke-width="2"/>
+  <text class="ctx-title" x="910" y="488">Outbox table</text>
+  <text class="ctx-detail" x="910" y="512">every email: invites and</text>
+  <text class="ctx-detail" x="910" y="532">reset links</text>
+  <text class="ctx-detail" x="910" y="552">/dev/outbox, in development only</text>
+  <line class="ctx-arrow" x1="705" y1="362" x2="705" y2="456" stroke="#1D3557" marker-end="url(#tenure-context-end)"/>
+  <text class="ctx-edge" x="717" y="403">reads and writes</text>
+  <line class="ctx-arrow" x1="1025" y1="322" x2="1025" y2="456" stroke="#1D3557" marker-end="url(#tenure-context-end)"/>
+  <text class="ctx-edge" x="1037" y="403">each email</text>
+
+  <!-- Browsers to the API, over the network -->
+  <line class="ctx-arrow" x1="350" y1="170" x2="560" y2="170" stroke="#1D3557" marker-start="url(#tenure-context-start)" marker-end="url(#tenure-context-end)"/>
+  <text class="ctx-edge" x="445" y="160" text-anchor="middle">check-ins and joins</text>
+  <line class="ctx-arrow" x1="350" y1="350" x2="560" y2="350" stroke="#1D3557" marker-start="url(#tenure-context-start)" marker-end="url(#tenure-context-end)"/>
+  <text class="ctx-edge" x="445" y="326" text-anchor="middle">pages, JSON</text>
+  <text class="ctx-edge" x="445" y="342" text-anchor="middle">and live events</text>
+
+  <!-- Outside the network -->
+  <rect class="ctx-ext" x="60" y="690" width="290" height="84" rx="10" fill="#FFFFFF" stroke="#3F5571" stroke-dasharray="6 5"/>
+  <text class="ctx-title" x="80" y="722">The member's phone</text>
+  <text class="ctx-detail" x="80" y="746">gets the coach's message</text>
+  <line class="ctx-arrow ctx-dashed" x1="110" y1="606" x2="110" y2="690" stroke="#1D3557" stroke-dasharray="6 5" marker-end="url(#tenure-context-end)"/>
+  <text class="ctx-edge" x="124" y="674">the coach sends it</text>
+
+  <rect class="ctx-ext" x="890" y="690" width="270" height="116" rx="10" fill="#FFFFFF" stroke="#3F5571" stroke-dasharray="6 5"/>
+  <text class="ctx-title" x="910" y="722">Operator</text>
+  <text class="ctx-detail" x="910" y="746">at the laptop's terminal:</text>
+  <text class="ctx-detail" x="910" y="766">start, back up, restore,</text>
+  <text class="ctx-detail" x="910" y="786">reset links, demo reset</text>
+  <line class="ctx-arrow" x1="1025" y1="690" x2="1025" y2="628" stroke="#1D3557" marker-end="url(#tenure-context-end)"/>
+  <text class="ctx-edge" x="1037" y="674">runs commands</text>
+
+  <!-- Legend -->
+  <rect class="ctx-node" x="430" y="700" width="30" height="20" rx="5" fill="#FFFFFF" stroke="#457B9D" stroke-width="2"/>
+  <text class="ctx-edge" x="472" y="715">Part of Tenure</text>
+  <rect class="ctx-ext" x="430" y="734" width="30" height="20" rx="5" fill="#FFFFFF" stroke="#3F5571" stroke-dasharray="5 4"/>
+  <text class="ctx-edge" x="472" y="749">Outside Tenure</text>
+  <rect class="ctx-box" x="430" y="768" width="30" height="20" rx="5" fill="#FFFFFF" stroke="#738297"/>
+  <text class="ctx-edge" x="472" y="783">Where a part runs</text>
+</svg>

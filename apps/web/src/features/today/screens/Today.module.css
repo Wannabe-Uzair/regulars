@@ -1,0 +1,228 @@
+/* As in the shell: the column may be narrower than the board, which then scrolls inside its own frame. */
+.page {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: var(--space-6);
+  max-inline-size: 72rem;
+}
+
+/* The summary platter (data-1): the live sentence over the four figures, on one surface edge to edge. */
+.summary {
+  padding: 0;
+  overflow: hidden;
+}
+
+.headline {
+  margin: 0;
+  padding: var(--space-5) var(--space-6) var(--space-4);
+  font-size: var(--text-21);
+  font-weight: var(--weight-heading);
+  line-height: var(--leading-heading);
+  text-wrap: balance;
+}
+
+/* Four across on a laptop, two by two on a phone. Hairlines part the figures, drawn as each figure's leading edge (a
+   half-pixel gap can round away between fractional columns). */
+.kpis {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  border-block-start: var(--border-hairline) solid var(--color-line);
+}
+
+/* Each figure is a grid, so its Kpi fills the row's height and the figures in a row stay level. */
+.kpis > * {
+  display: grid;
+}
+
+/* Each figure's value follows its one-line label, so the values stay level when a meaning line wraps. */
+.figure {
+  align-items: start;
+  /* Inherited by the Kpi's label and hint, so a phone's lines break evenly: "last week", "2 weeks in a row". */
+  text-wrap: balance;
+  padding: var(--space-4) var(--space-6) var(--space-5);
+  background-color: var(--color-surface);
+}
+
+.figure + .figure {
+  border-inline-start: var(--border-hairline) solid var(--color-line);
+}
+
+/* Slipping and Nudged this week open a screen: the whole figure is the link, at least 44 px, pressed at once. */
+.figureLink {
+  min-block-size: calc(var(--space-10) + var(--space-1));
+  color: inherit;
+  text-decoration: none;
+}
+
+@media (hover: hover) {
+  .figureLink:hover {
+    background-image: linear-gradient(var(--color-highlight), var(--color-highlight));
+  }
+}
+
+.figureLink:active {
+  background-image: linear-gradient(var(--color-highlight-press), var(--color-highlight-press));
+}
+
+/* The cells touch, so the ring is drawn inside the figure. */
+.figureLink:focus-visible {
+  outline-offset: calc(-1 * var(--focus-width));
+}
+
+/* A figure's label: the Slipping triangle, the word, then the chevron where the figure is a link. */
+.figureLabel {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+}
+
+.chevron {
+  flex: none;
+  color: var(--color-text-soft);
+}
+
+/* Slipping Now and Checked In Today side by side when there is room, stacked on a phone. */
+.columns {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 22rem), 1fr));
+  gap: var(--space-6);
+  align-items: start;
+}
+
+/* An inset list: the rows reach the panel's edges, so a row's tint fills the panel's width. */
+.list {
+  margin: calc(-1 * var(--space-3)) calc(-1 * var(--space-6));
+  padding: 0;
+  list-style: none;
+}
+
+/* A row: one link, and the Nudge beside it when there is one. The link's cover takes the whole row's tap. */
+.row {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: var(--space-4);
+  padding-inline: var(--space-6);
+}
+
+/* Separators are hairlines inset to the text, as in an inset grouped list. */
+.row + .row::before {
+  content: '';
+  position: absolute;
+  inset-block-start: 0;
+  inset-inline: var(--space-6) 0;
+  border-block-start: var(--border-hairline) solid var(--color-line);
+}
+
+.rowLink {
+  box-sizing: border-box;
+  display: grid;
+  flex: 1;
+  align-content: center;
+  gap: var(--space-1);
+  min-inline-size: 0;
+  min-block-size: calc(var(--space-10) + var(--space-1));
+  padding-block: var(--space-3);
+  color: inherit;
+  text-decoration: none;
+}
+
+.rowLink::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+}
+
+/* The ring goes on the cover, round the whole row, drawn inside it. */
+.rowLink:focus-visible {
+  outline: none;
+}
+
+.rowLink:focus-visible::after {
+  outline: var(--focus-width) solid var(--color-focus);
+  outline-offset: calc(-1 * var(--focus-width));
+}
+
+@media (hover: hover) {
+  .row:has(.rowLink:hover) {
+    background-color: var(--color-highlight);
+  }
+}
+
+.row:has(.rowLink:active) {
+  background-color: var(--color-highlight-press);
+}
+
+/* Above the link's cover, so the Nudge takes its own taps. */
+.trailing {
+  position: relative;
+  flex: none;
+}
+
+/* Names take the interface weight, as the board's rows do, so the panel's heading outranks them. */
+.name {
+  min-inline-size: 0;
+  font-weight: var(--weight-interface);
+}
+
+.meta {
+  color: var(--color-text-soft);
+  font-size: var(--text-14);
+}
+
+/* A sign-in sheet (pick K2): a column of times in small soft tabular figures, then the name, then the chevron. */
+.checkin {
+  grid-template-columns: 4.5rem minmax(0, 1fr) auto;
+  align-items: baseline;
+  column-gap: var(--space-4);
+  padding-block: var(--space-2);
+}
+
+.time {
+  color: var(--color-text-soft);
+  font-size: var(--text-14);
+  font-variant-numeric: var(--font-numeric);
+  text-align: end;
+  white-space: nowrap;
+}
+
+.checkin .chevron {
+  align-self: center;
+}
+
+/* A plain button has no fill, so its words line up with the rows' names: pulled back by its own inline padding. */
+.showAll {
+  margin-block-start: var(--space-4);
+  margin-inline-start: calc(-1 * var(--space-3));
+}
+
+/* An empty list keeps its place in the panel, with less air than a page's empty state. */
+.empty {
+  padding: var(--space-4) 0;
+}
+
+.error {
+  display: grid;
+  gap: var(--space-4);
+  justify-items: start;
+}
+
+.error p {
+  margin: 0;
+  color: var(--color-danger);
+}
+
+@media (width < 48rem) {
+  .kpis {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  /* Two by two: the second column keeps its leading edge, the second row takes one on top. */
+  .figure:nth-child(odd) {
+    border-inline-start: none;
+  }
+
+  .figure:nth-child(n + 3) {
+    border-block-start: var(--border-hairline) solid var(--color-line);
+  }
+}

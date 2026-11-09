@@ -1,0 +1,44 @@
+/* A status's mark (ARCHITECTURE §9, the status marks): a shape drawn in currentColor, sized in em so it follows the
+   text beside it. Each status sets the colour: in light, on, below and new take the neutral status marks and slipping
+   the attention red; in dark, the board's own marks (full, faint, outline) as before. */
+.dot {
+  display: inline-block;
+  flex: none;
+  inline-size: 0.75em;
+  block-size: 0.75em;
+  overflow: visible;
+}
+
+.dot[data-status='on'] {
+  color: var(--color-status-on);
+}
+
+.dot[data-status='below'] {
+  color: var(--color-status-below);
+}
+
+.dot[data-status='new'] {
+  color: var(--color-status-new);
+}
+
+.dot[data-status='slipping'] {
+  color: var(--color-attention);
+}
+
+/* In a Windows contrast theme the shapes keep their form, in the system's text colour (New's empty ring in its grey
+   text), rather than being repainted (ARCHITECTURE §9, the status marks). */
+@media (forced-colors: active) {
+  .dot {
+    forced-color-adjust: none;
+  }
+
+  .dot[data-status='on'],
+  .dot[data-status='below'],
+  .dot[data-status='slipping'] {
+    color: CanvasText;
+  }
+
+  .dot[data-status='new'] {
+    color: GrayText;
+  }
+}

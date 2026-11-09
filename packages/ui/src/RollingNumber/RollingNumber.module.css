@@ -1,0 +1,59 @@
+/* Rolling figures: each digit is a column of 0 to 9 behind a one-figure window, moved to its digit on the smooth
+   spring. The face is drawn by CSS (generated content), so the DOM's text is the final value alone. */
+.rolling {
+  font-variant-numeric: var(--font-numeric);
+}
+
+/* A figure never breaks across lines, and its tabular digits keep its width while it rolls. */
+.figure {
+  white-space: nowrap;
+}
+
+/* The figure's words, for screen readers and the DOM's text only. */
+.text {
+  position: absolute;
+  inline-size: 1px;
+  block-size: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+  border: 0;
+}
+
+.char::before {
+  content: attr(data-char);
+}
+
+/* The window: one tabular figure wide and one line tall, sized by a hidden 0 so it sits on the text's baseline.
+   clip-path (not overflow) hides the column outside it, since overflow would move an inline-block's baseline. */
+.digit {
+  position: relative;
+  display: inline-block;
+  clip-path: inset(0);
+}
+
+.digit::before {
+  content: '0';
+  visibility: hidden;
+}
+
+/* The column, ten lines tall: each step of --digit moves it up one line (10% of its height). It rolls on the smooth
+   spring when the digit changes, and from 0 when it first shows; Reduce Motion makes both 0 ms (base.css). */
+.digit::after {
+  content: '0\A 1\A 2\A 3\A 4\A 5\A 6\A 7\A 8\A 9';
+  position: absolute;
+  inset-block-start: 0;
+  inset-inline: 0;
+  white-space: pre;
+  transform: translateY(calc(var(--digit) * -10%));
+  transition: transform var(--motion-spring) var(--ease-spring);
+  animation: roll-in var(--motion-spring) var(--ease-spring) backwards;
+}
+
+@keyframes roll-in {
+  from {
+    transform: translateY(0);
+  }
+}

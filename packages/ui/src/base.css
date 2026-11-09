@@ -1,0 +1,116 @@
+/* The only global styles: the font, the page ground, the tint on selection and native controls, touch hygiene, the body
+   margin, bare links, numbers for data, the focus ring (and the page title's focus bar), forced colours and reduced
+   motion. Everything else lives in a component's CSS Module. */
+@import './tokens.css';
+
+/* Inter 4, variable, with the optical-size axis (ARCHITECTURE §9), self-hosted so the stall laptop works offline. Its
+   SIL Open Font License is beside it in fonts/. */
+@font-face {
+  font-family: 'Inter Variable';
+  font-style: normal;
+  font-weight: 100 900;
+  font-display: swap;
+  src: url('./fonts/InterVariable.woff2') format('woff2');
+}
+
+:root {
+  font-family: var(--font-sans);
+  font-optical-sizing: auto;
+  font-size: var(--text-16);
+  font-weight: var(--weight-body);
+  line-height: var(--leading-body);
+  color: var(--color-text);
+  background-color: var(--color-bg);
+  /* One tint for everything you can act on: native checkboxes and radios, and the text caret. */
+  accent-color: var(--color-tint);
+  caret-color: var(--color-tint);
+  /* Touch hygiene (ARCHITECTURE §9, "Touch"): a phone keeps the text at the size we set when it turns, and a tap shows
+     no grey flash (each control's own :active press stays). */
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* No double-tap zoom delay on links and form controls: a tap acts at once. */
+:where(a, button, input, select, textarea, label, summary) {
+  touch-action: manipulation;
+}
+
+::selection {
+  background-color: var(--color-tint);
+  color: var(--color-on-action);
+}
+
+/* No browser margin: the page ground, the app header and the sign-in blend reach the window's edges. */
+body {
+  margin: 0;
+}
+
+/* A link with no class of its own takes the theme's link colour and underline, so no page shows the browser's blue.
+   :where keeps it at no specificity, so any class (buttonClass, a nav link's) wins. */
+:where(a:any-link) {
+  color: var(--color-link);
+  text-decoration: var(--link-decoration);
+}
+
+/* Data: mark an element with `data-numeric` and its digits line up. */
+[data-numeric] {
+  font-variant-numeric: var(--font-numeric);
+}
+
+:focus-visible {
+  outline: var(--focus-width) solid var(--color-focus);
+  outline-offset: var(--focus-offset);
+}
+
+/* Page-title focus: the router marks the h1 it focuses after a navigation with `data-route-focus`, never with the
+   ring. After a key (`keyboard`) its focus shows as a short bar at the title's inline start, drawn outside the text so
+   the title doesn't move; after a tap or click (`pointer`) nothing shows, in Safari too. */
+[data-route-focus]:focus-visible {
+  position: relative;
+  outline: none;
+}
+
+[data-route-focus='keyboard']:focus-visible::before {
+  content: '';
+  position: absolute;
+  inset-block: 0;
+  inset-inline-end: calc(100% + var(--space-2));
+  inline-size: calc(2 * var(--focus-width));
+  border-radius: var(--radius-full);
+  background-color: var(--color-focus);
+}
+
+/* Forced colours (Windows High Contrast) would paint the bar the page's own colour, so it takes the system highlight,
+   and so do the focus ring and the selection (NFR-USE-06). */
+@media (forced-colors: active) {
+  [data-route-focus='keyboard']:focus-visible::before {
+    forced-color-adjust: none;
+    background-color: Highlight;
+  }
+
+  :focus-visible {
+    outline-color: Highlight;
+  }
+
+  ::selection {
+    background-color: Highlight;
+    color: HighlightText;
+  }
+}
+
+/* Reduce Motion stays fully still (ARCHITECTURE §2 "Motion", NFR-USE-04): every duration, the springs' included, is
+   0 ms, and a press gives nothing, so no component writes this query itself. */
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    --motion-fast: 0ms;
+    --motion-base: 0ms;
+    --motion-slow: 0ms;
+    --motion-crossfade: 0ms;
+    --motion-spring: 0ms;
+    --motion-spring-quick: 0ms;
+    --motion-spring-bounce: 0ms;
+    --motion-linger: 0ms;
+    --scale-press: 1;
+  }
+}

@@ -1,0 +1,24 @@
+{
+ "bpm": 120,
+ "bar_s": 2.0,
+ "beat_s": 0.5,
+ "duration_s": 32.0,
+ "film_s": 30.0,
+ "key": "F major",
+ "bars": ["Dm9", "Bbmaj9", "Fadd9", "C", "Dm9", "Bbmaj9", "C9sus", "Fadd9", "C/E", "Dm9", "Bbmaj9", "Fadd9", "Gm7 > C", "Fadd9 (resolved)", "Fadd9 (held)"],
+ "cues": {
+  "drop_s": [2.75, 3.0],
+  "back_in_s": 3.0,
+  "clap_run_s": [13.625, 13.75, 13.875],
+  "product_half_s": 14.0,
+  "resolved_chord_s": 26.0,
+  "held_swell_s": 28.0,
+  "tail_fade_s": [31.0, 32.0]
+ },
+ "levels": {
+  "music.wav": "-24.0 LUFS integrated, true peak -12.4 dBTP (peaks held 11.6 dB above the loudness by the limiter)",
+  "music-drums.wav": "-28.9 LUFS, true peak -15.9 dBTP, the same gain as in music.wav (not limited)",
+  "under_voice": "use music.wav as it is under the voice lines: the voice sits 10.5 to 12.9 LU above it",
+  "loop": "for the no-voice loop, raise music.wav by +10 dB: about -14 LUFS, true peak about -2.4 dBTP"
+ }
+}

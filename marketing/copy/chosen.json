@@ -1,0 +1,413 @@
+{
+  "version": 1,
+  "source": "picks page, 2026-11-06; untouched lines take the recommendation",
+  "items": [
+    {
+      "id": "tagline",
+      "group": "Brand lines",
+      "label": "Tagline",
+      "key": "B",
+      "byUser": true,
+      "changed": true,
+      "text": "KEEP NEW MEMBERS PAST *DAY 90.*",
+      "current": "GET EVERY NEW MEMBER TO *DAY 90.*",
+      "where": [
+        "slides/slides.html slide 1 \"Tagline\"",
+        "reel/reel.html end card #tag",
+        "app COPY login.tagline",
+        "slides/notes.md slide 1"
+      ]
+    },
+    {
+      "id": "signoff",
+      "group": "Brand lines",
+      "label": "Sign-off under the logo",
+      "key": "A",
+      "byUser": false,
+      "changed": false,
+      "text": "*MEMBERS WHO STAY.*",
+      "current": "*MEMBERS WHO STAY.*",
+      "where": [
+        "slides/slides.html slide 8 \"Sign-off\"",
+        "slides/notes.md slide 8"
+      ]
+    },
+    {
+      "id": "descriptor",
+      "group": "Brand lines",
+      "label": "Logo descriptor",
+      "key": "A",
+      "byUser": false,
+      "changed": false,
+      "text": "MEMBER RETENTION FOR INDEPENDENT GYMS",
+      "current": "MEMBER RETENTION FOR INDEPENDENT GYMS",
+      "where": [
+        "brand/kit.js logo (outlined in brand/wordmark.js: rerun tools/make-assets.mjs)",
+        "brand/assets/lockup-*.svg",
+        "brochure covers",
+        "standee",
+        "slide 1",
+        "reel logo scene and end card",
+        "app COPY brand.descriptor"
+      ]
+    },
+    {
+      "id": "hook",
+      "group": "Brand lines",
+      "label": "Hook under DAY 90",
+      "key": "A",
+      "byUser": false,
+      "changed": false,
+      "text": "GET EVERY NEW\nMEMBER THERE.",
+      "current": "GET EVERY NEW\nMEMBER THERE.",
+      "where": [
+        "brochure/brochure.html front cover (under the DAY / 90 hero)",
+        "standee/standee.html under DAY 90"
+      ]
+    },
+    {
+      "id": "problem",
+      "group": "Headlines",
+      "label": "The problem (with the 6 IN 10 hero; source Sperandei et al., 2016 always beside it)",
+      "key": "B",
+      "byUser": false,
+      "changed": true,
+      "text": "*6 IN 10*\nNEW MEMBERS QUIT\nWITHIN THREE MONTHS.",
+      "current": "*6 IN 10*\nNEW MEMBERS ARE GONE\nBY MONTH THREE.",
+      "where": [
+        "brochure inside flap",
+        "standee problem line",
+        "slide 2 \"Headline\"",
+        "reel #gone",
+        "slides/notes.md slide 2"
+      ]
+    },
+    {
+      "id": "the-line",
+      "group": "Headlines",
+      "label": "The line (with the 3+ plate and 78% / 59%)",
+      "key": "B",
+      "byUser": false,
+      "changed": true,
+      "text": "MEMBERS WHO STAY\nHIT *3 VISITS*\n*A WEEK.*",
+      "current": "THE ONES WHO STAY\nHIT *3 VISITS*\n*A WEEK.*",
+      "where": [
+        "brochure inside panel 1",
+        "slide 3 \"Headline\"",
+        "reel #ones and #hit3",
+        "slides/notes.md slide 3"
+      ]
+    },
+    {
+      "id": "product",
+      "group": "Headlines",
+      "label": "Product headline (the board)",
+      "key": "A",
+      "byUser": false,
+      "changed": false,
+      "text": "ONE BOARD FOR EVERY NEW\nMEMBER'S FIRST *90 DAYS.*",
+      "current": "ONE BOARD FOR EVERY NEW\nMEMBER'S FIRST *90 DAYS.*",
+      "where": [
+        "brochure inside panel 2",
+        "slide 4 \"Headline\"",
+        "reel #head",
+        "slides/notes.md slide 4"
+      ]
+    },
+    {
+      "id": "section-labels",
+      "group": "Headlines",
+      "label": "Section labels (slide titles; brochure panel labels)",
+      "key": "B",
+      "byUser": false,
+      "changed": true,
+      "text": "01 — THE PROBLEM\n02 — THE LINE\n03 — TENURE\n04 — HOW IT WORKS\n05 — THE MARKET",
+      "current": "01 — THE PROBLEM\n02 — THE LINE\n03 — MEET TENURE\n04 — HOW IT WORKS\n05 — THE MARKET",
+      "where": [
+        "slides 2, 3, 4, 5, 7 \"Section label\"",
+        "brochure panel labels 01–04"
+      ]
+    },
+    {
+      "id": "steps",
+      "group": "Product words",
+      "label": "The three steps",
+      "key": "A",
+      "byUser": false,
+      "changed": false,
+      "text": "TRACK · FLAG · NUDGE",
+      "current": "TRACK · FLAG · NUDGE",
+      "where": [
+        "brochure panel 3 h2",
+        "standee steps row (NUDGE →)",
+        "slide 5 h1",
+        "reel #steps labels and the TRACK. FLAG. NUDGE. cards",
+        "slides/notes.md slide 5"
+      ]
+    },
+    {
+      "id": "price",
+      "group": "Headlines",
+      "label": "Price",
+      "key": "A",
+      "byUser": false,
+      "changed": false,
+      "text": "FREE 90-DAY PILOT.\nTHEN $99 A MONTH.",
+      "current": "FREE 90-DAY PILOT.\nTHEN $99 A MONTH.",
+      "where": [
+        "brochure back cover",
+        "standee low zone",
+        "slide 6 price lines",
+        "reel #free and #then",
+        "app COPY billing.offer, signup.lede (sentence case)",
+        "slides/notes.md slide 6"
+      ]
+    },
+    {
+      "id": "payback",
+      "group": "Headlines",
+      "label": "Payback line",
+      "key": "B",
+      "byUser": false,
+      "changed": true,
+      "text": "Keep 2 members a month and it pays for itself.",
+      "current": "Keep two members a month and it pays for itself.",
+      "where": [
+        "brochure back cover",
+        "slide 6 \"Payback\"",
+        "app COPY billing.payback",
+        "slides/notes.md slide 6"
+      ]
+    },
+    {
+      "id": "contrast",
+      "group": "Headlines",
+      "label": "Contrast line (slide 7 big idea)",
+      "key": "B",
+      "byUser": false,
+      "changed": true,
+      "text": "Most gym software shows who canceled. Tenure shows who's slipping.",
+      "current": "Most gym software shows you who canceled. Tenure shows you who's slipping.",
+      "where": [
+        "slide 7 \"Contrast line\" (first sentence steel)",
+        "slides/notes.md slide 7"
+      ]
+    },
+    {
+      "id": "statuses",
+      "group": "Product words",
+      "label": "Status names (must agree everywhere)",
+      "key": "B",
+      "byUser": false,
+      "changed": true,
+      "text": "SLIPPING · NEW · ON THE LINE · BELOW THE LINE",
+      "current": "SLIPPING · NEW · ON THE LINE · BELOW",
+      "where": [
+        "app COPY status.*, today.kpi.onLine, today.kpi.slipping, today.slipping.title (SLIPPING NOW), today.slipping.empty, kiosk.welcome.line, reports.chart.line (THE LINE · 3 A WEEK), nudges.emptyBody",
+        "brand/kit.js board status and legend (SLIPPING)",
+        "standee board overlay (SLIPPING)",
+        "slides/notes.md slides 4, 7, 8",
+        "DESIGN.md §12"
+      ]
+    },
+    {
+      "id": "btn-nudge",
+      "group": "App buttons",
+      "label": "Nudge button",
+      "key": "A",
+      "byUser": false,
+      "changed": false,
+      "text": "NUDGE →",
+      "current": "NUDGE →",
+      "where": [
+        "app COPY today.slipping.nudge, member.nudge",
+        "brand/kit.js board chip",
+        "standee board overlay"
+      ]
+    },
+    {
+      "id": "btn-send",
+      "group": "App buttons",
+      "label": "Composer primary, phone",
+      "key": "B",
+      "byUser": false,
+      "changed": true,
+      "text": "TEXT {FIRST}",
+      "current": "SEND FROM MY PHONE",
+      "where": [
+        "app COPY nudge.send"
+      ]
+    },
+    {
+      "id": "btn-copy",
+      "group": "App buttons",
+      "label": "Composer primary, computer",
+      "key": "B",
+      "byUser": false,
+      "changed": true,
+      "text": "COPY MESSAGE",
+      "current": "COPY TEXT",
+      "where": [
+        "app COPY nudge.copy"
+      ]
+    },
+    {
+      "id": "btn-record",
+      "group": "App buttons",
+      "label": "Record a nudge (computer and no-phone variants)",
+      "key": "B",
+      "byUser": false,
+      "changed": true,
+      "text": "RECORD NUDGE",
+      "current": "MARK AS SENT",
+      "where": [
+        "app COPY nudge.markSent, nudge.noPhoneAction"
+      ]
+    },
+    {
+      "id": "btn-import",
+      "group": "App buttons",
+      "label": "Import buttons",
+      "key": "B",
+      "byUser": false,
+      "changed": true,
+      "text": "IMPORT MEMBERS · IMPORT MEMBERS · CHOOSE CSV FILE",
+      "current": "IMPORT YOUR MEMBERS · IMPORT MEMBERS · CHOOSE CSV FILE",
+      "where": [
+        "app COPY today.empty.import, import.commit (IMPORT MEMBERS / IMPORT CHECK-INS), import.choose"
+      ]
+    },
+    {
+      "id": "btn-invite",
+      "group": "App buttons",
+      "label": "Invite a coach",
+      "key": "A",
+      "byUser": false,
+      "changed": false,
+      "text": "INVITE A COACH · CREATE LINK · COPY LINK",
+      "current": "INVITE A COACH · CREATE LINK · COPY LINK",
+      "where": [
+        "app COPY settings.invite, settings.invite.create, settings.invite.copy"
+      ]
+    },
+    {
+      "id": "btn-signup",
+      "group": "App buttons",
+      "label": "Sign-up title and button",
+      "key": "B",
+      "byUser": false,
+      "changed": true,
+      "text": "SET UP YOUR GYM · START THE PILOT",
+      "current": "CREATE YOUR GYM · CREATE GYM",
+      "where": [
+        "app COPY signup.title, signup.submit"
+      ]
+    },
+    {
+      "id": "btn-plan",
+      "group": "App buttons",
+      "label": "Billing button",
+      "key": "B",
+      "byUser": false,
+      "changed": true,
+      "text": "CONTINUE AT $99 A MONTH",
+      "current": "CHOOSE THE $99 PLAN",
+      "where": [
+        "app COPY billing.plan"
+      ]
+    },
+    {
+      "id": "kiosk-entry",
+      "group": "Kiosk",
+      "label": "Kiosk title and join buttons",
+      "key": "A",
+      "byUser": false,
+      "changed": false,
+      "text": "CHECK IN · NEW HERE? JOIN · JOIN AND CHECK IN",
+      "current": "CHECK IN · NEW HERE? JOIN · JOIN AND CHECK IN",
+      "where": [
+        "app COPY kiosk.idle.title, kiosk.join, kiosk.join.submit, kiosk.notFound"
+      ]
+    },
+    {
+      "id": "kiosk-welcome",
+      "group": "Kiosk",
+      "label": "Kiosk welcome lines",
+      "key": "A",
+      "byUser": false,
+      "changed": false,
+      "text": "WELCOME, {FIRST}. DAY 1 OF 90. · WELCOME BACK, {FIRST}. WEEK {n}. · ON THE LINE THIS WEEK. · {n} visits this week.",
+      "current": "WELCOME, {FIRST}. DAY 1 OF 90. · WELCOME BACK, {FIRST}. WEEK {n}. · ON THE LINE THIS WEEK. · {n} visits this week.",
+      "where": [
+        "app COPY kiosk.welcome.first, kiosk.welcome.back, kiosk.welcome.line, kiosk.welcome.visits"
+      ]
+    },
+    {
+      "id": "empty-states",
+      "group": "App empty states",
+      "label": "Empty-state titles",
+      "key": "A",
+      "byUser": true,
+      "changed": false,
+      "text": "NO MEMBERS YET · NO MEMBERS TO SHOW · NO MEMBERS FOUND · NO NUDGES YET · NO TEMPLATES",
+      "current": "NO MEMBERS YET · NO MEMBERS TO SHOW · NO MEMBERS FOUND · NO NUDGES YET · NO TEMPLATES",
+      "where": [
+        "app COPY today.empty.title, board.empty, members.empty, nudges.empty, templates.empty"
+      ]
+    },
+    {
+      "id": "tpl-1",
+      "group": "Nudge templates",
+      "label": "Starter template 1",
+      "key": "A",
+      "byUser": false,
+      "changed": true,
+      "text": "We missed you — Hey {first}, we missed you this week. Want me to save you a spot in Thursday's 6 pm class? - Coach {coach}",
+      "current": "We missed you — Hey {first}, we missed you this week. Want me to save you a spot in Thursday's 6 pm class? — Coach {coach}",
+      "where": [
+        "app/server/seed/northside.mjs TEMPLATES[0]",
+        "the SAMPLE MESSAGE on every expo piece mirrors it"
+      ]
+    },
+    {
+      "id": "tpl-2",
+      "group": "Nudge templates",
+      "label": "Starter template 2",
+      "key": "B",
+      "byUser": false,
+      "changed": true,
+      "text": "First weeks — Hi {first}, it's {coach} from {gym}. How are your first few weeks going? Tell me if I can help with anything.",
+      "current": "Quick check-in — Hi {first}, it's {coach} from {gym}. How are your first few weeks going? Anything I can help with?",
+      "where": [
+        "app/server/seed/northside.mjs TEMPLATES[1]"
+      ]
+    },
+    {
+      "id": "tpl-3",
+      "group": "Nudge templates",
+      "label": "Starter template 3",
+      "key": "B",
+      "byUser": false,
+      "changed": true,
+      "text": "One visit — Hi {first}, it's been {days} days since we saw you. One visit this week is a good restart. Want me to save you a spot? - {coach}",
+      "current": "Back on track — Hey {first}, it's been {days} days. One visit this week gets you back on track. See you soon? — {coach}",
+      "where": [
+        "app/server/seed/northside.mjs TEMPLATES[2]"
+      ]
+    },
+    {
+      "id": "manifest",
+      "group": "App name",
+      "label": "Installed app name",
+      "key": "B",
+      "byUser": true,
+      "changed": true,
+      "text": "Tenure: member retention / Tenure",
+      "current": "Tenure / Tenure",
+      "where": [
+        "app/client/public/manifest.webmanifest name, short_name",
+        "app/client/index.html <title>, apple-mobile-web-app-title"
+      ]
+    }
+  ]
+}

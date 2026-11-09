@@ -1,0 +1,48 @@
+.composer {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+
+.help {
+  margin: 0;
+  color: var(--color-text-soft);
+  font-size: var(--text-14);
+  font-variant-numeric: var(--font-numeric);
+}
+
+.noPhone {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+}
+
+.noPhoneTitle {
+  margin: 0;
+  font-size: var(--text-16);
+  font-weight: var(--weight-heading);
+  line-height: var(--leading-heading);
+}
+
+/* The channels (flow-3A): equal full-width capsules, one per line, under the message and within thumb reach. */
+.actions {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: var(--space-2);
+}
+
+/* No resize grip, under a finger (a target too small to use) or a mouse (audit A15): the message keeps its five rows
+   and scrolls inside them past that. The element outweighs Textarea's own resize. */
+textarea.message {
+  resize: none;
+}
+
+/* A channel link waiting for words looks as a disabled button does, and gives nothing under hover or a press. The
+   two classes, the element and the attribute outweigh the variant's hover and press rules. */
+.actions a.waiting[aria-disabled] {
+  border-color: transparent;
+  background-color: var(--color-disabled-fill);
+  color: var(--color-text-soft);
+  cursor: not-allowed;
+  transform: none;
+}

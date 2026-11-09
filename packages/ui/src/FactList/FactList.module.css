@@ -1,0 +1,39 @@
+.facts {
+  display: grid;
+  gap: var(--space-4);
+  margin: 0;
+}
+
+.fact {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+}
+
+/* The label tokens, in soft text (ARCHITECTURE §9 "Labels"). */
+.label {
+  color: var(--color-text-soft);
+  font-size: var(--label-size);
+  font-weight: var(--label-weight);
+  letter-spacing: var(--label-tracking);
+  text-transform: var(--label-transform);
+  line-height: var(--leading-heading);
+}
+
+.value {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-2) var(--space-3);
+  margin: 0;
+  color: var(--color-text);
+}
+
+.text {
+  min-inline-size: 0;
+  overflow-wrap: anywhere;
+}
+
+.action {
+  margin-inline-start: auto;
+}

@@ -1,0 +1,727 @@
+{
+  "version": 1,
+  "items": [
+    {
+      "id": "tagline",
+      "group": "Brand lines",
+      "label": "Tagline",
+      "where": [
+        "slides/slides.html slide 1 \"Tagline\"",
+        "reel/reel.html end card #tag",
+        "app COPY login.tagline",
+        "slides/notes.md slide 1"
+      ],
+      "limits": "1 line, ≤ 34 characters, caps (Anton h2 on slide 1 and the reel end card)",
+      "current": "GET EVERY NEW MEMBER TO *DAY 90.*",
+      "options": [
+        {
+          "key": "A",
+          "text": "GET EVERY NEW MEMBER TO *DAY 90.*",
+          "why": "Already calm and concrete: one instruction, one number, the owner's goal."
+        },
+        {
+          "key": "B",
+          "text": "KEEP NEW MEMBERS PAST *DAY 90.*",
+          "why": "Names the outcome (members kept) instead of the task; four words shorter."
+        },
+        {
+          "key": "C",
+          "text": "*MEMBERS WHO STAY.*",
+          "why": "The quietest choice: one brand line on every piece; the hook still carries day 90. Slide 1 and slide 8 would then say the same line."
+        }
+      ],
+      "recommended": "A"
+    },
+    {
+      "id": "signoff",
+      "group": "Brand lines",
+      "label": "Sign-off under the logo",
+      "where": [
+        "slides/slides.html slide 8 \"Sign-off\"",
+        "slides/notes.md slide 8"
+      ],
+      "limits": "1 line, ≤ 18 characters, caps, all yellow (Anton h1)",
+      "current": "*MEMBERS WHO STAY.*",
+      "options": [
+        {
+          "key": "A",
+          "text": "*MEMBERS WHO STAY.*",
+          "why": "Understated, outcome-first, already the brand's close."
+        },
+        {
+          "key": "B",
+          "text": "*THE ONES WHO STAY.*",
+          "why": "Echoes the line headline word for word, so the close answers slide 3."
+        }
+      ],
+      "recommended": "A"
+    },
+    {
+      "id": "descriptor",
+      "group": "Brand lines",
+      "label": "Logo descriptor",
+      "where": [
+        "brand/kit.js logo (outlined in brand/wordmark.js: rerun tools/make-assets.mjs)",
+        "brand/assets/lockup-*.svg",
+        "brochure covers",
+        "standee",
+        "slide 1",
+        "reel logo scene and end card",
+        "app COPY brand.descriptor"
+      ],
+      "limits": "1 line, 33–37 characters, caps. It is fitted to the word's width: longer sets below the standee's 48 pt floor, shorter makes every lockup taller",
+      "current": "MEMBER RETENTION FOR INDEPENDENT GYMS",
+      "options": [
+        {
+          "key": "A",
+          "text": "MEMBER RETENTION FOR INDEPENDENT GYMS",
+          "why": "Tells a passer-by the category and the audience in one line; the category name is the word owners search for."
+        },
+        {
+          "key": "B",
+          "text": "THE FIRST 90 DAYS · INDEPENDENT GYMS",
+          "why": "Concrete instead of category: says what Tenure watches, at the same size."
+        }
+      ],
+      "recommended": "A"
+    },
+    {
+      "id": "hook",
+      "group": "Brand lines",
+      "label": "Hook under DAY 90",
+      "where": [
+        "brochure/brochure.html front cover (under the DAY / 90 hero)",
+        "standee/standee.html under DAY 90"
+      ],
+      "limits": "2 lines, ≤ 14 characters each and no wider than MEMBER THERE. as set on the standee (Anton h1 230 pt fills the width); DAY 90 hero unchanged, *90* yellow",
+      "current": "GET EVERY NEW\nMEMBER THERE.",
+      "options": [
+        {
+          "key": "A",
+          "text": "GET EVERY NEW\nMEMBER THERE.",
+          "why": "A goal the owner sets, not a promise Tenure makes; reads aloud as one calm sentence."
+        },
+        {
+          "key": "B",
+          "text": "SEE EVERY NEW\nMEMBER THERE.",
+          "why": "Softer, a coach walking someone in; but \"see\" can read as a promise that every member arrives."
+        },
+        {
+          "key": "C",
+          "text": "THE DAY THAT\nCOUNTS.",
+          "why": "The most understated, and shorter; drops the owner's task and the word members."
+        }
+      ],
+      "recommended": "A"
+    },
+    {
+      "id": "problem",
+      "group": "Headlines",
+      "label": "The problem (with the 6 IN 10 hero; source Sperandei et al., 2016 always beside it)",
+      "where": [
+        "brochure inside flap",
+        "standee problem line",
+        "slide 2 \"Headline\"",
+        "reel #gone",
+        "slides/notes.md slide 2"
+      ],
+      "limits": "Slide 2 and reel: 2 lines ≤ 22. Brochure: 3 lines ≤ 13. Standee: 2 lines ≤ 25, *6 IN 10* opens line 1. Text shows the slide break",
+      "current": "*6 IN 10*\nNEW MEMBERS ARE GONE\nBY MONTH THREE.",
+      "options": [
+        {
+          "key": "A",
+          "text": "*6 IN 10*\nNEW MEMBERS ARE GONE\nBY MONTH THREE.",
+          "why": "Calm already; \"gone\" is vivid without being loud."
+        },
+        {
+          "key": "B",
+          "text": "*6 IN 10*\nNEW MEMBERS QUIT\nWITHIN THREE MONTHS.",
+          "why": "Uses the source's own words (quit, within three months): exact, the way a serious company states a number."
+        }
+      ],
+      "recommended": "B"
+    },
+    {
+      "id": "the-line",
+      "group": "Headlines",
+      "label": "The line (with the 3+ plate and 78% / 59%)",
+      "where": [
+        "brochure inside panel 1",
+        "slide 3 \"Headline\"",
+        "reel #ones and #hit3",
+        "slides/notes.md slide 3"
+      ],
+      "limits": "Slide 3: 3 lines ≤ 18. Brochure: 3 lines ≤ 18. Reel: card 1 2 lines ≤ 9, card 2 2 lines ≤ 13. *3 VISITS A WEEK.* yellow",
+      "current": "THE ONES WHO STAY\nHIT *3 VISITS*\n*A WEEK.*",
+      "options": [
+        {
+          "key": "A",
+          "text": "THE ONES WHO STAY\nHIT *3 VISITS*\n*A WEEK.*",
+          "why": "Spoken and clear; \"the ones\" is a little casual for the new voice."
+        },
+        {
+          "key": "B",
+          "text": "MEMBERS WHO STAY\nHIT *3 VISITS*\n*A WEEK.*",
+          "why": "Same fact with the concrete noun, and it rhymes with the sign-off MEMBERS WHO STAY."
+        },
+        {
+          "key": "C",
+          "text": "THE LINE IS\n*3 VISITS*\n*A WEEK.*",
+          "why": "Defines the product's own word; flatter, and the reel needs a new split (THE LINE / IS 3 VISITS A WEEK.)."
+        }
+      ],
+      "recommended": "B"
+    },
+    {
+      "id": "product",
+      "group": "Headlines",
+      "label": "Product headline (the board)",
+      "where": [
+        "brochure inside panel 2",
+        "slide 4 \"Headline\"",
+        "reel #head",
+        "slides/notes.md slide 4"
+      ],
+      "limits": "Slide 4 and reel: 2 lines ≤ 25 (Anton h2). Brochure: 4 lines ≤ 15, *90 DAYS.* yellow",
+      "current": "ONE BOARD FOR EVERY NEW\nMEMBER'S FIRST *90 DAYS.*",
+      "options": [
+        {
+          "key": "A",
+          "text": "ONE BOARD FOR EVERY NEW\nMEMBER'S FIRST *90 DAYS.*",
+          "why": "Plain description of what the owner sees; reads aloud in one breath."
+        },
+        {
+          "key": "B",
+          "text": "ONE BOARD. EVERY NEW\nMEMBER'S FIRST *90 DAYS.*",
+          "why": "Two flat statements, a little more product-company; the stop adds a beat."
+        }
+      ],
+      "recommended": "A"
+    },
+    {
+      "id": "section-labels",
+      "group": "Headlines",
+      "label": "Section labels (slide titles; brochure panel labels)",
+      "where": [
+        "slides 2, 3, 4, 5, 7 \"Section label\"",
+        "brochure panel labels 01–04"
+      ],
+      "limits": "Label type, 1 line, each ≤ 13 characters after the dash",
+      "current": "01 — THE PROBLEM\n02 — THE LINE\n03 — MEET TENURE\n04 — HOW IT WORKS\n05 — THE MARKET",
+      "options": [
+        {
+          "key": "A",
+          "text": "01 — THE PROBLEM\n02 — THE LINE\n03 — MEET TENURE\n04 — HOW IT WORKS\n05 — THE MARKET",
+          "why": "\"Meet Tenure\" is the one friendly-chatty label in the set."
+        },
+        {
+          "key": "B",
+          "text": "01 — THE PROBLEM\n02 — THE LINE\n03 — TENURE\n04 — HOW IT WORKS\n05 — THE MARKET",
+          "why": "Names the product and lets the board introduce itself; matches the flat nouns of the other labels."
+        },
+        {
+          "key": "C",
+          "text": "01 — THE PROBLEM\n02 — THE LINE\n03 — THE BOARD\n04 — HOW IT WORKS\n05 — THE MARKET",
+          "why": "Concrete, but repeats the word board in the headline right under it."
+        }
+      ],
+      "recommended": "B"
+    },
+    {
+      "id": "steps",
+      "group": "Product words",
+      "label": "The three steps",
+      "where": [
+        "brochure panel 3 h2",
+        "standee steps row (NUDGE →)",
+        "slide 5 h1",
+        "reel #steps labels and the TRACK. FLAG. NUDGE. cards",
+        "slides/notes.md slide 5"
+      ],
+      "limits": "One word each, ≤ 5 letters (the standee row and the reel's centered word card are fitted to these); caps",
+      "current": "TRACK · FLAG · NUDGE",
+      "options": [
+        {
+          "key": "A",
+          "text": "TRACK · FLAG · NUDGE",
+          "why": "Three active verbs in the order the product works; already the shortest way to say it."
+        },
+        {
+          "key": "B",
+          "text": "WATCH · FLAG · NUDGE",
+          "why": "Matches the product sentence (\"Tenure watches\"); calmer, a person's verb rather than a software one."
+        }
+      ],
+      "recommended": "A"
+    },
+    {
+      "id": "price",
+      "group": "Headlines",
+      "label": "Price",
+      "where": [
+        "brochure back cover",
+        "standee low zone",
+        "slide 6 price lines",
+        "reel #free and #then",
+        "app COPY billing.offer, signup.lede (sentence case)",
+        "slides/notes.md slide 6"
+      ],
+      "limits": "Brochure: 4 lines ≤ 12. Standee: 2 lines ≤ 19. Slide 6: 2 lines (line 2 holds the $99 hero). Reel: hero 2 lines ≤ 12, then 1 line ≤ 18. Must keep: free, 90-day pilot, $99 a month",
+      "current": "FREE 90-DAY PILOT.\nTHEN $99 A MONTH.",
+      "options": [
+        {
+          "key": "A",
+          "text": "FREE 90-DAY PILOT.\nTHEN $99 A MONTH.",
+          "why": "Numbers first, two full stops, nothing to add."
+        },
+        {
+          "key": "B",
+          "text": "90-DAY PILOT, FREE.\nTHEN $99 A MONTH.",
+          "why": "Leads with the 90 that every piece is built on; reads a shade quieter. Reel hero breaks 90-DAY / PILOT, FREE."
+        }
+      ],
+      "recommended": "A"
+    },
+    {
+      "id": "payback",
+      "group": "Headlines",
+      "label": "Payback line",
+      "where": [
+        "brochure back cover",
+        "slide 6 \"Payback\"",
+        "app COPY billing.payback",
+        "slides/notes.md slide 6"
+      ],
+      "limits": "Body, 1 line, ≤ 53 characters; source line under it unchanged",
+      "current": "Keep two members a month and it pays for itself.",
+      "options": [
+        {
+          "key": "A",
+          "text": "Keep two members a month and it pays for itself.",
+          "why": "Clear owner outcome; spells out the number, against the numerals rule."
+        },
+        {
+          "key": "B",
+          "text": "Keep 2 members a month and it pays for itself.",
+          "why": "The same line with the numeral the rules ask for."
+        },
+        {
+          "key": "C",
+          "text": "Keeping 2 members a month covers the cost.",
+          "why": "Drops the sales phrase \"pays for itself\" for a plain statement."
+        }
+      ],
+      "recommended": "B"
+    },
+    {
+      "id": "contrast",
+      "group": "Headlines",
+      "label": "Contrast line (slide 7 big idea)",
+      "where": [
+        "slide 7 \"Contrast line\" (first sentence steel)",
+        "slides/notes.md slide 7"
+      ],
+      "limits": "Body 34 px in a 500 px column: ≤ 81 characters, 2 sentences, first one steel",
+      "current": "Most gym software shows you who canceled. Tenure shows you who's slipping.",
+      "options": [
+        {
+          "key": "A",
+          "text": "Most gym software shows you who canceled. Tenure shows you who's slipping.",
+          "why": "Clear and fair (\"most\"); the repeated \"you\" is conversational."
+        },
+        {
+          "key": "B",
+          "text": "Most gym software shows who canceled. Tenure shows who's slipping.",
+          "why": "Tighter parallel; the difference lands on the last word."
+        }
+      ],
+      "recommended": "B"
+    },
+    {
+      "id": "statuses",
+      "group": "Product words",
+      "label": "Status names (must agree everywhere)",
+      "where": [
+        "app COPY status.*, today.kpi.onLine, today.kpi.slipping, today.slipping.title (SLIPPING NOW), today.slipping.empty, kiosk.welcome.line, reports.chart.line (THE LINE · 3 A WEEK), nudges.emptyBody",
+        "brand/kit.js board status and legend (SLIPPING)",
+        "standee board overlay (SLIPPING)",
+        "slides/notes.md slides 4, 7, 8",
+        "DESIGN.md §12"
+      ],
+      "limits": "SLIPPING ≤ 8 characters (kit.board status column and legend are fixed); other tags ≤ 14 characters (label type 12 px tags)",
+      "current": "SLIPPING · NEW · ON THE LINE · BELOW",
+      "options": [
+        {
+          "key": "A",
+          "text": "SLIPPING · NEW · ON THE LINE · BELOW",
+          "why": "Short; but BELOW alone leaves the reader to finish the phrase."
+        },
+        {
+          "key": "B",
+          "text": "SLIPPING · NEW · ON THE LINE · BELOW THE LINE",
+          "why": "Only BELOW changes: it now pairs with ON THE LINE and says what it is below."
+        },
+        {
+          "key": "C",
+          "text": "SLIPPING · FIRST WEEKS · ON THE LINE · BELOW THE LINE",
+          "why": "Also ends the clash between the NEW tag and the NEW MEMBERS count (every tracked member is new)."
+        }
+      ],
+      "recommended": "B"
+    },
+    {
+      "id": "btn-nudge",
+      "group": "App buttons",
+      "label": "Nudge button",
+      "where": [
+        "app COPY today.slipping.nudge, member.nudge",
+        "brand/kit.js board chip",
+        "standee board overlay"
+      ],
+      "limits": "≤ 8 characters with the Anton arrow (fixed chip in kit.board)",
+      "current": "NUDGE →",
+      "options": [
+        {
+          "key": "A",
+          "text": "NUDGE →",
+          "why": "The product's verb, the brand's one arrow; fits the chip."
+        },
+        {
+          "key": "B",
+          "text": "NUDGE",
+          "why": "Quieter without the arrow; the arrow is the one in DESIGN §6, so the device would go."
+        }
+      ],
+      "recommended": "A"
+    },
+    {
+      "id": "btn-send",
+      "group": "App buttons",
+      "label": "Composer primary, phone",
+      "where": [
+        "app COPY nudge.send"
+      ],
+      "limits": "1 line on a 375 px phone, ≤ 20 characters with a 10-letter first name",
+      "current": "SEND FROM MY PHONE",
+      "options": [
+        {
+          "key": "A",
+          "text": "SEND FROM MY PHONE",
+          "why": "Says where it sends from; the meta line already says that."
+        },
+        {
+          "key": "B",
+          "text": "TEXT {FIRST}",
+          "why": "Verb and person: TEXT SAM. Says exactly what happens next (the text app opens to Sam)."
+        }
+      ],
+      "recommended": "B"
+    },
+    {
+      "id": "btn-copy",
+      "group": "App buttons",
+      "label": "Composer primary, computer",
+      "where": [
+        "app COPY nudge.copy"
+      ],
+      "limits": "≤ 20 characters",
+      "current": "COPY TEXT",
+      "options": [
+        {
+          "key": "A",
+          "text": "COPY TEXT",
+          "why": "Short; \"text\" can mean the words or the SMS."
+        },
+        {
+          "key": "B",
+          "text": "COPY MESSAGE",
+          "why": "Matches the field label MESSAGE above it."
+        }
+      ],
+      "recommended": "B"
+    },
+    {
+      "id": "btn-record",
+      "group": "App buttons",
+      "label": "Record a nudge (computer and no-phone variants)",
+      "where": [
+        "app COPY nudge.markSent, nudge.noPhoneAction"
+      ],
+      "limits": "≤ 20 characters",
+      "current": "MARK AS SENT",
+      "options": [
+        {
+          "key": "A",
+          "text": "MARK AS SENT",
+          "why": "Clear on a computer; wrong for the no-phone case, where nothing was sent."
+        },
+        {
+          "key": "B",
+          "text": "RECORD NUDGE",
+          "why": "True in both cases and matches the toast \"Nudge to Sam recorded\"."
+        }
+      ],
+      "recommended": "B"
+    },
+    {
+      "id": "btn-import",
+      "group": "App buttons",
+      "label": "Import buttons",
+      "where": [
+        "app COPY today.empty.import, import.commit (IMPORT MEMBERS / IMPORT CHECK-INS), import.choose"
+      ],
+      "limits": "≤ 20 characters",
+      "current": "IMPORT YOUR MEMBERS · IMPORT MEMBERS · CHOOSE CSV FILE",
+      "options": [
+        {
+          "key": "A",
+          "text": "IMPORT YOUR MEMBERS · IMPORT MEMBERS · CHOOSE CSV FILE",
+          "why": "Works; the empty-state button and the commit button differ by one word."
+        },
+        {
+          "key": "B",
+          "text": "IMPORT MEMBERS · IMPORT MEMBERS · CHOOSE CSV FILE",
+          "why": "One name for one action on every screen."
+        }
+      ],
+      "recommended": "B"
+    },
+    {
+      "id": "btn-invite",
+      "group": "App buttons",
+      "label": "Invite a coach",
+      "where": [
+        "app COPY settings.invite, settings.invite.create, settings.invite.copy"
+      ],
+      "limits": "≤ 20 characters",
+      "current": "INVITE A COACH · CREATE LINK · COPY LINK",
+      "options": [
+        {
+          "key": "A",
+          "text": "INVITE A COACH · CREATE LINK · COPY LINK",
+          "why": "Accurate: the owner sends an invite link; each step is a verb."
+        },
+        {
+          "key": "B",
+          "text": "ADD A COACH · CREATE LINK · COPY LINK",
+          "why": "Names the outcome, but hides that the coach must accept."
+        }
+      ],
+      "recommended": "A"
+    },
+    {
+      "id": "btn-signup",
+      "group": "App buttons",
+      "label": "Sign-up title and button",
+      "where": [
+        "app COPY signup.title, signup.submit"
+      ],
+      "limits": "Title Anton page title, ≤ 16 characters; button ≤ 20 characters",
+      "current": "CREATE YOUR GYM · CREATE GYM",
+      "options": [
+        {
+          "key": "A",
+          "text": "CREATE YOUR GYM · CREATE GYM",
+          "why": "Works; an owner does not create a gym, they already run one."
+        },
+        {
+          "key": "B",
+          "text": "SET UP YOUR GYM · START THE PILOT",
+          "why": "Says what really happens: the gym is set up and the free pilot starts."
+        }
+      ],
+      "recommended": "B"
+    },
+    {
+      "id": "btn-plan",
+      "group": "App buttons",
+      "label": "Billing button",
+      "where": [
+        "app COPY billing.plan"
+      ],
+      "limits": "≤ 24 characters",
+      "current": "CHOOSE THE $99 PLAN",
+      "options": [
+        {
+          "key": "A",
+          "text": "CHOOSE THE $99 PLAN",
+          "why": "Implies a choice of plans; there is one."
+        },
+        {
+          "key": "B",
+          "text": "CONTINUE AT $99 A MONTH",
+          "why": "States the one price as the billing headline does."
+        }
+      ],
+      "recommended": "B"
+    },
+    {
+      "id": "kiosk-entry",
+      "group": "Kiosk",
+      "label": "Kiosk title and join buttons",
+      "where": [
+        "app COPY kiosk.idle.title, kiosk.join, kiosk.join.submit, kiosk.notFound"
+      ],
+      "limits": "Title ≤ 10 characters; buttons ≤ 18 characters (touch targets on the front-desk screen)",
+      "current": "CHECK IN · NEW HERE? JOIN · JOIN AND CHECK IN",
+      "options": [
+        {
+          "key": "A",
+          "text": "CHECK IN · NEW HERE? JOIN · JOIN AND CHECK IN",
+          "why": "The question does real work; every verb says what happens."
+        },
+        {
+          "key": "B",
+          "text": "CHECK IN · NEW HERE? JOIN · START DAY 1",
+          "why": "Warmer, and the welcome then says DAY 1 OF 90; less literal about joining."
+        }
+      ],
+      "recommended": "A"
+    },
+    {
+      "id": "kiosk-welcome",
+      "group": "Kiosk",
+      "label": "Kiosk welcome lines",
+      "where": [
+        "app COPY kiosk.welcome.first, kiosk.welcome.back, kiosk.welcome.line, kiosk.welcome.visits"
+      ],
+      "limits": "Title lines ≤ 30 characters with a 5-letter name; sub line ≤ 24",
+      "current": "WELCOME, {FIRST}. DAY 1 OF 90. · WELCOME BACK, {FIRST}. WEEK {n}. · ON THE LINE THIS WEEK. · {n} visits this week.",
+      "options": [
+        {
+          "key": "A",
+          "text": "WELCOME, {FIRST}. DAY 1 OF 90. · WELCOME BACK, {FIRST}. WEEK {n}. · ON THE LINE THIS WEEK. · {n} visits this week.",
+          "why": "Already warm, short and numeric."
+        },
+        {
+          "key": "B",
+          "text": "WELCOME, {FIRST}. DAY 1 OF 90. · HELLO AGAIN, {FIRST}. WEEK {n}. · ON THE LINE THIS WEEK. · {n} visits this week.",
+          "why": "A front-desk greeting rather than a system message, at the same length."
+        }
+      ],
+      "recommended": "A"
+    },
+    {
+      "id": "empty-states",
+      "group": "App empty states",
+      "label": "Empty-state titles",
+      "where": [
+        "app COPY today.empty.title, board.empty, members.empty, nudges.empty, templates.empty"
+      ],
+      "limits": "Anton section title, ≤ 20 characters",
+      "current": "NO MEMBERS YET · NO MEMBERS TO SHOW · NO MEMBERS FOUND · NO NUDGES YET · NO TEMPLATES",
+      "options": [
+        {
+          "key": "A",
+          "text": "NO MEMBERS YET · NO MEMBERS TO SHOW · NO MEMBERS FOUND · NO NUDGES YET · NO TEMPLATES",
+          "why": "Fine one by one; three ways to say the same thing."
+        },
+        {
+          "key": "B",
+          "text": "NO MEMBERS YET · NO MATCHES · NO MATCHES · NO NUDGES YET · NO TEMPLATES YET",
+          "why": "One pattern: YET where it will fill, NO MATCHES where a filter or search hides it."
+        }
+      ],
+      "recommended": "B"
+    },
+    {
+      "id": "tpl-1",
+      "group": "Nudge templates",
+      "label": "Starter template 1",
+      "where": [
+        "app/server/seed/northside.mjs TEMPLATES[0]",
+        "the SAMPLE MESSAGE on every expo piece mirrors it"
+      ],
+      "limits": "Name ≤ 20 characters; body ≤ 160 characters with variables filled; GSM-7 characters only (no em dashes or curly quotes), so it sends as one text",
+      "current": "We missed you — Hey {first}, we missed you this week. Want me to save you a spot in Thursday's 6 pm class? — Coach {coach}",
+      "options": [
+        {
+          "key": "A",
+          "text": "We missed you — Hey {first}, we missed you this week. Want me to save you a spot in Thursday's 6 pm class? - Coach {coach}",
+          "why": "Warm, specific, one easy question; it matches the SAMPLE MESSAGE printed on every piece."
+        },
+        {
+          "key": "B",
+          "text": "We missed you — Hi {first}, we missed you this week. Want me to hold you a spot in Thursday's 6 pm class? - Coach {coach}",
+          "why": "A shade calmer (Hi, hold); the expo SAMPLE MESSAGE would have to change with it."
+        }
+      ],
+      "recommended": "A"
+    },
+    {
+      "id": "tpl-2",
+      "group": "Nudge templates",
+      "label": "Starter template 2",
+      "where": [
+        "app/server/seed/northside.mjs TEMPLATES[1]"
+      ],
+      "limits": "Name ≤ 20 characters; body ≤ 160 characters with variables filled; GSM-7 characters only (no em dashes or curly quotes), so it sends as one text",
+      "current": "Quick check-in — Hi {first}, it's {coach} from {gym}. How are your first few weeks going? Anything I can help with?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Quick check-in — Hi {first}, it's {coach} from {gym}. How are your first few weeks going? Anything I can help with?",
+          "why": "Good body; the name \"check-in\" collides with the visits Tenure counts."
+        },
+        {
+          "key": "B",
+          "text": "First weeks — Hi {first}, it's {coach} from {gym}. How are your first few weeks going? Tell me if I can help with anything.",
+          "why": "Renamed to avoid the clash; one question instead of two."
+        }
+      ],
+      "recommended": "B"
+    },
+    {
+      "id": "tpl-3",
+      "group": "Nudge templates",
+      "label": "Starter template 3",
+      "where": [
+        "app/server/seed/northside.mjs TEMPLATES[2]"
+      ],
+      "limits": "Name ≤ 20 characters; body ≤ 160 characters with variables filled; keep one template using {days}; GSM-7 characters only (no em dashes or curly quotes), so it sends as one text",
+      "current": "Back on track — Hey {first}, it's been {days} days. One visit this week gets you back on track. See you soon? — {coach}",
+      "options": [
+        {
+          "key": "A",
+          "text": "Back on track — Hey {first}, it's been {days} days. One visit this week gets you back on track. See you soon? - {coach}",
+          "why": "Direct, but counting days at someone reads as pressure, and \"gets you back on track\" is a promise."
+        },
+        {
+          "key": "B",
+          "text": "One visit — Hi {first}, it's been {days} days since we saw you. One visit this week is a good restart. Want me to save you a spot? - {coach}",
+          "why": "Keeps {days} as a plain fact, offers help, asks one easy question."
+        },
+        {
+          "key": "C",
+          "text": "Good to see you — Hi {first}, it's {coach} from {gym}. It's been a little while. Want me to save you a spot this week?",
+          "why": "The gentlest; drops {days}, so no starter shows that variable."
+        }
+      ],
+      "recommended": "B"
+    },
+    {
+      "id": "manifest",
+      "group": "App name",
+      "label": "Installed app name",
+      "where": [
+        "app/client/public/manifest.webmanifest name, short_name",
+        "app/client/index.html <title>, apple-mobile-web-app-title"
+      ],
+      "limits": "name ≤ 30 characters; short_name ≤ 12 (home-screen label)",
+      "current": "Tenure / Tenure",
+      "options": [
+        {
+          "key": "A",
+          "text": "Tenure / Tenure",
+          "why": "The name alone: the quietest, most product-like choice."
+        },
+        {
+          "key": "B",
+          "text": "Tenure: member retention / Tenure",
+          "why": "Explains itself in the install dialog; the home-screen label stays the name."
+        }
+      ],
+      "recommended": "A"
+    }
+  ]
+}

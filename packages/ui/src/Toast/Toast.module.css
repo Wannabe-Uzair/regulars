@@ -1,0 +1,110 @@
+/* Bottom centre, above dialogs, clear of the home indicator and of the tab bar (the shell sets --toast-clearance while
+   the bar shows). The empty stack lets clicks through. */
+.stack {
+  box-sizing: border-box;
+  position: fixed;
+  inset-block-end: calc(var(--space-4) + var(--toast-clearance) + env(safe-area-inset-bottom, 0));
+  inset-inline: 0;
+  z-index: var(--layer-toast);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-2);
+  margin: 0;
+  padding: 0 var(--space-4);
+  list-style: none;
+  pointer-events: none;
+}
+
+/* While a sheet is open the stack moves to the top edge, clear of the safe area, newest on top, so a live toast never
+   covers a sheet's actions (ARCHITECTURE §9 "Layers"). */
+:root:has([data-presentation='sheet'][data-state='open']) .stack {
+  inset-block: calc(var(--space-4) + env(safe-area-inset-top, 0)) auto;
+  flex-direction: column-reverse;
+}
+
+.toast {
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  inline-size: min(100%, 26rem);
+  padding: var(--space-2) var(--space-2) var(--space-2) var(--space-4);
+  border: var(--border-hairline) solid var(--color-line);
+  border-radius: var(--radius-md);
+  background-color: var(--color-raised);
+  box-shadow: var(--shadow-float);
+  color: var(--color-text);
+  font-size: var(--text-14);
+  line-height: var(--leading-body);
+  pointer-events: auto;
+}
+
+/* The attention edge: the thin edge in attention, and a band-wide strip inside it that the toast's radius clips, so the
+   band keeps its width into the corners. The padding leaves room for the action's focus ring. */
+.toast[data-tone='attention'] {
+  position: relative;
+  overflow: hidden;
+  border-inline-start-color: var(--color-attention);
+}
+
+.toast[data-tone='attention']::before {
+  content: '';
+  position: absolute;
+  inset-block: 0;
+  inset-inline-start: 0;
+  inline-size: var(--border-band);
+  background-color: var(--color-attention);
+  pointer-events: none;
+}
+
+.message {
+  flex: 1;
+  margin: 0;
+  padding-block: var(--space-1);
+}
+
+.action {
+  flex: none;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  /* Making room (pick G2): Toast.tsx starts a toast that has to move back where it stood, with `translate`, and this
+     carries it to its new place. No stacked cards or scaling. */
+  .toast {
+    transition: translate var(--motion-base) var(--ease-emphasised);
+  }
+
+  .toast[data-state='open'] {
+    animation: toast-in var(--motion-base) var(--ease-emphasised);
+  }
+
+  .toast[data-state='closed'] {
+    animation: toast-out var(--motion-fast) var(--ease-standard) forwards;
+  }
+
+  /* At the top edge a toast enters from above. */
+  :root:has([data-presentation='sheet'][data-state='open']) .toast[data-state='open'] {
+    animation: toast-in-top var(--motion-base) var(--ease-emphasised);
+  }
+}
+
+@keyframes toast-in {
+  from {
+    opacity: 0;
+    transform: translateY(var(--space-4));
+  }
+}
+
+@keyframes toast-in-top {
+  from {
+    opacity: 0;
+    transform: translateY(calc(-1 * var(--space-4)));
+  }
+}
+
+@keyframes toast-out {
+  to {
+    opacity: 0;
+  }
+}

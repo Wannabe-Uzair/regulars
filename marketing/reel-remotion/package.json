@@ -1,0 +1,20 @@
+{
+  "name": "regulars-reel",
+  "private": true,
+  "description": "The 30-second Regulars film in Remotion; its own package, outside the npm workspaces, like marketing/slides",
+  "type": "module",
+  "scripts": {
+    "studio": "remotion studio src/index.ts",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@remotion/cli": "4.0.541",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0",
+    "remotion": "4.0.541"
+  },
+  "devDependencies": {
+    "@types/react": "^19.0.0",
+    "typescript": "^5.6.0"
+  }
+}

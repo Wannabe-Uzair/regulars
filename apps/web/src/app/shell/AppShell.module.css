@@ -1,0 +1,490 @@
+/* One column that may be narrower than its content, so a wide child (the board) scrolls inside itself, not the page. */
+.frame {
+  min-height: 100dvh;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  grid-template-rows: auto 1fr;
+}
+
+/* Skip to Content (audit B2-23): out of the grid's flow, and hidden until Tab reaches it first; then a capsule over the
+   bar's leading corner, on the menu layer, its words in the tint as a capsule button's are (no underline). */
+.skip {
+  position: fixed;
+  inset-block-start: calc(var(--space-2) + env(safe-area-inset-top, 0px));
+  inset-inline-start: max(var(--space-4), env(safe-area-inset-left, 0px));
+  z-index: var(--layer-menu);
+  display: flex;
+  align-items: center;
+  min-block-size: calc(var(--space-10) + var(--space-1));
+  padding-inline: var(--space-4);
+  border-radius: var(--radius-full);
+  background-color: var(--color-surface);
+  box-shadow: var(--shadow-flyout);
+  color: var(--color-tint);
+  font-weight: var(--weight-interface);
+  font-size: var(--text-16);
+  white-space: nowrap;
+  text-decoration: none;
+}
+
+.skip:not(:focus) {
+  inline-size: 1px;
+  block-size: 1px;
+  min-block-size: 0;
+  padding: 0;
+  overflow: hidden;
+  clip-path: inset(50%);
+}
+
+/* Below 1024 px (FR-SHELL-01): a static glass title bar over the content, one row with the gym name (and the owner's
+   pilot day after it from 768 px, and a coach's quiet Log Out at the end). The logo and the nav stay out of it: the tab
+   bar holds the pages, and its Today tab goes home. Sticky, with a fixed hairline under it and no scroll listener; the
+   fill and blur are tokens, which tokens.css turns opaque under the material fallbacks (ARCHITECTURE §9, "Depth"). The
+   gutters clear a phone's notch when it's held sideways, and the status bar above it. */
+.header {
+  position: sticky;
+  inset-block-start: 0;
+  z-index: var(--layer-nav);
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-2) var(--space-3);
+  padding-block: calc(var(--space-2) + env(safe-area-inset-top, 0px)) var(--space-2);
+  padding-inline: max(var(--space-6), env(safe-area-inset-left, 0px))
+    max(var(--space-6), env(safe-area-inset-right, 0px));
+  border-block-end: var(--border-hairline) solid var(--color-line);
+  background-color: var(--color-material-bar);
+  -webkit-backdrop-filter: var(--material-bar-filter);
+  backdrop-filter: var(--material-bar-filter);
+}
+
+.home {
+  display: none;
+  color: inherit;
+  text-decoration: none;
+}
+
+/* 44 px tall, so the bar is as tall for an owner as for a coach, whose Log Out is a 44 px button. */
+.gymArea {
+  display: flex;
+  flex: 1;
+  align-items: center;
+  gap: var(--space-3);
+  min-width: 0;
+  min-block-size: calc(var(--space-10) + var(--space-1));
+}
+
+/* The bars carry primary text only (ARCHITECTURE §9): the gym name and the pilot day in `text`. */
+.gym {
+  min-width: 0;
+  overflow: hidden;
+  color: var(--color-text);
+  font-weight: var(--weight-heading);
+  font-size: var(--text-17);
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.pilot {
+  flex: none;
+  color: var(--color-text);
+  font-size: var(--text-14);
+  white-space: nowrap;
+}
+
+/* The pilot day's place while billing loads: empty and hidden in the header's row, one line tall in the sidebar. */
+.pilotSlot {
+  display: none;
+}
+
+/* The demo gym's Sample data tag, after the name and the pilot day: it keeps its size, and the name gives way first.
+   An opaque surface under its words, so they keep their contrast on the glass. */
+.sample {
+  flex: none;
+  background-color: var(--color-surface);
+}
+
+/* The page's title as the bar's small title, rendered on phones only (tuck.ts). */
+.barTitle {
+  display: none;
+}
+
+.navArea {
+  display: none;
+}
+
+.nav {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+/* The sidebar's items: 44 px tall, 16 px, the page's icon before the label. */
+.link {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  min-block-size: calc(var(--space-10) + var(--space-1));
+  padding: 0 var(--space-3);
+  border-radius: var(--radius-full);
+  color: var(--color-text);
+  font-weight: var(--weight-interface);
+  font-size: var(--text-16);
+  white-space: nowrap;
+  text-decoration: none;
+  transition:
+    background-color var(--motion-fast) var(--ease-standard),
+    color var(--motion-fast) var(--ease-standard);
+}
+
+.linkIcon {
+  flex: none;
+  font-size: var(--text-21);
+}
+
+/* The current page (FR-SHELL-02): a soft tinted capsule, its icon and label in the tint. Also the tapped item while its
+   lazy screen loads (F23). */
+.active {
+  color: var(--color-on-tint-fill);
+  background-color: var(--color-tint-fill);
+}
+
+.actions {
+  display: none;
+  flex: none;
+  align-items: center;
+  gap: var(--space-1);
+}
+
+/* A coach logs out from the phone header (FR-SHELL-01); an owner from Settings' Account group there. The quiet button
+   reaches into the gutter by most of its padding, as a bar button does, so its words sit near the margin and the gym
+   name keeps its room; its press capsule stays clear of the screen's edge. */
+.coachActions {
+  display: flex;
+  margin-inline-end: calc(-1 * var(--space-3));
+}
+
+/* The sign-out icon shows from 1024 px only, at the sidebar's foot. */
+.logoutIcon {
+  display: none;
+}
+
+.logoutError {
+  flex-basis: 100%;
+  margin: 0;
+  color: var(--color-danger);
+  font-size: var(--text-14);
+}
+
+.error {
+  display: grid;
+  justify-items: start;
+  gap: var(--space-3);
+  padding: var(--space-4) var(--space-6);
+}
+
+.errorLine {
+  margin: 0;
+  color: var(--color-danger);
+  font-size: var(--text-14);
+}
+
+/* Clear of the tab bar, and of the home indicator under it. */
+.main {
+  padding: var(--space-6);
+  padding-inline: max(var(--space-6), env(safe-area-inset-left, 0px))
+    max(var(--space-6), env(safe-area-inset-right, 0px));
+  padding-block-end: calc(var(--space-6) + var(--tab-bar-size, 0px) + env(safe-area-inset-bottom, 0px));
+}
+
+/* The tab bar (FR-SHELL-01): a floating glass capsule on the nav layer, under dialogs and under toasts, which sit clear
+   of it. Inset from the sides and the bottom, plus the safe areas, and no wider than five tabs need on a tablet. */
+.tabBar {
+  position: fixed;
+  inset-inline: max(var(--space-4), env(safe-area-inset-left, 0px)) max(var(--space-4), env(safe-area-inset-right, 0px));
+  inset-block-end: calc(var(--space-2) + env(safe-area-inset-bottom, 0px));
+  z-index: var(--layer-nav);
+  max-inline-size: 30rem;
+  margin-inline: auto;
+  padding: var(--space-1);
+  border: var(--border-hairline) solid var(--color-line);
+  border-radius: var(--radius-full);
+  background-color: var(--color-material-tabs);
+  -webkit-backdrop-filter: var(--material-tabs-filter);
+  backdrop-filter: var(--material-tabs-filter);
+  box-shadow: var(--shadow-float);
+}
+
+.tabs {
+  display: grid;
+  grid-auto-columns: minmax(0, 1fr);
+  grid-auto-flow: column;
+  gap: var(--space-1);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+/* A tab: its filled icon (24 px) over its one-word label (12 px), in `text`; the open one in the tint. */
+.tab {
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  inline-size: 100%;
+  min-block-size: calc(var(--space-10) + var(--space-1));
+  padding: var(--space-1);
+  border-radius: var(--radius-full);
+  color: var(--color-text);
+  font-weight: var(--weight-interface);
+  font-size: var(--text-12);
+  line-height: var(--leading-heading);
+  white-space: nowrap;
+  text-decoration: none;
+  transition:
+    background-color var(--motion-fast) var(--ease-standard),
+    color var(--motion-fast) var(--ease-standard);
+}
+
+.tabIcon {
+  display: block;
+  font-size: var(--text-24);
+}
+
+.tabLabel {
+  display: block;
+  max-inline-size: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* The open tab, icon and label, takes the tint, with no fill (ARCHITECTURE §9, "Icons"). */
+.tabActive {
+  color: var(--color-tint);
+}
+
+/* Hover as the quiet buttons do (F22), only where the pointer can hover, so a tapped item on a phone doesn't stay
+   lit, and never on the current item. */
+@media (hover: hover) {
+  .link:not(.active):hover,
+  .tab:not(.tabActive):hover {
+    color: var(--color-text);
+    background-color: var(--color-highlight);
+  }
+}
+
+/* While pressed, one step past hover (pick E2), with no movement, at once: the current items too. */
+.link:not(.active):active,
+.tab:not(.tabActive):active {
+  color: var(--color-text);
+  background-color: var(--color-highlight-press);
+}
+
+.active:active {
+  background-color: var(--color-tint-fill-press);
+}
+
+.tabActive:active {
+  background-color: var(--color-highlight-press);
+}
+
+/* While the tab bar shows: its height (a tab's padded icon and label line, the capsule's padding and edge) plus its
+   gap to the bottom, above the safe area, which the main column sits clear of and toasts rise above (ARCHITECTURE §9). */
+@media (width < 64rem) {
+  :global(:root):has(.tabBar) {
+    --tab-bar-size: calc(
+      var(--text-24) + var(--text-12) * var(--leading-heading) + 4 * var(--space-1) + 2 * var(--border-hairline) +
+        var(--space-2)
+    );
+    --toast-clearance: var(--tab-bar-size);
+  }
+}
+
+/* Phones: tighter paddings, and no pilot day (FR-SHELL-03). */
+@media (width < 48rem) {
+  .header {
+    padding-inline: max(var(--space-4), env(safe-area-inset-left, 0px))
+      max(var(--space-4), env(safe-area-inset-right, 0px));
+  }
+
+  .pilot {
+    display: none;
+  }
+
+  /* The Sample data tag a step closer to the name, so the demo gym's name fits beside a coach's Log Out at 390 px. */
+  .gymArea {
+    gap: var(--space-2);
+  }
+
+  /* The large title tucked in (tuck.ts), over the bar's first row, inside its gutters: the page's title centred at
+     17 px, as the gym name is set, and for the demo gym the Sample data tag at the trailing edge (before a coach's Log
+     Out), so the bar always carries it and the leading edge stays free, as iOS keeps it for Back (audit B2-20). The
+     title moves off centre only to clear the tag, or a coach's Log Out, and ends in an ellipsis before it would reach
+     either. Once the large title starts under the bar, the gym name and its tag fade out (fast, as exits are) and then
+     the title fades in on the quick spring, so the two never overlap; scrolling back reverses it. Under reduced motion
+     (0 ms) they swap. */
+  .gymArea > :not(.barTitle) {
+    transition: opacity var(--motion-spring-quick) var(--ease-spring-quick) var(--motion-fast);
+  }
+
+  .barTitle {
+    position: absolute;
+    inset-block-start: calc(var(--space-2) + env(safe-area-inset-top, 0px));
+    inset-inline: max(var(--space-4), env(safe-area-inset-left, 0px))
+      max(var(--space-4), env(safe-area-inset-right, 0px));
+    block-size: calc(var(--space-10) + var(--space-1));
+    display: grid;
+    grid-template-columns: minmax(max-content, 1fr) minmax(0, max-content) minmax(max-content, 1fr);
+    column-gap: var(--space-2);
+    align-items: center;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity var(--motion-fast) var(--ease-standard);
+  }
+
+  /* A coach's Log Out sits over the end column: the end keeps its width (about 85 px at 16 px text, in rem so it grows
+     with the text), and the demo gym's tag stands that far in from it. */
+  .header:has(.coachActions) .barTitle {
+    grid-template-columns: minmax(max-content, 1fr) minmax(0, max-content) minmax(max-content, 1fr);
+  }
+
+  .barTitle > .sample {
+    grid-row: 1;
+    grid-column: 3;
+    justify-self: end;
+  }
+
+  .header:has(.coachActions) .barTitle > .sample {
+    margin-inline-end: 6rem;
+  }
+
+  /* A coach with no tag still keeps the end column clear of Log Out. */
+  .header:has(.coachActions) .barTitle::after {
+    content: '';
+    grid-row: 1;
+    grid-column: 3;
+    inline-size: 6rem;
+  }
+
+  .barTitleText {
+    grid-row: 1;
+    grid-column: 2;
+    overflow: hidden;
+    color: var(--color-text);
+    font-weight: var(--weight-heading);
+    font-size: var(--text-17);
+    white-space: nowrap;
+    text-overflow: ellipsis;
+  }
+
+  .header[data-tucked] .gymArea > :not(.barTitle) {
+    opacity: 0;
+    transition: opacity var(--motion-fast) var(--ease-standard);
+  }
+
+  .header[data-tucked] .barTitle {
+    opacity: 1;
+    transition: opacity var(--motion-spring-quick) var(--ease-spring-quick) var(--motion-fast);
+  }
+
+  .main {
+    padding: var(--space-4);
+    padding-inline: max(var(--space-4), env(safe-area-inset-left, 0px))
+      max(var(--space-4), env(safe-area-inset-right, 0px));
+    padding-block-end: calc(var(--space-4) + var(--tab-bar-size, 0px) + env(safe-area-inset-bottom, 0px));
+  }
+}
+
+/* From 1024 px (FR-SHELL-02): an opaque sidebar column holding the logo, the gym name with the pilot day under it, the
+   nav, and the actions at its foot. No glass here (ARCHITECTURE §9), so the pilot day steps down to `text-soft`. The
+   main column may still be narrower than its content. */
+@media (width >= 64rem) {
+  .frame {
+    grid-template-columns: 14.5rem minmax(0, 1fr);
+    grid-template-rows: none;
+  }
+
+  .header {
+    position: sticky;
+    inset-block-start: 0;
+    z-index: var(--layer-nav);
+    box-sizing: border-box;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    align-items: stretch;
+    gap: var(--space-3);
+    block-size: 100dvh;
+    overflow-y: auto;
+    padding: var(--space-6);
+    padding-inline-start: max(var(--space-6), env(safe-area-inset-left, 0px));
+    border-block-end: 0;
+    background-color: var(--color-surface);
+    -webkit-backdrop-filter: none;
+    backdrop-filter: none;
+  }
+
+  /* The link home is a 44 px target round the 28 px mark, its margins giving the extra back so nothing moves (A19). */
+  .home {
+    display: flex;
+    align-items: center;
+    min-block-size: calc(var(--space-10) + var(--space-1));
+    margin-block: calc(-1 * var(--space-2));
+  }
+
+  .gymArea {
+    flex: none;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--space-1);
+    min-block-size: 0;
+  }
+
+  .gym {
+    max-inline-size: 100%;
+    font-size: var(--text-16);
+  }
+
+  .pilot {
+    color: var(--color-text-soft);
+  }
+
+  /* Held for the pilot day while billing loads, so the nav doesn't drop a line when it lands (audit B2-06). */
+  .pilotSlot {
+    display: block;
+    block-size: calc(var(--text-14) * var(--leading-body));
+  }
+
+  .navArea {
+    display: block;
+    margin-block-start: var(--space-5);
+  }
+
+  .actions {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    margin-block-start: auto;
+    margin-inline-end: 0;
+  }
+
+  /* Log Out reads as one more sidebar row: as wide as the nav's capsules, its icon and words lined up with theirs.
+     Two classes, so it outranks the button's own padding whatever order the sheets load in. */
+  .actions .logout {
+    justify-content: flex-start;
+    padding-inline: calc(var(--space-3) - var(--border-thin));
+  }
+
+  .logoutIcon {
+    display: block;
+    margin-inline-end: var(--space-1);
+    font-size: var(--text-21);
+  }
+
+  .tabBar {
+    display: none;
+  }
+}

@@ -1,0 +1,71 @@
+/* As in the shell: one column that may be narrower than its content. */
+.page {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: var(--space-6);
+  max-inline-size: 72rem;
+  justify-items: stretch;
+}
+
+/* The contact card's head (flow-5C): the name, the status and last visit under it, and Nudge under them, start-aligned.
+   The way back sits just above it, closer to the title than the page's other groups. */
+.head {
+  display: grid;
+  gap: var(--space-2);
+  justify-items: start;
+  margin-block-start: calc(-1 * var(--space-4));
+}
+
+.state {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-1) var(--space-3);
+  margin: 0;
+}
+
+.lastVisit {
+  color: var(--color-text-soft);
+}
+
+.nudge {
+  margin-block-start: var(--space-2);
+}
+
+/* Visits and nudges side by side when there is room, stacked on a phone. */
+.columns {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 22rem), 1fr));
+  gap: var(--space-6);
+  align-items: start;
+}
+
+/* Member Not Found (B2-09): the head holds the title, the sentence and the way back, 16 px apart, and with no back link
+   above it the title keeps the page's own top, as Page Not Found does. */
+.missing {
+  gap: var(--space-4);
+  margin-block-start: 0;
+}
+
+.notFound {
+  margin: 0;
+  color: var(--color-text-soft);
+  font-size: var(--text-16);
+  line-height: var(--leading-body);
+  text-wrap: pretty;
+}
+
+.page > a {
+  justify-self: start;
+}
+
+.error {
+  display: grid;
+  gap: var(--space-4);
+  justify-items: start;
+}
+
+.error p {
+  margin: 0;
+  color: var(--color-danger);
+}

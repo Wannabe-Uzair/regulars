@@ -1,0 +1,291 @@
+/* The home hero's floating board, as the home page drew it (apps/web/src/features/website/screens/BoardPicture.tsx at
+   the commit that replaced it with this clip): its rules copied from BoardPicture.module.css and the parts it used
+   (packages/ui Card, Tag, StatusTag, StatusDot, Marks and Button's tinted and quiet sm), with the token values from
+   packages/ui/src/tokens.css written in. The film may not import the app's packages, so this is a copy: change it with
+   them. Two things differ: the shape comes from a class (hb-wide, the table from 48rem) rather than a media and a
+   container query, and the shadow is the page's (the clip is the card alone, drawn edge to edge). */
+
+.hb-frame {
+  --line: #d1d1d6;
+  --line-strong: color-mix(in oklab, #1d1d1f 47%, #ffffff);
+  --text: #1d1d1f;
+  --text-soft: #606068;
+  --attention: #e0102e;
+  --attention-text: #d40624;
+  --tint: #5444e4;
+  --tint-fill: #eae9fc;
+  --tint-fill-press: color-mix(in oklab, #eae9fc 94%, #1d1d1f);
+  --mark-some: color-mix(in oklab, #1d1d1f 44%, #ffffff);
+  --mark-future: color-mix(in oklab, #1d1d1f 7%, #ffffff);
+  /* tokens.css makes the hairline 0.5px at 2x, and Chrome draws it a whole CSS pixel wide (its computed border width on
+     the page is 1px): the clip draws what Chrome showed. */
+  --hairline: 1px;
+  position: absolute;
+  inset: 0;
+  background-color: #ffffff;
+  font-family: Inter, sans-serif;
+  font-optical-sizing: auto;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 1.5;
+  color: var(--text);
+}
+
+/* Card, then .picture: a grid of the head, the rows and the legend. */
+.hb-card {
+  box-sizing: border-box;
+  display: grid;
+  align-content: start;
+  gap: 16px;
+  block-size: 100%;
+  padding: 24px;
+  border: var(--hairline) solid var(--line);
+  border-radius: 24px;
+  background-color: #ffffff;
+}
+
+.hb-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px 12px;
+  margin: 0;
+}
+
+.hb-title {
+  font-size: 1.3125rem;
+  font-weight: 600;
+  line-height: 1.25;
+}
+
+/* Tag. */
+.hb-tag {
+  box-sizing: border-box;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 4px 8px;
+  border: var(--hairline) solid var(--line);
+  border-radius: 999px;
+  color: var(--text-soft);
+  font-size: 0.75rem;
+  font-weight: 600;
+  line-height: 1.25;
+  white-space: nowrap;
+}
+
+/* StatusTag and StatusDot: the words in the status's text colour, the shape at 0.75 em. */
+.hb-tag[data-status] {
+  color: var(--text);
+}
+
+.hb-tag[data-status='slipping'] {
+  color: var(--attention-text);
+}
+
+.hb-dot {
+  display: inline-block;
+  flex: none;
+  inline-size: 0.75em;
+  block-size: 0.75em;
+  overflow: visible;
+  color: var(--text);
+}
+
+.hb-tag[data-status='slipping'] .hb-dot {
+  color: var(--attention);
+}
+
+/* The rows: two-line cards (the phone), or the table (hb-wide). */
+.hb-rows {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  font-size: 0.875rem;
+}
+
+.hb-rows > li + li {
+  border-block-start: 1px solid var(--line);
+}
+
+.hb-row {
+  position: relative;
+  isolation: isolate;
+  display: grid;
+  grid-template-columns: max-content minmax(0, 1fr);
+  grid-template-areas:
+    'name status'
+    'weeks weeks';
+  align-items: center;
+  gap: 8px 12px;
+  padding-block: 8px;
+}
+
+.hb-name {
+  grid-area: name;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.hb-weeks {
+  grid-area: weeks;
+  display: inline-flex;
+  flex-wrap: nowrap;
+  gap: 4px;
+}
+
+.hb-status {
+  grid-area: status;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 8px;
+  min-block-size: 32px;
+  white-space: nowrap;
+}
+
+.hb-wide .hb-rows {
+  grid-template-columns: max-content max-content minmax(0, 1fr);
+  column-gap: 12px;
+}
+
+.hb-wide .hb-row {
+  grid-column: 1 / -1;
+  grid-template-columns: subgrid;
+  grid-template-areas: 'name weeks status';
+}
+
+/* Two looks in one place, one over the other (Nudge and Nudged): the place takes the wider. */
+.hb-stack {
+  display: inline-grid;
+  justify-items: start;
+  align-items: center;
+}
+
+.hb-stack > * {
+  grid-area: 1 / 1;
+}
+
+.hb-stack.hb-end {
+  justify-items: end;
+}
+
+/* A live check-in's row tint (FR-BOARD-03's fading tint), a little past the row's ends. */
+.hb-tint {
+  position: absolute;
+  z-index: -1;
+  inset-block: 0;
+  inset-inline: -12px;
+  border-radius: 8px;
+  background-color: var(--tint-fill);
+}
+
+/* Button sm, tinted and quiet, drawn at the picture's size (32 px, no touch target). */
+.hb-button {
+  box-sizing: border-box;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-block-size: 32px;
+  padding: 4px 12px;
+  border: 1px solid transparent;
+  border-radius: 999px;
+  color: var(--text);
+  font-size: 0.875rem;
+  font-weight: 600;
+  line-height: 1.25;
+  white-space: nowrap;
+}
+
+.hb-button > span {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.hb-tinted {
+  background-color: var(--tint-fill);
+  color: var(--tint);
+}
+
+.hb-button svg {
+  flex: none;
+}
+
+/* Marks: a cell holds a mark's layers one over the other. md is 16 px in the table and 14 px in the cards. */
+.hb-cell {
+  display: grid;
+  flex: none;
+  inline-size: 16px;
+  block-size: 16px;
+}
+
+.hb-phone .hb-cell {
+  inline-size: 14px;
+  block-size: 14px;
+}
+
+.hb-cell > * {
+  grid-area: 1 / 1;
+}
+
+.hb-mark {
+  box-sizing: border-box;
+  display: inline-block;
+  flex: none;
+  inline-size: 100%;
+  block-size: 100%;
+  border: 1px solid transparent;
+  border-radius: 4px;
+  vertical-align: middle;
+}
+
+.hb-mark[data-mark='full'] {
+  background-color: var(--text);
+}
+
+.hb-mark[data-mark='some'] {
+  background-color: var(--mark-some);
+}
+
+.hb-mark[data-mark='none'] {
+  border-color: var(--line-strong);
+}
+
+.hb-mark[data-mark='outline'] {
+  border: 2px solid var(--mark-some);
+}
+
+.hb-mark[data-mark='future'] {
+  background-color: var(--mark-future);
+}
+
+.hb-mark[data-mark='flag'] {
+  border: 2px solid var(--attention);
+}
+
+/* MarkLegend: sm marks (12 px) beside their words. */
+.hb-legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 16px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  color: var(--text-soft);
+  font-size: 0.8125rem;
+}
+
+.hb-legend li {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.hb-legend .hb-cell {
+  inline-size: 12px;
+  block-size: 12px;
+}

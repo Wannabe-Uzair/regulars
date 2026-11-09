@@ -1,0 +1,126 @@
+/* "Past 90 days" in place of a status (answers.md, 7 Nov). */
+.past {
+  color: var(--color-text-soft);
+  white-space: nowrap;
+}
+
+.numbers {
+  font-variant-numeric: var(--font-numeric);
+  white-space: nowrap;
+}
+
+.nowrap {
+  white-space: nowrap;
+}
+
+/* The table's name is the link to the member (FR-MEM-03): a 44 px block that takes back the cell's own padding, so the
+   row keeps its height and the whole name cell answers. The words stay the row name's: no tint, no underline at rest. */
+.nameLink {
+  display: flex;
+  align-items: center;
+  min-block-size: calc(var(--space-10) + var(--space-1));
+  margin-block: calc(-1 * var(--space-3));
+  color: inherit;
+  text-decoration: none;
+  overflow-wrap: anywhere;
+}
+
+@media (hover: hover) {
+  .nameLink:hover {
+    color: var(--color-link);
+    text-decoration: var(--link-decoration);
+  }
+}
+
+.nameLink:active {
+  color: var(--color-action-press);
+}
+
+/* Below 48 rem (FR-MEM-03, audit B2-12): one inset grouped list in a card, as the board's phone list and Today's, not a
+   card for each member. The rows reach the card's sides, so a row's tint fills its width. */
+.rows {
+  margin: calc(-1 * var(--space-3)) calc(-1 * var(--space-6));
+  padding: 0;
+  list-style: none;
+}
+
+/* A row holds its name link's cover. The name's 44 px block gives the air above, so the row pads only below. */
+.row {
+  position: relative;
+  display: grid;
+  gap: var(--space-1);
+  padding: 0 var(--space-6) var(--space-3);
+}
+
+/* Separators are hairlines inset to the text, as in an inset grouped list. */
+.row + .row::before {
+  content: '';
+  position: absolute;
+  inset-block-start: 0;
+  inset-inline: var(--space-6) 0;
+  border-block-start: var(--border-hairline) solid var(--color-line);
+}
+
+.rowHead {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0 var(--space-3);
+}
+
+/* A row's name takes the interface weight, as Today's list rows do (F32), so the page's heading outranks it. */
+.rowName {
+  min-inline-size: 0;
+  font-weight: var(--weight-interface);
+  overflow-wrap: anywhere;
+}
+
+/* The row's one link: the name, a 44 px block (NFR-USE-03), whose ::after covers the whole row, so a tap anywhere on
+   it opens the member. Its focus ring goes round the row, on the cover, drawn inside it. */
+.rowLink {
+  display: flex;
+  align-items: center;
+  min-block-size: calc(var(--space-10) + var(--space-1));
+  color: inherit;
+  text-decoration: none;
+}
+
+.rowLink::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+}
+
+.rowLink:focus-visible {
+  outline: none;
+}
+
+.rowLink:focus-visible::after {
+  outline: var(--focus-width) solid var(--color-focus);
+  outline-offset: calc(-1 * var(--focus-width));
+}
+
+@media (forced-colors: active) {
+  .rowLink:focus-visible::after {
+    outline-color: Highlight;
+  }
+}
+
+/* A pointer's hover tints the row, as Today's rows; a press tints it deeper at once. */
+@media (hover: hover) {
+  .row:has(.rowLink:hover) {
+    background-color: var(--color-highlight);
+  }
+}
+
+.row:has(.rowLink:active) {
+  background-color: var(--color-highlight-press);
+}
+
+.meta {
+  margin: 0;
+  color: var(--color-text-soft);
+  font-size: var(--text-14);
+  font-variant-numeric: var(--font-numeric);
+}

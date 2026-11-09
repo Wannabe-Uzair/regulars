@@ -1,0 +1,44 @@
+/* As in the shell: the column may be narrower than the cohort table, which then scrolls inside its own box. */
+.page {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: var(--space-6);
+  max-inline-size: 72rem;
+}
+
+.section {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: var(--space-4);
+}
+
+/* The section titles are findings with figures in them: tabular, so a live refresh doesn't shift them, and balanced, so
+   a sentence that wraps on a phone breaks into even lines. */
+.takeaway {
+  display: block;
+  font-variant-numeric: var(--font-numeric);
+  text-wrap: balance;
+}
+
+/* The heading spans the header, as the skeleton's does: sized to its content, WebKit measures the rolling figures a
+   little short and breaks a lead that fits ("12 of 16 nudges / led to a visit"). */
+.panel h2 {
+  flex-grow: 1;
+}
+
+.explain {
+  margin: 0;
+  color: var(--color-text-soft);
+  font-size: var(--text-14);
+}
+
+.error {
+  display: grid;
+  gap: var(--space-4);
+  justify-items: start;
+}
+
+.error p {
+  margin: 0;
+  color: var(--color-danger);
+}

@@ -1,0 +1,18 @@
+/* As in the shell: the column may be narrower than its content. */
+.page {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: var(--space-6);
+  max-inline-size: 36rem;
+}
+
+.actions {
+  display: grid;
+  gap: var(--space-2);
+  justify-items: start;
+}
+
+.error {
+  margin: 0;
+  color: var(--color-danger);
+}

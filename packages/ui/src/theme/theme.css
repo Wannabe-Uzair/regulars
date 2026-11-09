@@ -1,0 +1,17 @@
+/* The theme switch: one crossfade of the whole page (docs/ARCHITECTURE.md §9). ThemeProvider starts it only where
+   View Transitions exist and motion is welcome, so this needs no reduced-motion rule of its own. */
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation-duration: var(--motion-crossfade);
+  animation-timing-function: var(--ease-standard);
+}
+
+/* For the frame a theme change lands in (applyTheme marks <html>), nothing transitions: the crossfade is the one
+   motion, and no colour eases from the old theme into the new one. Important, to outrank every component's own
+   transition. */
+[data-theme-switching],
+[data-theme-switching] *,
+[data-theme-switching] *::before,
+[data-theme-switching] *::after {
+  transition: none !important;
+}

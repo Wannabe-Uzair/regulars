@@ -1,0 +1,76 @@
+/* Wider than its column, it scrolls sideways inside its own frame instead of widening the page. The frame has room for
+   a focus ring at either end of a row (each row's Open), taken back by the margin so nothing moves. */
+.scroll {
+  --table-ground: var(--color-surface);
+
+  margin-inline: calc(-1 * (var(--focus-width) + var(--focus-offset)));
+  padding-inline: calc(var(--focus-width) + var(--focus-offset));
+  overflow-x: auto;
+  border-radius: var(--radius-md);
+}
+
+.scroll[data-ground='bg'] {
+  --table-ground: var(--color-bg);
+}
+
+.scroll[data-ground='raised'] {
+  --table-ground: var(--color-raised);
+}
+
+.table {
+  border-collapse: collapse;
+  inline-size: 100%;
+  font-size: var(--text-14);
+  line-height: var(--leading-body);
+}
+
+.table th,
+.table td {
+  padding: var(--space-3) var(--space-4);
+  text-align: start;
+  vertical-align: middle;
+}
+
+.table :is(th, td):first-child {
+  padding-inline-start: 0;
+}
+
+.table :is(th, td):last-child {
+  padding-inline-end: 0;
+}
+
+/* Column headers: the label tokens, in soft text (ARCHITECTURE §9 "Labels"). */
+.table thead th {
+  padding-block: 0 var(--space-2);
+  color: var(--color-text-soft);
+  font-size: var(--label-size);
+  font-weight: var(--label-weight);
+  letter-spacing: var(--label-tracking);
+  text-transform: var(--label-transform);
+  line-height: var(--leading-heading);
+  white-space: nowrap;
+}
+
+.table tbody th {
+  font-weight: var(--weight-interface);
+}
+
+/* One line under the headers and between rows, in the one line strength. */
+.table tbody > tr > * {
+  border-block-start: var(--border-hairline) solid var(--color-line);
+}
+
+/* Numbers line up at the end, in tabular figures. */
+.table [data-numeric] {
+  font-variant-numeric: var(--font-numeric);
+  text-align: end;
+}
+
+/* The first column holds still while the rest scrolls under it, on the ground's own colour. */
+.sticky :is(th, td):first-child {
+  position: sticky;
+  inset-inline-start: 0;
+  z-index: var(--layer-sticky);
+  padding-inline-end: var(--space-4);
+  background-color: var(--table-ground);
+}

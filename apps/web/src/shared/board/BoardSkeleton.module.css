@@ -1,0 +1,25 @@
+/* The board's placeholder parts, inside BoardTable's own cells. */
+
+/* The name link's 44 px block holds a line in the row's type. */
+.name {
+  min-inline-size: 0;
+}
+
+/* A week mark's size (ui's Mark, md), so a row is as high as a real one. */
+.mark {
+  inline-size: 1rem;
+  block-size: 1rem;
+  border-radius: var(--radius-sm);
+}
+
+/* The pace's figures end level with the column's end. */
+.pace {
+  margin-inline-start: auto;
+}
+
+@media (width < 48rem) {
+  .mark {
+    inline-size: 0.875rem;
+    block-size: 0.875rem;
+  }
+}

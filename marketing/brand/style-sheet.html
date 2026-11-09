@@ -1,0 +1,154 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Tenure design code</title>
+<link rel="stylesheet" href="tokens.css">
+<style>
+  @page { size: 1920px 3760px; margin: 0; }
+  body { width: 1920px; height: 3760px; position: relative; overflow: hidden; }
+  .page { position: absolute; inset: 0; background-color: var(--rubber); background-image: url(assets/speckle-tile.svg); background-size: 512px 512px; color: var(--chalk); }
+  .band { position: absolute; left: 0; right: 0; }
+  .wrap { position: absolute; left: 120px; right: 120px; top: 96px; }
+  .sec { border-top: 2px solid var(--rubber3); padding-top: 26px; margin-top: 64px; }
+  .head { display: flex; justify-content: space-between; align-items: baseline; }
+  .lab { font-size: 28px; color: var(--steel); }
+  .row { display: grid; gap: 48px; }
+  .sw { height: 150px; position: relative; }
+  .sw b { position: absolute; left: 18px; bottom: 16px; font-family: var(--font-label); font-weight: 700; font-size: 26px; letter-spacing: .14em; }
+  .meta { margin-top: 14px; font-size: 22px; line-height: 1.35; color: var(--steel); }
+  .meta strong { display: block; color: var(--chalk); font-family: var(--font-label); font-weight: 700; letter-spacing: .14em; font-size: 22px; margin-bottom: 4px; }
+  .rule-list { margin: 0; padding: 0; list-style: none; font-size: 26px; line-height: 1.4; }
+  .rule-list li { padding: 12px 0; border-bottom: 1px solid var(--rubber3); }
+  .rule-list li span { color: var(--steel); }
+  .rule-list li span.c-yellow { color: var(--yellow); }
+</style>
+</head>
+<body>
+<div class="page">
+  <div class="band hazard" style="top:0;--band:36px;--stripe:18px"></div>
+
+  <div class="wrap">
+    <div class="head">
+      <div class="t-label lab">Tenure · design code v1.0 · Gym floor</div>
+      <div class="t-label lab">6 Nov 2026 · tenure/brand/DESIGN.md</div>
+    </div>
+
+    <!-- 01 LOGO -->
+    <div class="sec" style="margin-top:40px">
+      <div class="t-label lab">01 — Logo</div>
+      <div class="row" style="grid-template-columns: 1.25fr 1fr; margin-top: 36px; align-items: stretch">
+        <div style="background:var(--rubber2);padding:64px 72px;display:flex;flex-direction:column;justify-content:center" id="logoA"></div>
+        <div class="g-yellow" style="padding:64px 72px;display:flex;flex-direction:column;justify-content:center" id="logoB"></div>
+      </div>
+      <div class="row" style="grid-template-columns: repeat(3, 1fr); margin-top: 24px">
+        <div class="meta"><strong>The word</strong>TENURE in Anton, outlined, +0.02 em. Never retyped, stretched, outlined or shadowed.</div>
+        <div class="meta"><strong>The tape</strong>Floor tape in three segments: three 30-day blocks, the first 90 days. Same width as the word.</div>
+        <div class="meta"><strong>Use</strong>Chalk word + yellow tape on rubber. Rubber word + rubber tape on yellow. Clear space = the word's cap height.</div>
+      </div>
+    </div>
+
+    <!-- 02 COLOUR -->
+    <div class="sec">
+      <div class="t-label lab">02 — Colour</div>
+      <div class="row" style="grid-template-columns: repeat(7, 1fr); gap: 20px; margin-top: 36px">
+        <div><div class="sw" style="background:var(--rubber);box-shadow:inset 0 0 0 2px var(--steel)"><b class="c-chalk">RUBBER</b></div><div class="meta"><strong>#141414</strong>Ground, 70–85%</div></div>
+        <div><div class="sw" style="background:var(--rubber2);box-shadow:inset 0 0 0 2px var(--steel)"><b class="c-chalk">RUBBER 2</b></div><div class="meta"><strong>#1F1F1F</strong>Screens, cards</div></div>
+        <div><div class="sw" style="background:var(--rubber3);box-shadow:inset 0 0 0 2px var(--steel)"><b class="c-chalk">RUBBER 3</b></div><div class="meta"><strong>#2B2B2B</strong>Empty cells, lines</div></div>
+        <div><div class="sw" style="background:var(--chalk)"><b class="c-rubber">CHALK</b></div><div class="meta"><strong>#EDEBE6</strong>Text, line work</div></div>
+        <div><div class="sw" style="background:var(--steel)"><b class="c-rubber">STEEL</b></div><div class="meta"><strong>#8C9098</strong>Labels, sources</div></div>
+        <div><div class="sw" style="background:var(--yellow)"><b class="c-rubber">SAFETY YELLOW</b></div><div class="meta"><strong>#FFD60A</strong>The one accent, 5–12%</div></div>
+        <div><div class="sw" style="background:var(--red)"><b class="c-rubber">SIGNAL RED</b></div><div class="meta"><strong>#FF4B3E</strong>Slipping only, &lt;3%</div></div>
+      </div>
+      <div style="display:flex;height:22px;margin-top:28px">
+        <div style="flex:78;background:var(--rubber);box-shadow:inset 0 0 0 2px var(--steel)"></div><div style="flex:12;background:var(--chalk)"></div><div style="flex:8;background:var(--yellow)"></div><div style="flex:2;background:var(--red)"></div>
+      </div>
+      <div class="meta" style="margin-top:10px">A typical surface: rubber 78 · chalk 12 · yellow 8 · red 2. Yellow text only on rubber. On yellow, everything is rubber.</div>
+    </div>
+
+    <!-- 03 TYPE -->
+    <div class="sec">
+      <div class="t-label lab">03 — Type</div>
+      <div class="row" style="grid-template-columns: 1.6fr 1fr; margin-top: 30px">
+        <div>
+          <div class="t-display" style="font-size:300px;line-height:.86">DAY <span class="c-yellow">90</span></div>
+          <div class="t-display" style="font-size:140px;margin-top:22px">GET EVERY NEW<br>MEMBER THERE.</div>
+          <div class="t-display c-steel" style="font-size:56px;margin-top:26px">ANTON · ALWAYS CAPS · LINE HEIGHT 0.9</div>
+        </div>
+        <div style="padding-top:18px">
+          <div class="t-label c-yellow" style="font-size:28px">01 — The problem</div>
+          <div class="meta" style="margin-top:8px">Barlow Condensed Bold · caps · tracking 0.14 em · labels, tags, data</div>
+          <div class="t-body" style="font-size:36px;margin-top:40px;max-width:640px">Tenure watches every new member's first 90 days, flags anyone who drops below the line, and lets you nudge them back in one tap.</div>
+          <div class="meta" style="margin-top:12px">Barlow Medium · sentence case · line height 1.38</div>
+          <div class="t-small" style="font-size:24px;margin-top:40px">63% of new members quit within three months. Sperandei et al., 2016.</div>
+          <div class="meta" style="margin-top:8px">Barlow Regular, steel · sources and small print</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 04 DEVICES -->
+    <div class="sec">
+      <div class="head"><div class="t-label lab">04 — Devices</div><div class="sample-tag" style="font-size:20px">Sample data</div></div>
+      <div class="row" style="grid-template-columns: 1.55fr 1fr; margin-top: 36px; align-items:start">
+        <div>
+          <div style="background:var(--rubber2);padding:40px 44px" id="board"></div>
+          <div style="margin-top:20px" id="legend"></div>
+          <div class="meta" style="margin-top:6px"><strong>The 90-day board</strong>One row per new member, one cell per week. Yellow = on the line (3+ visits). Two weak weeks in a row = red, slipping. The highlighted member gets NUDGE <span class="arrow">→</span>.</div>
+        </div>
+        <div>
+          <div style="display:grid;grid-template-columns: 300px 1fr;gap:36px;align-items:center">
+            <div id="plate"></div>
+            <div class="meta"><strong>Plate</strong>Holds one number. One per surface.</div>
+          </div>
+          <div style="margin-top:40px" id="tape"></div>
+          <div class="t-label c-steel" style="font-size:22px;display:flex;justify-content:space-between;margin-top:10px"><span>Day 1</span><span>Day 30</span><span>Day 60</span><span>Day 90</span></div>
+          <div class="meta"><strong>Floor tape</strong>Underlines, rulers, progress. Square ends.</div>
+          <div class="hazard" style="--band:36px;--stripe:18px;margin-top:36px"></div>
+          <div class="meta"><strong>Hazard tape</strong>Top or bottom edge of a frame only. Never behind text. Two per surface at most.</div>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:28px;margin-top:36px">
+            <div><div id="daysA"></div><div class="t-label c-steel" style="font-size:20px;margin-top:10px">A member who stays</div></div>
+            <div><div id="daysB"></div><div class="t-label c-steel" style="font-size:20px;margin-top:10px">A member who slips</div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 05 VOICE -->
+    <div class="sec">
+      <div class="t-label lab">05 — Voice</div>
+      <div class="row" style="grid-template-columns: 1fr 1fr; margin-top: 26px">
+        <ul class="rule-list">
+          <li>KEEP NEW MEMBERS PAST <span class="c-yellow">DAY 90.</span> <span>— tagline</span></li>
+          <li><span class="c-yellow">6 IN 10</span> NEW MEMBERS QUIT WITHIN THREE MONTHS. <span>— problem</span></li>
+          <li>MEMBERS WHO STAY HIT <span class="c-yellow">3 VISITS A WEEK.</span> <span>— the line</span></li>
+          <li>TRACK. FLAG. NUDGE. <span>— how it works</span></li>
+          <li>FREE 90-DAY PILOT. THEN $99 A MONTH. <span>— price</span></li>
+        </ul>
+        <ul class="rule-list">
+          <li>Calm, exact, sure. The type is loud; the words are not.</li>
+          <li>Numerals always: 6 in 10, 3 visits, day 90, $99.</li>
+          <li>State, don't shout. No hype, no exclamation marks or emojis.</li>
+          <li>Every statistic carries its source in small type.</li>
+          <li>No QR codes, contact details, launch dates or roles. Display only.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="band hazard" style="bottom:0;--band:36px;--stripe:18px"></div>
+</div>
+<script src="wordmark.js"></script>
+<script src="kit.js"></script>
+<script>
+  const T = TENURE
+  document.getElementById('logoA').innerHTML = T.logo({ w: 760, descriptor: true })
+  document.getElementById('logoB').innerHTML = T.logo({ w: 560, word: T.C.rubber, tapeColor: T.C.rubber, descriptor: true, descColor: T.C.rubber })
+  document.getElementById('board').innerHTML = T.board({ w: 980 })
+  document.getElementById('legend').innerHTML = T.legend({ w: 900, h: 34 })
+  document.getElementById('plate').innerHTML = T.plate({ d: 300 })
+  document.getElementById('tape').innerHTML = T.tape({ w: 560, h: 22 })
+  document.getElementById('daysA').innerHTML = T.days({ w: 300 })
+  document.getElementById('daysB').innerHTML = T.days({ w: 300, visits: T.SLIPPER })
+</script>
+</body>
+</html>

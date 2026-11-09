@@ -1,0 +1,79 @@
+/* Regulars print kit: the face, the Iris palette (light only) and the shared print classes.
+ * Used by brochure/regulars.html and standee/regulars.html. The old kit (../tokens.css, Barlow and Anton) stays for
+ * the slides and the reel until they are redone. */
+
+@font-face {
+  font-family: 'Inter';
+  src: url(fonts/InterVariable.woff2) format('woff2');
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: block;
+}
+
+:root {
+  /* Iris, light */
+  --ground: #F2F2F7;        /* the app's ground; on paper, the board picture's ground */
+  --card: #FFFFFF;          /* cards, menus, the paper */
+  --text: #1D1D1F;
+  --text-soft: #606068;
+  --separator: #D1D1D6;     /* hairlines */
+  --line-strong: #8C8C8D;   /* control edges, the Sample data ring: 3.4:1 on white */
+  --tint: #5444E4;          /* everything you can act on: white on it 6.32:1 */
+  --tint-fill: #EAE9FC;     /* the Nudge capsule; tint text on it 5.28:1 */
+  --week-low: #929294;      /* 1 or 2 visits, and the no-visit outline (the app's light week colours) */
+  --week-future: #EDEDED;   /* a week not reached yet */
+  --day-empty: #E5E5EA;     /* a day with no visit, in the 90-day grids */
+
+  /* status: only Slipping is coloured (text / mark); On the line, Below the line and New are in the text colour */
+  --slip-text: #D40624;   --slip-mark: #E0102E;
+
+  --font: 'Inter', system-ui, sans-serif;
+}
+
+html {
+  font-family: var(--font);
+  font-optical-sizing: auto;
+  font-weight: 400;
+  color: var(--text);
+  -webkit-font-smoothing: antialiased;
+  font-kerning: normal;
+  text-rendering: geometricPrecision;
+}
+
+/* weights 400, 600 and 700 only */
+.w400 { font-weight: 400; }
+.w600 { font-weight: 600; }
+.w700 { font-weight: 700; }
+.soft { color: var(--text-soft); }
+.num  { font-variant-numeric: tabular-nums; }
+
+/* the lockup: the Quarter symbol beside "Regulars", Inter 600, tracked -0.01em */
+.lockup { display: inline-flex; align-items: baseline; white-space: nowrap; font-weight: 600; letter-spacing: -0.01em; line-height: 1; }
+.lockup svg { flex: none; display: block; width: 0.96em; height: 0.96em; margin-right: 0.32em; transform: translateY(0.196em); }
+
+/* the Sample data tag: a capsule with a line-strong ring */
+.sample-tag { display: inline-block; font-weight: 600; color: var(--text-soft); border: 0.08em solid var(--line-strong); border-radius: 999px; padding: 0.22em 0.75em 0.26em; line-height: 1.1; white-space: nowrap; }
+
+/* ---------------------------------------------------------------- the board picture (regulars.js: REGULARS.board)
+ * Sized from two variables on .rg-screen: font-size (the label size) and --mark (one week mark). */
+.rg-screen { background: var(--ground); border-radius: 1.6em; padding: 1.2em; }
+.rg-top { display: flex; justify-content: flex-end; align-items: center; margin-bottom: 0.9em; }
+.rg-ruler { position: relative; height: 1.2em; padding-top: 0.95em; margin-bottom: -0.2em; color: var(--text-soft); font-weight: 600; }
+.rg-ruler span { top: 0.95em; }
+.rg-ruler span { position: absolute; transform: translateX(-100%); white-space: nowrap; line-height: 1.2; }
+.rg-card { background: var(--card); border-radius: 1.1em; padding: 0 1.1em; }
+.rg-row { padding: 0.95em 0 1.05em; position: relative; }
+.rg-row + .rg-row::before { content: ''; position: absolute; left: 0; right: 0; top: 0; border-top: 0.5pt solid var(--separator); }
+.rg-l1 { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 0.55em; }
+.rg-name { font-weight: 600; font-size: 1.14em; line-height: 1.2; }
+/* the status: a mark (REGULARS.statusMark: dot, half ring, empty ring, falling triangle) and a word; the mark is
+ * 0.68em, centred on the capitals; only Slipping is red */
+.rg-status { font-weight: 600; line-height: 1.2; white-space: nowrap; color: var(--text); }
+.rg-status svg { display: inline-block; width: 0.68em; height: 0.68em; margin-right: 0.42em; vertical-align: 0.02em; overflow: visible; }
+.st-slip { color: var(--slip-text); }
+.rg-l2 { display: flex; justify-content: space-between; align-items: center; min-height: var(--mark); }
+.rg-l2 svg { display: block; flex: none; }
+.rg-nudge { font-weight: 600; color: var(--tint); background: var(--tint-fill); border-radius: 999px; padding: 0.34em 1.05em 0.38em; line-height: 1.1; white-space: nowrap; }
+.rg-legend { display: flex; flex-wrap: wrap; gap: 0.5em 1.5em; margin-top: 1em; color: var(--text-soft); font-weight: 600; }
+.rg-legend span { display: inline-flex; align-items: center; white-space: nowrap; }
+.rg-legend svg { display: block; margin-right: 0.5em; }

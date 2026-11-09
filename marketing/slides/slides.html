@@ -1,0 +1,375 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Regulars pitch</title>
+<link rel="stylesheet" href="../brand/regulars/tokens.css">
+<style>
+  /* The eight slides on the light stage, 1920 x 1080: one idea per slide, the app's real screens as the pictures
+     (shots/, taken by capture.mjs), in the Regulars print kit (brand/regulars/README.md): Inter 400 / 600 / 700,
+     sentence case, tabular figures, the text colour for words and figures, text-soft for what steps back, the tint only
+     on the mark's square, red only for Slipping. Margins 120 left and right, 96 top and bottom.
+     Two layouts from one page: without a query it is the print layout (all eight slides, every build shown) that
+     build.sh turns into the PDF; slides.html?present shows one slide at a time, scaled to the window, for the stall. */
+  @page { size: 1920px 1080px; margin: 0; }
+  *, *::before, *::after { box-sizing: border-box; }
+  html, body { margin: 0; background: var(--card); }
+  body { width: 1920px; }
+  .slide { position: relative; width: 1920px; height: 1080px; overflow: hidden; break-after: page; page-break-after: always; background: var(--card); color: var(--text); }
+  .slide:last-of-type { break-after: auto; page-break-after: auto; }
+  .slide > * { position: absolute; }
+
+  /* slide type: display sizes set tight, small sizes given air; Inter 700 for figures, 600 for headlines */
+  .hero  { font-size: 280px; line-height: 1;    font-weight: 700; letter-spacing: -0.04em; font-variant-numeric: tabular-nums; }
+  .h1    { font-size: 128px; line-height: 1.04; font-weight: 600; letter-spacing: -0.032em; text-wrap: balance; }
+  .h2    { font-size: 84px;  line-height: 1.08; font-weight: 600; letter-spacing: -0.026em; }
+  .h3    { font-size: 56px;  line-height: 1.14; font-weight: 600; letter-spacing: -0.02em; }
+  .body  { font-size: 36px;  line-height: 50px; text-wrap: pretty; }
+  .small { font-size: 24px;  line-height: 32px; color: var(--text-soft); }
+  .caption { font-size: 26px; line-height: 32px; font-weight: 600; color: var(--text-soft); }
+  .names { font-size: 32px; line-height: 40px; font-weight: 600; }
+  .names i { font-style: normal; color: var(--text-soft); }
+  .num { font-weight: 700; font-variant-numeric: tabular-nums; }
+  .hair { height: 0; border-top: 1.5px solid var(--separator); }
+  .slide .sample-tag { font-size: 24px; }
+
+  /* the screens: each in a neutral rounded frame (no device drawing) with the app's one float shadow on the frame */
+  .frame { overflow: hidden; background: var(--ground); box-shadow: 0 0 8px rgb(0 0 0 / 0.08), 0 14px 28px rgb(0 0 0 / 0.14); }
+  .frame img { display: block; width: 100%; height: auto; }
+  .frame.window { border-radius: 24px; }
+  .frame.phone { border-radius: 32px; }
+  .word { text-align: center; }
+
+  /* slide 3: the two renewal figures as bars from zero, on one scale (100% = 1000 px) */
+  .bars { --unit: 9px; }
+  .bars::before { content: ''; position: absolute; left: 0; top: 58px; bottom: 0; border-left: 2px solid var(--text-soft); }
+  .bar-label { color: var(--text-soft); padding-left: 32px; }
+  .bar-line { display: flex; align-items: center; gap: 32px; height: 128px; margin-top: 8px; }
+  .bar-line + .bar-label { margin-top: 32px; }
+  .bar { height: 72px; width: calc(var(--v) * var(--unit)); background: var(--text); border-radius: 0 14px 14px 0; flex: none; }
+  .bar.low { background: var(--week-low); }
+  .bar-fig { font-size: 128px; line-height: 1; font-weight: 700; letter-spacing: -0.032em; font-variant-numeric: tabular-nums; }
+
+  /* the status key (slide 3): an inset grouped list on the app's ground; hairlines start under the words */
+  .key { background: var(--ground); border-radius: 32px; padding: 0 36px; --inset: 62px; }
+  .key-row { padding: 30px 0 32px; position: relative; }
+  .key-row + .key-row::before { content: ''; position: absolute; left: var(--inset); right: 0; top: 0; border-top: 1.5px solid var(--separator); }
+  .key-row .rg-status { font-size: 40px; display: block; }
+  .key-row .rg-status svg { margin-right: calc(var(--inset) - 0.68em); }
+  .key-row .def { text-wrap: balance; display: block; font-size: 28px; line-height: 36px; color: var(--text-soft); margin-top: 6px; padding-left: var(--inset); }
+
+  /* ---------------------------------------------------------------- present mode (slides.html?present)
+     One slide at a time on black, scaled to fit the window; builds not yet shown are hidden. Slides and builds change
+     through document.startViewTransition: a crossfade, and a build's screen rises into place on the app's smooth
+     spring; under reduced motion both are a 200 ms crossfade, and with no view transitions, a plain swap. */
+  html.present, html.present body { width: 100%; height: 100%; overflow: hidden; background: #000; }
+  html.present .slide { position: fixed; left: 0; top: 0; transform-origin: 0 0; transform: translate(var(--x), var(--y)) scale(var(--k)); display: none; }
+  html.present .slide.current { display: block; }
+  html.present .later { visibility: hidden; }
+  html.present.idle, html.present.idle * { cursor: none; }
+  ::view-transition-old(root), ::view-transition-new(root) { animation-duration: 420ms; animation-timing-function: cubic-bezier(0.2, 0, 0, 1); }
+  ::view-transition-group(build) { animation-duration: 740ms; }
+  ::view-transition-new(build) { animation: rise 740ms cubic-bezier(0.2, 0.8, 0.2, 1) both; }
+  @keyframes rise { from { opacity: 0; transform: translateY(48px); } to { opacity: 1; transform: none; } }
+  /* the film step (present mode only, after slide 3): the reel full bleed on black, no controls; the Play button shows
+     only if the browser refuses to start it with sound. Never printed. */
+  .film { display: none; }
+  html.present .film.current { display: block; position: fixed; inset: 0; background: #000; }
+  .film video, .film img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: contain; display: block; }
+  .film-play { position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); display: inline-flex; align-items: center; gap: 12px; height: 64px; padding: 0 36px 0 30px; border: 0; border-radius: 32px; background: var(--tint); color: #fff; font: 600 26px/1 var(--font); cursor: pointer; }
+  .film-play svg { width: 24px; height: 24px; }
+  .film-play:active { background: color-mix(in oklab, var(--tint) 76%, var(--text)); }
+  .film-play[hidden] { display: none; }
+  html.present.idle .film-play { cursor: none; }
+  @media (prefers-reduced-motion: reduce) {
+    ::view-transition-old(root), ::view-transition-new(root) { animation-duration: 200ms; animation-timing-function: linear; }
+    ::view-transition-new(build) { animation: fade 200ms linear both; }
+    @keyframes fade { from { opacity: 0; } to { opacity: 1; } }
+  }
+</style>
+<script>
+  window.READY = false
+  if (new URLSearchParams(location.search).has('present')) document.documentElement.classList.add('present')
+</script>
+</head>
+<body>
+
+<!-- 1 TITLE -->
+<section class="slide" data-title="Title">
+  <div class="lockup" id="lock1" style="left:120px;top:168px;font-size:128px"></div>
+  <div class="h1" style="left:120px;top:600px;width:1680px">Turn new members<br>into regulars.</div>
+  <div class="names" style="left:120px;top:912px;width:1680px">Uzair Imran <i>·</i> Moiz Hamid <i>·</i> Zain ul Abideen <i>·</i> Ali Hassan</div>
+</section>
+
+<!-- 2 THE PROBLEM -->
+<section class="slide" data-title="The problem">
+  <div class="hero" style="left:112px;top:176px;width:1040px">6 in 10</div>
+  <div class="h2" style="left:120px;top:488px;width:1000px">New members quit within three months.</div>
+  <div class="body" style="left:120px;top:704px;width:900px">They rarely quit on day one. They fade, one missed week at a time.</div>
+  <div class="small" style="left:120px;top:840px;width:900px">Sperandei et al., 2016</div>
+  <div id="daysSlip" style="left:1240px;top:300px;width:560px"></div>
+  <div class="caption" style="left:1240px;top:624px;width:560px">A member who slips</div>
+</section>
+
+<!-- 3 THE LINE -->
+<section class="slide" data-title="The line">
+  <div class="h1" style="left:120px;top:120px;width:1680px">Members who stay hit<br>3&nbsp;visits a&nbsp;week.</div>
+  <div class="bars" style="left:120px;top:470px;width:1080px">
+    <div class="bar-label body">renewed at 3 or more visits a week</div>
+    <div class="bar-line"><div class="bar" style="--v:78"></div><span class="bar-fig">78%</span></div>
+    <div class="bar-label body">under once a week</div>
+    <div class="bar-line"><div class="bar low" style="--v:59"></div><span class="bar-fig soft">59%</span></div>
+  </div>
+  <div class="small" style="left:120px;top:912px;width:1000px">A 2001 UK industry study</div>
+  <div class="key" style="left:1260px;top:470px;width:540px">
+    <div class="key-row" data-status="on"><span class="def">3 or more visits last week</span></div>
+    <div class="key-row" data-status="below"><span class="def">1 or 2 visits last week</span></div>
+    <div class="key-row" data-status="slip"><span class="def">Two weeks in a row<br>under 2 visits</span></div>
+  </div>
+</section>
+
+<!-- THE FILM (slides.html?present only, between slides 3 and 4): the reel with its voice, from the start, full bleed on
+     black. Its files are referenced by path, never copied; with no film the step shows the poster, and with neither it
+     is skipped. Not a slide: the print layout and the PDF never show it. -->
+<div class="film" data-film="../exports/Regulars-reel-16x9.mp4" data-poster="../exports/Regulars-reel-poster-16x9.png">
+  <button class="film-play" type="button" hidden><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M7 4.6v14.8a1.1 1.1 0 0 0 1.67.94l12.2-7.4a1.1 1.1 0 0 0 0-1.88L8.67 3.66A1.1 1.1 0 0 0 7 4.6Z"/></svg>Play</button>
+</div>
+
+<!-- 4 MEET REGULARS: the board, in a window frame running off the bottom edge -->
+<section class="slide" data-title="Meet Regulars">
+  <div class="h1" style="left:120px;top:96px;width:1400px">Meet Regulars.</div>
+  <div class="h3 soft" style="left:120px;top:252px;width:1400px">One board for every new member’s first 90&nbsp;days.</div>
+  <span class="sample-tag" style="right:120px;top:270px">Sample data</span>
+  <div class="frame window" data-bleed style="left:120px;top:396px;width:1680px">
+    <img src="shots/board-laptop.png" alt="The Board in Regulars: each new member's name, 13 week squares, pace and status, with the slipping members first">
+  </div>
+</section>
+
+<!-- 5 HOW IT WORKS: three builds, Track, Flag, Nudge -->
+<section class="slide" data-title="How it works">
+  <div class="frame phone" data-build="1" style="left:309px;top:156px;width:314px">
+    <img src="shots/kiosk-welcome-phone.png" alt="The kiosk's welcome after a check-in: Welcome back, Sam. Week 4.">
+  </div>
+  <div class="h2 word" data-build="1" style="left:249px;top:868px;width:434px">Track.</div>
+  <div class="frame phone" data-build="2" style="left:803px;top:156px;width:314px">
+    <img src="shots/today-phone.png" alt="Today on a phone: the four figures, then Slipping Now with each member's last visit and coach">
+  </div>
+  <div class="h2 word" data-build="2" style="left:743px;top:868px;width:434px">Flag.</div>
+  <div class="frame phone" data-build="3" style="left:1297px;top:156px;width:314px">
+    <img src="shots/nudge-sheet-phone.png" alt="The Nudge sheet: a message from the coach, ready to send from the coach's own phone">
+  </div>
+  <div class="h2 word" data-build="3" style="left:1237px;top:868px;width:434px">Nudge.</div>
+  <span class="sample-tag" style="right:120px;top:96px">Sample data</span>
+</section>
+
+<!-- 6 PRICE -->
+<section class="slide" data-title="Price">
+  <div class="h1" style="left:120px;top:150px;width:1680px"><span class="soft">The plan we’d test:</span><br>a free 90-day pilot, then<br>$99 a month per gym.</div>
+  <div class="h3" style="left:120px;top:604px;width:1680px">Not on sale yet.</div>
+  <div class="body" style="left:120px;top:744px;width:1680px;font-weight:600">One flat price. Unlimited members.</div>
+  <div class="body" style="left:120px;top:804px;width:1680px">Keep 2 members a month, and from the second month it pays for itself.</div>
+  <div class="small" style="left:120px;top:900px;width:1680px">Most US members pay under $50 a month. Health &amp; Fitness Association, 2024.</div>
+</section>
+
+<!-- 7 THE MARKET -->
+<section class="slide" data-title="The market">
+  <div class="hero" style="left:108px;top:150px;width:1400px">55,294</div>
+  <div class="h3" style="left:120px;top:462px;width:1000px">US gyms and studios.</div>
+  <div class="small" style="left:120px;top:542px;width:1000px">2024 U.S. Health &amp; Fitness Consumer Report</div>
+  <div class="hair" style="left:120px;top:640px;width:1680px"></div>
+  <div class="h3 num" style="left:120px;top:704px;width:1680px">$99 × 12 = $1,188 <span class="soft">a year per gym.</span></div>
+  <div class="h3 num" style="left:120px;top:792px;width:1680px">1% of US gyms ≈ 553 gyms ≈ $657,000 <span class="soft">a year.</span></div>
+</section>
+
+<!-- 8 CLOSE -->
+<section class="slide" data-title="Close">
+  <div class="lockup" id="lock8" style="left:120px;top:168px;font-size:128px"></div>
+  <div class="h1" style="left:120px;top:600px;width:1680px">Turn new members<br>into regulars.</div>
+  <div class="names" style="left:120px;top:912px;width:1680px">Uzair Imran <i>·</i> Moiz Hamid <i>·</i> Zain ul Abideen <i>·</i> Ali Hassan</div>
+</section>
+
+<script src="../brand/regulars/regulars.js"></script>
+<script>
+(async function () {
+  const R = REGULARS, $ = (id) => document.getElementById(id)
+  const present = document.documentElement.classList.contains('present')
+
+  $('lock1').innerHTML = R.lockup()
+  $('lock8').innerHTML = R.lockup()
+  $('daysSlip').innerHTML = R.days(R.SLIPPER, { width: '560px' })
+  document.querySelectorAll('.key-row').forEach((row) => row.insertAdjacentHTML('afterbegin', R.status(row.dataset.status)))
+
+  await document.fonts.ready
+  await Promise.all([...document.images].map((img) => img.decode().catch(() => console.error(`missing picture: ${img.getAttribute('src')}`))))
+
+  if (!present) {
+    // layout check (print): everything on a slide stays inside the margins (120 px at the sides, 96 at top and bottom;
+    // on the left, 16 px of room for the large figures, set left of the margin so their ink lines up with the text). A
+    // frame marked data-bleed runs off the bottom edge on purpose. render-regulars.mjs fails the build on any console
+    // error.
+    document.querySelectorAll('.slide').forEach((s, i) => {
+      const sr = s.getBoundingClientRect()
+      s.querySelectorAll(':scope > *').forEach((el) => {
+        const r = el.getBoundingClientRect()
+        const bottom = el.hasAttribute('data-bleed') ? -Infinity : r.bottom - (sr.bottom - 96)
+        const over = Math.max(sr.left + 104 - r.left, r.right - (sr.right - 120), sr.top + 96 - r.top, bottom)
+        if (over > 0.5) console.error(`slide ${i + 1}: "${el.textContent.trim().slice(0, 30) || el.id || el.className}" runs past the margin by ${over.toFixed(0)} px`)
+      })
+    })
+    window.READY = true
+    return
+  }
+
+  // ---------------------------------------------------------------- present mode
+  // The film after slide 3: the reel if its file loads, else its poster, else no step at all.
+  const film = document.querySelector('.film')
+  const playButton = film.querySelector('.film-play')
+  const loads = (el, ok, bad) => new Promise((resolve) => {
+    const t = setTimeout(() => resolve(false), 10000)
+    el.addEventListener(ok, () => { clearTimeout(t); resolve(true) }, { once: true })
+    el.addEventListener(bad, () => { clearTimeout(t); resolve(false) }, { once: true })
+  })
+  let video = document.createElement('video')
+  Object.assign(video, { preload: 'auto', playsInline: true, disablePictureInPicture: true })
+  video.setAttribute('aria-label', 'The Regulars reel')
+  const filmLoaded = loads(video, 'loadeddata', 'error')
+  video.src = film.dataset.film
+  let filmKind = null
+  if (await filmLoaded) {
+    film.prepend(video)
+    filmKind = 'film'
+  } else {
+    video.removeAttribute('src')
+    video = null
+    const poster = new Image()
+    poster.alt = 'Regulars. Turn new members into regulars.'
+    const posterLoaded = loads(poster, 'load', 'error')
+    poster.src = film.dataset.poster
+    if (await posterLoaded) {
+      film.prepend(poster)
+      filmKind = 'poster'
+    }
+  }
+  // Starts the reel from 0 with its sound. The key or click that reached the step is the gesture that allows sound; if
+  // the browser still refuses, the Play button starts it.
+  const startFilm = () => {
+    if (!video) return
+    video.currentTime = 0
+    playButton.hidden = true
+    video.play().catch(() => { if (steps[at].film && video.paused) playButton.hidden = false })
+  }
+  const stopFilm = () => {
+    playButton.hidden = true
+    if (!video) return
+    video.pause()
+    video.currentTime = 0
+  }
+  const playFromButton = () => {
+    playButton.hidden = true
+    video.play().catch(() => { playButton.hidden = false })
+  }
+  playButton.addEventListener('click', (e) => {
+    e.stopPropagation()
+    playFromButton()
+  })
+
+  // The steps: one per slide, one per build on a slide with builds (data-build="1", "2", ...), and the film after
+  // slide 3.
+  const slides = [...document.querySelectorAll('.slide')]
+  const steps = []
+  slides.forEach((s, i) => {
+    const n = Math.max(0, ...[...s.querySelectorAll('[data-build]')].map((el) => +el.dataset.build))
+    for (let b = n ? 1 : 0; b <= n; b++) steps.push({ slide: i, build: b })
+    if (i === 2 && filmKind) steps.push({ slide: -1, build: 0, film: true })
+  })
+  const reduce = matchMedia('(prefers-reduced-motion: reduce)')
+  const fromHash = () => {
+    const h = location.hash.slice(1)
+    const n = parseInt(h, 10)
+    const at = steps.findIndex((s) => (h === 'film' ? s.film : s.slide === n - 1))
+    return at < 0 ? 0 : at
+  }
+  let at = fromHash()
+  let shown = null
+
+  const fit = () => {
+    const k = Math.min(innerWidth / 1920, innerHeight / 1080)
+    const root = document.documentElement.style
+    root.setProperty('--k', k)
+    root.setProperty('--x', (innerWidth - 1920 * k) / 2 + 'px')
+    root.setProperty('--y', (innerHeight - 1080 * k) / 2 + 'px')
+  }
+  // Shows step `at`; returns the screens a build just revealed, which rise in on their own.
+  const draw = () => {
+    const { slide, build, film: onFilm } = steps[at]
+    slides.forEach((s, i) => s.classList.toggle('current', i === slide))
+    film.classList.toggle('current', !!onFilm)
+    const fresh = []
+    if (onFilm) {
+      shown = { slide, build }
+      document.body.dataset.slide = 'film'
+      document.body.dataset.build = 0
+      history.replaceState(null, '', '#film')
+      startFilm()
+      return fresh
+    }
+    stopFilm()
+    slides[slide].querySelectorAll('[data-build]').forEach((el) => {
+      const later = +el.dataset.build > build
+      if (!later && el.classList.contains('later') && shown && shown.slide === slide && el.classList.contains('frame')) fresh.push(el)
+      el.classList.toggle('later', later)
+    })
+    shown = { slide, build }
+    document.body.dataset.slide = slide + 1
+    document.body.dataset.build = build
+    history.replaceState(null, '', '#' + (slide + 1))
+    return fresh
+  }
+  let busy = Promise.resolve()
+  const go = (next) => {
+    next = Math.max(0, Math.min(steps.length - 1, next))
+    if (next === at) return
+    at = next
+    if (!document.startViewTransition) { draw(); return }
+    let fresh = []
+    const t = document.startViewTransition(() => {
+      fresh = draw()
+      fresh.forEach((el) => { el.style.viewTransitionName = 'build' })
+    })
+    busy = t.finished.catch(() => {}).then(() => fresh.forEach((el) => { el.style.viewTransitionName = '' }))
+  }
+
+  addEventListener('keydown', (e) => {
+    if (e.metaKey || e.ctrlKey || e.altKey) return
+    const k = e.key
+    const forward = ['ArrowRight', ' ', 'PageDown', 'Enter', 'ArrowDown'].includes(k)
+    // while the Play button shows, the clicker's forward key plays the film (the key is the gesture); the next one goes on
+    if (forward && video && steps[at].film && !playButton.hidden) { playFromButton(); e.preventDefault(); return }
+    if (forward) go(at + 1)
+    else if (['ArrowLeft', 'PageUp', 'Backspace', 'ArrowUp'].includes(k)) go(at - 1)
+    else if (k === 'Home') go(0)
+    else if (k === 'End') go(steps.length - 1)
+    else if (k === 'f' || k === 'F') { document.fullscreenElement ? document.exitFullscreen() : document.documentElement.requestFullscreen() }
+    else return
+    e.preventDefault()
+  })
+  addEventListener('click', (e) => { if (e.button === 0) go(at + 1) })
+  addEventListener('hashchange', () => go(fromHash()))
+  addEventListener('resize', fit)
+  // the pointer hides after 2 s still, and comes back when it moves
+  let idle
+  addEventListener('mousemove', () => {
+    document.documentElement.classList.remove('idle')
+    clearTimeout(idle)
+    idle = setTimeout(() => document.documentElement.classList.add('idle'), 2000)
+  })
+  document.documentElement.classList.add('idle')
+
+  fit()
+  draw()
+  window.PRESENT = { steps: steps.length, slides: slides.length, film: filmKind, settled: () => busy, reduce: () => reduce.matches }
+  window.READY = true
+})()
+</script>
+</body>
+</html>

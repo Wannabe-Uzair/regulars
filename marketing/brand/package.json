@@ -1,0 +1,5 @@
+{
+  "type": "commonjs",
+  "private": true,
+  "description": "Tenure design code. kit.js and wordmark.js are plain scripts in the browser and CommonJS in Node."
+}

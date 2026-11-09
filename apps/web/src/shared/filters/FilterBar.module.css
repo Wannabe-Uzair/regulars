@@ -1,0 +1,90 @@
+/* Below 48rem: the search, then the chips on one line that scrolls sideways, then the coach filter. Each control is
+   44 px; their labels are hidden, so the bar is the controls alone. */
+.bar {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+.search,
+.coach {
+  min-inline-size: 0;
+}
+
+/* One line of chips that scrolls sideways, with room for a chip's focus ring all round, taken back by the margin. It is
+   positioned so it is the containing block of the chips' visually hidden radios: otherwise they sit outside its
+   clipping, past the screen's edge, and the whole page scrolls sideways. */
+.statusLine {
+  --focus-room: calc(var(--focus-width) + var(--focus-offset));
+
+  position: relative;
+  min-inline-size: 0;
+  margin: calc(-1 * var(--focus-room));
+  padding: var(--focus-room);
+  overflow-x: auto;
+}
+
+.statusLine [data-look='chips'] {
+  flex-wrap: nowrap;
+}
+
+.statusLine label {
+  flex-shrink: 0;
+  white-space: nowrap;
+}
+
+/* Below 48rem the chips run past the screen's edge, so the line's end fades out instead of cutting a chip mid-word, and
+   the chips end in room as wide as the fade, so the last one shows whole and clear of it once scrolled to (A21). Sized
+   to the chips, so that room is part of what scrolls. */
+@media (width < 48rem) {
+  .statusLine {
+    mask-image: linear-gradient(to left, transparent, currentColor var(--space-10));
+  }
+
+  .statusLine [data-look='chips'] {
+    inline-size: max-content;
+    padding-inline-end: var(--space-10);
+  }
+}
+
+/* Read by screen readers, not shown: a control's label, where the screen's title and the placeholder already say it. */
+.hidden {
+  position: absolute;
+  inline-size: 1px;
+  block-size: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+/* From 48rem, one line (Members' searchOwnLine, below, puts the search on a line of its own above the rest): the coach filter wide enough for All Coaches, the search at least 12rem and growing into the
+   room left over, and the chips whole where the line has room for them (a laptop's), scrolling where it is short. */
+@media (width >= 48rem) {
+  .bar {
+    flex-direction: row;
+    align-items: flex-end;
+    gap: var(--space-4);
+  }
+
+  .search {
+    flex: 1 0 12rem;
+  }
+
+  .statusLine {
+    flex: 0 1 auto;
+  }
+
+  .coach {
+    flex: 0 0 10rem;
+  }
+
+  /* Members' search on a line of its own (A5): "Search by name or phone" clipped at 12rem beside the chips and All
+     Coaches on a laptop. The chips and the coach filter share the line below. */
+  .searchOwnLine {
+    flex-wrap: wrap;
+  }
+
+  .searchOwnLine .search {
+    flex-basis: 100%;
+  }
+}

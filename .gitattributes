@@ -1,0 +1,9 @@
+# Line endings for a checkout on any computer. Without this, Git for Windows' default setting turns the shell scripts'
+# line endings into CRLF, and the container's start-up script then fails inside Docker.
+* text=auto eol=lf
+*.ps1 text eol=crlf
+START-HERE-WINDOWS.txt text eol=crlf
+# Kept byte for byte as written (CRLF on purpose, or third-party files).
+legacy/app/server/import/samples/*.csv -text
+marketing/brand/fonts/OFL-Anton.txt -text
+packages/ui/src/icons/LICENSE -text

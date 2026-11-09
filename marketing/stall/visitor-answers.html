@@ -1,0 +1,187 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Regulars visitor answers (A4, for the team)</title>
+<link rel="stylesheet" href="../brand/regulars/tokens.css">
+<style>
+  /* One A4 portrait page, 210 x 297 mm, no bleed: printed on an office printer and kept on the stall table.
+     A working sheet for the four of us, not a handout. The Regulars print kit (brand/regulars/README.md): white paper,
+     Inter in 400 / 600 / 700, sentence case, hairlines, the lockup once. Words are copied verbatim from
+     ../VISITOR-QA.md. */
+  @page { size: A4; margin: 0; }
+  html, body { margin: 0; background: var(--card); }
+  .sheet { position: relative; width: 210mm; height: 297mm; padding: 10mm 11mm 0; box-sizing: border-box; overflow: hidden; }
+  .body { text-wrap: pretty; }
+
+  /* header: the lockup, the title and the names, over a hairline */
+  .head { display: flex; align-items: flex-end; gap: 8mm; padding-bottom: 4mm; border-bottom: 0.5pt solid var(--separator); }
+  .head .lockup { font-size: 17pt; }
+  .head .title { flex: 1; }
+  .head .h1 { font-size: 20pt; line-height: 1.05; font-weight: 700; letter-spacing: -0.017em; }
+  .head .note { font-size: 8pt; line-height: 1.2; color: var(--text-soft); margin-top: 1.2mm; }
+  .names { font-size: 8.5pt; line-height: 11.5pt; font-weight: 600; text-align: right; }
+
+  /* the three things that are always true + how to say the answers */
+  .always { display: grid; grid-template-columns: 1fr 1fr; column-gap: 7mm; margin-top: 3.4mm; padding-bottom: 3.2mm; border-bottom: 0.5pt solid var(--separator); }
+  .always .body { font-size: 8.2pt; line-height: 11.2pt; }
+  .always strong { font-weight: 600; }
+
+  /* two columns of answers */
+  .cols { column-count: 2; column-gap: 7mm; column-fill: balance; margin-top: 3.6mm; }
+  .group + .group { margin-top: 3.4mm; }
+  .gh { break-after: avoid; display: flex; align-items: baseline; gap: 2.4mm; padding-bottom: 1.4mm; margin-bottom: 2mm; border-bottom: 0.5pt solid var(--separator); }
+  .gh .lab { font-size: 8pt; font-weight: 600; color: var(--text-soft); font-variant-numeric: tabular-nums; }
+  .gh .h2 { font-size: 13pt; line-height: 1.1; font-weight: 700; letter-spacing: -0.012em; }
+  .qa, .idk > .body, .idk li { break-inside: avoid; }
+  .qa { display: grid; grid-template-columns: 5.6mm 1fr; }
+  .qa + .qa { margin-top: 2mm; }
+  .qa .n { font-size: 8.2pt; line-height: 11.2pt; font-weight: 600; color: var(--text-soft); font-variant-numeric: tabular-nums; }
+  .qa .q { font-size: 8.2pt; line-height: 11.2pt; font-weight: 600; }
+  .qa .hint { font-size: 7.5pt; line-height: 10.5pt; color: var(--text-soft); margin-top: 0.2mm; }
+  .qa .a { font-size: 8.2pt; line-height: 11.2pt; margin-top: 0.5mm; }
+  .idk .body { font-size: 8.2pt; line-height: 11.2pt; }
+  .idk ul { list-style: none; margin: 1.6mm 0 0; padding: 0; }
+  .idk li { position: relative; padding-left: 5.6mm; }
+  .idk li + li { margin-top: 1.4mm; }
+  .idk li::before { content: ""; position: absolute; left: 0.6mm; top: 1.55mm; width: 1.3mm; height: 1.3mm; border-radius: 50%; background: var(--text); }
+</style>
+<script>window.READY = false</script>
+</head>
+<body>
+<div class="sheet">
+
+  <div class="head">
+    <div class="lockup" id="lockup"></div>
+    <div class="title">
+      <div class="h1">Visitor answers</div>
+      <div class="note">For the team at the stall. Not a handout.</div>
+    </div>
+    <div class="names">Uzair Imran · Moiz Hamid<br>Zain ul Abideen · Ali Hassan</div>
+  </div>
+
+  <div class="always">
+    <div class="body"><strong>Three things are always true at the stall:</strong> everything on screen is sample data, the app is a prototype that is not on sale yet, and a person sends every text; nothing is ever sent from Regulars.</div>
+    <div class="body">Each answer is two or three plain sentences. Say them at a calm pace, one idea per breath, and let the fact sit. When a number has a source, say the source with it. If a question is not on this page, use the last section.</div>
+  </div>
+
+  <div class="cols">
+      <section class="group">
+        <div class="gh"><span class="lab">01</span><span class="h2">What it is and who it's for</span></div>
+        <div class="qa"><div class="n">1</div><div>
+          <div class="q">What is it?</div>
+          <div class="body a">It's Regulars, a dashboard for independent gyms. It follows each new member's first 90 days, shows who is slipping, and lets a coach text them from their own phone. That window matters: 6 in 10 new members are gone by month three (Sperandei et al., 2016).</div>
+        </div></div>
+        <div class="qa"><div class="n">2</div><div>
+          <div class="q">Who is it for?</div>
+          <div class="body a">Owners and coaches of independent gyms in the US. The owner sees every new member. Each coach sees only the members assigned to them.</div>
+        </div></div>
+        <div class="qa"><div class="n">3</div><div>
+          <div class="q">How is that different from the software my gym already has?</div>
+          <div class="body a">Some gym systems do flag members at risk, often on their bigger plans. Ours is the narrow version: only a new member's first 90 days, one rule anyone can check, and messages from the coach's own phone.</div>
+        </div></div>
+      </section>
+
+      <section class="group">
+        <div class="gh"><span class="lab">02</span><span class="h2">How it works</span></div>
+        <div class="qa"><div class="n">4</div><div>
+          <div class="q">How does a member count as slipping?</div>
+          <div class="body a">The app counts each new member's visits, week by week, from the day they join. Two finished weeks in a row with fewer than 2 visits each, and they show as slipping. A week with 3 or more visits puts them on the line.</div>
+        </div></div>
+        <div class="qa"><div class="n">5</div><div>
+          <div class="q">Why 3 visits a week?</div>
+          <div class="body a">The ones who stay hit 3 visits a week. In a 2001 UK industry study, members who came 3 or more times a week in their first month renewed 78% of the time. Under once a week, it was 59%.</div>
+        </div></div>
+        <div class="qa"><div class="n">6</div><div>
+          <div class="q">Where does the data come from?</div>
+          <div class="body a">The owner imports a CSV file of members and check-ins, and checks a preview before anything is saved. Members also check in at a front-desk kiosk with their phone number, no login needed. There are no integrations with other gym software.</div>
+        </div></div>
+        <div class="qa"><div class="n">7</div><div>
+          <div class="q">Does it text my members?</div>
+          <div class="body a">No, nothing is ever sent from Regulars. One tap opens a personal text from you or their coach, ready to send: the coach picks a message, can edit it, and chooses Text message or WhatsApp. The nudge is recorded, and marked Came back if the member visits within 7 days.</div>
+        </div></div>
+        <div class="qa"><div class="n">8</div><div>
+          <div class="q">Is there AI in it?</div>
+          <div class="body a">No. The app counts visits per week and applies fixed rules, so you can always see why someone shows as slipping. A person decides who to text and what to say.</div>
+        </div></div>
+      </section>
+
+      <section class="group">
+        <div class="gh"><span class="lab">03</span><span class="h2">Data and privacy</span></div>
+        <div class="qa"><div class="n">9</div><div>
+          <div class="q">Where is the member data kept?</div>
+          <div class="hint">The honest answer includes "we don't know yet".</div>
+          <div class="body a">In this demo, everything lives on this laptop, in one database file. The app doesn't use the internet here; the phones reach the laptop over a local Wi-Fi network. Where a real gym's data would live is a decision we haven't made.</div>
+        </div></div>
+        <div class="qa"><div class="n">10</div><div>
+          <div class="q">Who can see it, and is it secure?</div>
+          <div class="body a">The owner sees every member; a coach sees only their own, and the server checks that on every request. Passwords are stored as hashes, not as text. We have no security certification; this is a prototype.</div>
+        </div></div>
+      </section>
+
+      <section class="group">
+        <div class="gh"><span class="lab">04</span><span class="h2">Price and availability</span></div>
+        <div class="qa"><div class="n">11</div><div>
+          <div class="q">What does it cost?</div>
+          <div class="body a">The plan we'd test: a free 90-day pilot, then $99 a month per gym. Not on sale yet. One flat price. Unlimited members. Most US members pay under $50 a month (Health &amp; Fitness Association). Keep 2 members a month, and from the second month it pays for itself.</div>
+        </div></div>
+        <div class="qa"><div class="n">12</div><div>
+          <div class="q">Can I use it at my gym? When does it launch?</div>
+          <div class="hint">The honest answer is "we don't know yet".</div>
+          <div class="body a">Not today. It's a prototype built for this expo, so nothing is on sale yet, and there is no sign-up today and no launch date. What comes after the expo, we haven't decided.</div>
+        </div></div>
+      </section>
+
+      <section class="group">
+        <div class="gh"><span class="lab">05</span><span class="h2">The project</span></div>
+        <div class="qa"><div class="n">13</div><div>
+          <div class="q">Is Northside Strength a real gym?</div>
+          <div class="body a">No. Northside Strength is sample data, and every member and coach on screen is made up. The app itself is real: accounts, a database, CSV import, the kiosk and live updates, all running on this laptop.</div>
+        </div></div>
+        <div class="qa"><div class="n">14</div><div>
+          <div class="q">Does it work? Has a gym used it?</div>
+          <div class="hint">The honest answer is "we don't know yet".</div>
+          <div class="body a">We don't know yet. No gym has used Regulars, so we can't say it keeps members. The numbers we quote describe gyms in general, not Regulars.</div>
+        </div></div>
+        <div class="qa"><div class="n">15</div><div>
+          <div class="q">Who built it?</div>
+          <div class="body a">Four of us: Uzair Imran, Moiz Hamid, Zain ul Abideen and Ali Hassan. We built the prototype for this expo, and the name, Regulars, is a working name.</div>
+        </div></div>
+      </section>
+
+      <section class="group idk">
+        <div class="gh"><span class="lab">06</span><span class="h2">If you don't know</span></div>
+        <div class="body">Questions outside this page get one of these. Don't guess, and don't promise a feature, a date or a price.</div>
+        <ul class="body">
+          <li>"Good question. We haven't worked that out, and I'd rather not guess."</li>
+          <li>"That isn't in the prototype. Here is what it does today." Then show the closest screen.</li>
+          <li>"I don't have a figure for that. The numbers we use are on the brochure, each with its source."</li>
+        </ul>
+      </section>
+  </div>
+</div>
+<script src="../brand/regulars/regulars.js"></script>
+<script>
+(async function () {
+  document.getElementById('lockup').innerHTML = REGULARS.lockup()
+  await document.fonts.ready
+
+  // layout check: every box stays on the page, 11 mm in from each edge and at least 9 mm above the bottom, so nothing
+  // is cut off by the page or an office printer's unprintable margin. The renderer fails on any console error.
+  const MM = 25.4 / 96
+  const sheet = document.querySelector('.sheet').getBoundingClientRect()
+  const left = sheet.left + 11 / MM - 0.5, right = sheet.right - 11 / MM + 0.5, bottom = sheet.bottom - 9 / MM
+  document.querySelectorAll('.sheet *').forEach((el) => {
+    const r = el.getBoundingClientRect(), what = (el.className && String(el.className)) || el.tagName
+    if (!r.width) return
+    if (r.left < left || r.right > right) console.error(`visitor answers: ${what} runs past the side margin by ${(Math.max(left - r.left, r.right - right) * MM).toFixed(1)} mm`)
+    if (r.bottom > bottom) console.error(`visitor answers: ${what} runs ${((r.bottom - bottom) * MM).toFixed(1)} mm into the bottom margin`)
+  })
+  const cols = document.querySelector('.cols')
+  if (cols.scrollHeight > cols.clientHeight + 1 || cols.scrollWidth > cols.clientWidth + 1) console.error('visitor answers: the two columns overflow (a third column would be cut off)')
+
+  window.READY = true
+})()
+</script>
+</body>
+</html>

@@ -1,0 +1,108 @@
+/* The welcome (FR-KIOSK-05, flow-2B), centred in the screen's height: the ring with its check, the headline, the visits
+   line, then the countdown in soft text. It moves only on the motion tokens, which are 0 ms under reduced motion, so
+   the check and the ring then show finished. */
+.welcome {
+  box-sizing: border-box;
+  display: grid;
+  flex: 1;
+  inline-size: 100%;
+  max-inline-size: 40rem;
+  margin-inline: auto;
+  align-content: center;
+  justify-items: center;
+  gap: var(--space-6);
+  padding-block: var(--space-8);
+  text-align: center;
+  cursor: pointer;
+}
+
+.ring {
+  inline-size: 11rem;
+  block-size: 11rem;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-width: 12;
+}
+
+.third {
+  stroke: var(--color-highlight);
+}
+
+.filled {
+  stroke: var(--color-tint);
+}
+
+/* Today's third fills after the check has started, on the bouncy spring: the one bounce on the kiosk. */
+.today {
+  animation: ring-fill var(--motion-spring-bounce) var(--ease-spring-bounce) var(--motion-slow) both;
+}
+
+.check {
+  stroke: var(--color-tint);
+  stroke-dasharray: 100;
+  stroke-dashoffset: 0;
+  animation: check-draw var(--motion-spring) var(--ease-spring) both;
+}
+
+@keyframes ring-fill {
+  from {
+    stroke-dasharray: 0 360;
+    visibility: hidden;
+  }
+}
+
+@keyframes check-draw {
+  from {
+    stroke-dashoffset: 100;
+  }
+}
+
+.words {
+  display: grid;
+  justify-items: center;
+  gap: var(--space-3);
+}
+
+.headline {
+  max-inline-size: 16ch;
+  margin: 0;
+  font-size: var(--text-44);
+  font-weight: var(--weight-display);
+  line-height: var(--leading-display);
+  overflow-wrap: anywhere;
+  text-wrap: balance;
+}
+
+.line {
+  margin: 0;
+  color: var(--color-text-soft);
+  font-size: var(--text-24);
+  line-height: var(--leading-heading);
+}
+
+.emphasised {
+  color: var(--color-text);
+  font-weight: var(--weight-heading);
+}
+
+.reset {
+  margin: 0;
+  color: var(--color-text-soft);
+  font-size: var(--text-18);
+  line-height: var(--leading-body);
+}
+
+@media (min-width: 48rem) {
+  .ring {
+    inline-size: 13rem;
+    block-size: 13rem;
+  }
+
+  .headline {
+    font-size: var(--text-64);
+  }
+
+  .line {
+    font-size: var(--text-32);
+  }
+}

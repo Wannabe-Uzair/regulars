@@ -1,0 +1,106 @@
+/* The keypad (FR-KIOSK-07, NFR-USE-03, kiosk-1): round flat keys of 76 px, smaller on a short screen but never under
+   64 px. Digits sit on the surface over the page's ground, with no outline; + and delete have no fill and no outline.
+   A pressed key goes one step past its hover at once, with no movement, and eases back over --motion-fast on release
+   (pick E2). */
+.keypad {
+  /* What the rest of the start screen takes from the height (measured at 390 x 844, and at 800 px on the short
+     screen's tighter steps in Kiosk.module.css), so four rows fit under it. The typed number's height grows with the
+     column's width, so each value holds at the widest column, 26rem. */
+  --keypad-rest: 33.25rem;
+
+  display: grid;
+  grid-template-columns: repeat(3, auto);
+  justify-content: center;
+  gap: var(--space-3) var(--space-6);
+}
+
+.key {
+  position: relative;
+  isolation: isolate;
+  box-sizing: border-box;
+  display: grid;
+  place-items: center;
+  inline-size: clamp(var(--space-16), calc((100dvh - var(--keypad-rest)) / 4), var(--size-kiosk-key));
+  block-size: clamp(var(--space-16), calc((100dvh - var(--keypad-rest)) / 4), var(--size-kiosk-key));
+  margin: 0;
+  padding: 0;
+  border: 0;
+  border-radius: var(--radius-full);
+  background-color: var(--color-surface);
+  color: var(--color-text);
+  font-family: inherit;
+  font-size: var(--text-34);
+  font-variant-numeric: tabular-nums;
+  font-weight: var(--weight-interface);
+  line-height: var(--leading-display);
+  cursor: pointer;
+  touch-action: manipulation;
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
+  transition: background-color var(--motion-fast) var(--ease-standard);
+}
+
+/* The hover and press tints, laid over the key's own fill as the browser composites one translucent colour on
+   another: a layer under the digit, clipped to the circle. */
+.key::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: var(--layer-behind);
+  border-radius: inherit;
+  background-color: transparent;
+  pointer-events: none;
+  transition: background-color var(--motion-fast) var(--ease-standard);
+}
+
+.key:focus-visible {
+  outline: var(--focus-width) solid var(--color-focus);
+  outline-offset: var(--focus-offset);
+}
+
+.fn {
+  background-color: transparent;
+  font-size: var(--text-32);
+}
+
+/* Hover only where there is a pointer that hovers, so a tapped key on a phone doesn't stay lit. */
+@media (hover: hover) {
+  .key:hover:not(:disabled)::before {
+    background-color: var(--color-highlight);
+  }
+}
+
+/* Pressed, after hover so it wins while a pointer holds the key: one step past the hover tint, at once. */
+.key:active:not(:disabled)::before {
+  background-color: var(--color-highlight-press);
+  transition: none;
+}
+
+/* + once a number is started: no fill, its sign faded. */
+.key:disabled {
+  background-color: transparent;
+  color: var(--color-text-soft);
+  opacity: var(--opacity-disabled);
+  cursor: default;
+}
+
+@media (max-height: 50rem) {
+  .keypad {
+    --keypad-rest: 31rem;
+  }
+}
+
+/* Under 760 px Check In and Join the Gym share a row (Kiosk.module.css), and under 720 px the title is smaller: less
+   of the height is taken, so the keys take what is left (measured at 375 x 667 and 375 x 740, plus the typed number's
+   growth up to the widest column). */
+@media (max-height: 47.5rem) {
+  .keypad {
+    --keypad-rest: 26.25rem;
+  }
+}
+
+@media (max-height: 45rem) {
+  .keypad {
+    --keypad-rest: 25.25rem;
+  }
+}

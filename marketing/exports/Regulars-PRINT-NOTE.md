@@ -1,0 +1,38 @@
+# Regulars: a note for the print shop
+
+Two pieces: an A4 tri-fold brochure and a 2 x 5 ft roll-up standee.
+
+## The brochure (A4 tri-fold)
+
+- **Send only `Regulars-brochure-A4-trifold-print.pdf`.** Never send `Regulars-brochure-proof.pdf`: it carries trim
+  lines, fold lines and panel names for checking, and they would print.
+- **If your preflight refuses the fonts** (Chrome embeds the typeface as Type 3 outlines), use the same pages as
+  pictures instead: `Regulars-brochure-A4-trifold-print-600dpi-images.pdf` (2 pages, 600 dpi, no fonts), or the two
+  JPGs `Regulars-brochure-A4-trifold-side1-300dpi.jpg` (the outside) and `Regulars-brochure-A4-trifold-side2-300dpi.jpg`
+  (the inside).
+- **Paper and sides:** A4 landscape, double-sided, flip on the short edge. Page 1 (side 1) is the outside, page 2
+  (side 2) the inside.
+- **Size:** every file is 303 x 216 mm, A4 with 3 mm bleed on each side. Print at 100% and trim 3 mm per side. Or, with
+  no trimming, print with "fit to A4" (about 97%): the design keeps white paper out to the edges, so nothing is lost.
+- **Folding:** a roll fold in three panels. The narrow 97 mm panel folds in first; the second fold closes the brochure
+  with the front cover ("Turn new members into regulars.") on the outside.
+- **Test sheet first:** print one double-sided sheet and fold it before the run. The inside must come out upright and
+  each fold must fall in the white gap between panels. If the inside comes out upside down, use flip on the long edge.
+- **Paper:** coated matt or silk, about 150 to 170 gsm, scored before folding.
+
+## The standee (24 x 60 in roll-up)
+
+- **Send `Regulars-standee-2x5ft-150dpi.jpg` as a file or a document**, never as a WhatsApp photo (WhatsApp shrinks
+  photos). Send `Regulars-standee-2x5ft.pdf` as the second file.
+- **Size:** 24 x 60 in (2 x 5 ft) at 100%. Never stretch or squeeze it to fit a different stand size; if your stand is
+  another size, ask before printing.
+- The bottom 3 in are white on purpose: they sit in the stand's base.
+- **Material:** a matte material rather than glossy flex, so the pale ground and the fine lines don't wash out under
+  hall lights.
+
+## Colour, for both
+
+- **Ask for a colour proof first.** The violet #5444E4 (the Nudge word and the square in the logo) can print duller in
+  CMYK.
+- **Check the very light grey ground** (#F2F2F7) behind the board picture shows on your paper or banner material. It
+  should read as a pale grey panel on white; if it disappears, tell us before printing the run.

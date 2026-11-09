@@ -1,0 +1,27 @@
+/* Reports' placeholder parts. */
+
+/* The chart's shape fills its box, which takes the chart's own height (CHART_HEIGHT, set inline). */
+.chart {
+  block-size: 100%;
+}
+
+/* A figure ends level with its column's end, as the table's numeric cells do. */
+.figure {
+  margin-inline-start: auto;
+}
+
+/* The heading spans the header, so a takeaway's placeholder lines measure their share of the panel's width. */
+.panel h2 {
+  flex-grow: 1;
+}
+
+/* A takeaway wraps on a phone, one line on a laptop. */
+@media (width >= 48rem) {
+  .title > :not(:first-child) {
+    display: none;
+  }
+
+  .title > :first-child {
+    inline-size: 100%;
+  }
+}
